@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "types": ["node"],
+    "typeRoots": ["./@types"],
+    "outDir": "./bin",
+    "declaration": true
+  }
+  ,"exclude": [
+    ".vscode",
+    "@types",
+    "node_modules",
+    "bin",
+    "config"
+  ]
+  ,"include": [
+    "src/**/*.ts",
+    "tests/**/*.ts"
+  ]
+}

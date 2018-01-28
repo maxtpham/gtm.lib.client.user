@@ -1,0 +1,29 @@
+{
+  "name": "@tm/client.lib.user",
+  "version": "1.0.0",
+  "description": "API client",
+  "main": "bin/index.js",
+  "typings": "bin/index",
+  "scripts": {
+    "clean": "rimraf bin/*",
+    "build": "npm run clean && npm up && tsc",
+    "b": "npm run build",
+    "prepublishOnly": "npm version patch && npm run build",
+    "p": "npm publish --access public"
+  },
+  "keywords": [],
+  "author": "MyBestBook.NET",
+  "license": "UNLICENSED",
+  "repository": {
+    "url": "https://github.com/thanhptr/tm.lib.client.user.git"
+  },
+  "devDependencies": {
+    "@types/node": "^8.5.9",
+    "typescript": "^2.6.2"
+  },
+  "dependencies": {
+    "@tm/lib.client": "git+ssh://git@github.com/thanhptr/tm.lib.client.git",
+    "inversify": "^4.9.0",
+    "rimraf": "^2.6.2"
+  }
+}
