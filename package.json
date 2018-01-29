@@ -1,5 +1,5 @@
 {
-  "name": "@tm/client.lib.user",
+  "name": "@tm/lib.client.user",
   "version": "1.0.0",
   "description": "API client",
   "main": "bin/index.js",
