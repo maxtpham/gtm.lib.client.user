@@ -39,7 +39,7 @@ class RoleApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/v1/role/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
 }
 exports.RoleApi = RoleApi;
@@ -58,7 +58,7 @@ class SessionApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/v1/session/current', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/session/current', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
 }
 exports.SessionApi = SessionApi;
@@ -77,7 +77,7 @@ class SystemApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/v1/system/loggedin', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/system/loggedin', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Get current system version info
@@ -87,7 +87,7 @@ class SystemApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('POST', '/api/v1/system/version', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('POST', '/api/user/v1/system/version', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
 }
 exports.SystemApi = SystemApi;

@@ -57,7 +57,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<any>('GET', '/api/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<any>('GET', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -78,7 +78,7 @@ export class SessionApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<JwtToken>('GET', '/api/v1/session/current',
+        return this.execute<JwtToken>('GET', '/api/user/v1/session/current',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -99,7 +99,7 @@ export class SystemApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<boolean>('GET', '/api/v1/system/loggedin',
+        return this.execute<boolean>('GET', '/api/user/v1/system/loggedin',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -112,7 +112,7 @@ export class SystemApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<string>('POST', '/api/v1/system/version',
+        return this.execute<string>('POST', '/api/user/v1/system/version',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
