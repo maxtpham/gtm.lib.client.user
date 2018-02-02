@@ -22,7 +22,7 @@
     "typescript": "^2.6.2"
   },
   "dependencies": {
-    "@tm/lib.client": "git+ssh://git@github.com/thanhptr/tm.lib.client.git",
+    "@tm/lib.client": "thanhptr/tm.lib.client",
     "inversify": "^4.9.0",
     "rimraf": "^2.6.2"
   }

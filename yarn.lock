@@ -2,19 +2,19 @@
 # yarn lockfile v1
 
 
-"@tm/lib.client@git+ssh://git@github.com/thanhptr/tm.lib.client.git":
+"@tm/lib.client@thanhptr/tm.lib.client":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/thanhptr/tm.lib.client.git#c366a380c0098777c19331c4fd70e78851e6467c"
+  resolved "https://codeload.github.com/thanhptr/tm.lib.client/tar.gz/2ecae5cf00a8bafa4e6929708a32d3d200d532e8"
   dependencies:
-    "@tm/lib.common" "git+ssh://git@github.com/thanhptr/tm.lib.common.git"
+    "@tm/lib.common" thanhptr/tm.lib.common
     inversify "^4.10.0"
     inversify-binding-decorators "^3.2.0"
     reflect-metadata "^0.1.12"
     rimraf "^2.6.2"
 
-"@tm/lib.common@git+ssh://git@github.com/thanhptr/tm.lib.common.git":
+"@tm/lib.common@thanhptr/tm.lib.common":
   version "1.0.0"
-  resolved "git+ssh://git@github.com/thanhptr/tm.lib.common.git#ae53d95dd73eb33f5e52ba80f0b3ea4dbcd816d0"
+  resolved "https://codeload.github.com/thanhptr/tm.lib.common/tar.gz/ae53d95dd73eb33f5e52ba80f0b3ea4dbcd816d0"
   dependencies:
     inversify "^4.10.0"
     inversify-binding-decorators "^3.2.0"
