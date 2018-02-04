@@ -18,8 +18,8 @@
     "url": "https://github.com/thanhptr/tm.lib.client.user.git"
   },
   "devDependencies": {
-    "@types/node": "^8.5.9",
-    "typescript": "^2.6.2"
+    "@types/node": "^9.4.0",
+    "typescript": "^2.7.1"
   },
   "dependencies": {
     "@tm/lib.client": "thanhptr/tm.lib.client",

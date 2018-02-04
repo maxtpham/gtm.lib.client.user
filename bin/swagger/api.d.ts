@@ -25,19 +25,64 @@ export declare class JwtToken {
     /**
     * Valid until
     */
-    'expires': Date;
+    'expires': number;
 }
 export declare class MapOfBoolean extends null<String, boolean> {
+}
+export declare class RoleEntity {
+    'name': string;
+    'scope': string;
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+}
+export declare class RoleView {
+    /**
+    * role code
+    */
+    'code': string;
+    /**
+    * role scope
+    */
+    'scope': string;
+}
+export declare class RoleViewWithPagination {
+    'roles': Array<RoleEntity>;
+    'totalItems': number;
 }
 export declare enum RoleApiApiKeys {
 }
 export declare class RoleApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
     /**
-     *
+     * Create New Role
+     * @param roleView
+     */
+    createEntity(roleView: RoleView): Promise<libclient.ApiResponse<RoleEntity>>;
+    /**
+     * Delete Role
      * @param id
      */
-    getEntity(id: string): Promise<libclient.ApiResponse<any>>;
+    deleteEntity(id: string): Promise<libclient.ApiResponse<any>>;
+    /**
+     * Get Roles
+     * @param query
+     * @param pageNumber
+     * @param itemCount
+     */
+    getEntities(query?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<RoleViewWithPagination>>;
+    /**
+     * Get Role by Id
+     * @param id
+     */
+    getEntity(id: string): Promise<libclient.ApiResponse<RoleEntity>>;
+    /**
+     * Update Role
+     * @param id
+     * @param roleView
+     */
+    updateEntity(id: string, roleView: RoleView): Promise<libclient.ApiResponse<RoleEntity>>;
 }
 export declare enum SessionApiApiKeys {
 }

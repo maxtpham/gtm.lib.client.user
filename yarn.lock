@@ -4,7 +4,7 @@
 
 "@tm/lib.client@thanhptr/tm.lib.client":
   version "1.0.0"
-  resolved "https://codeload.github.com/thanhptr/tm.lib.client/tar.gz/2ecae5cf00a8bafa4e6929708a32d3d200d532e8"
+  resolved "https://codeload.github.com/thanhptr/tm.lib.client/tar.gz/be3b59da2fe1660b06edfff3e5159b99df655f69"
   dependencies:
     "@tm/lib.common" thanhptr/tm.lib.common
     inversify "^4.10.0"
@@ -14,7 +14,7 @@
 
 "@tm/lib.common@thanhptr/tm.lib.common":
   version "1.0.0"
-  resolved "https://codeload.github.com/thanhptr/tm.lib.common/tar.gz/ae53d95dd73eb33f5e52ba80f0b3ea4dbcd816d0"
+  resolved "https://codeload.github.com/thanhptr/tm.lib.common/tar.gz/f8b07922bfa6860d4e2c1540a52be58c6ea78c1d"
   dependencies:
     inversify "^4.10.0"
     inversify-binding-decorators "^3.2.0"
@@ -22,9 +22,9 @@
     reflect-metadata "^0.1.12"
     rimraf "^2.6.2"
 
-"@types/node@^8.5.9":
-  version "8.5.9"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-8.5.9.tgz#7155cfb4ae405bca4dd8df1a214c339e939109bf"
+"@types/node@^9.4.0":
+  version "9.4.0"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-9.4.0.tgz#b85a0bcf1e1cc84eb4901b7e96966aedc6f078d1"
 
 balanced-match@^1.0.0:
   version "1.0.0"
@@ -105,7 +105,7 @@ rimraf@^2.6.2:
   dependencies:
     glob "^7.0.5"
 
-typescript@^2.6.2:
+typescript@^2.7.1:
   version "2.7.1"
   resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
 

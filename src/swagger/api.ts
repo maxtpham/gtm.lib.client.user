@@ -28,10 +28,35 @@ export class JwtToken {
     /**
     * Valid until 
     */
-    'expires': Date;
+    'expires': number;
 }
 
 export class MapOfBoolean extends null<String, boolean> {
+}
+
+export class RoleEntity {
+    'name': string;
+    'scope': string;
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+}
+
+export class RoleView {
+    /**
+    * role code 
+    */
+    'code': string;
+    /**
+    * role scope 
+    */
+    'scope': string;
+}
+
+export class RoleViewWithPagination {
+    'roles': Array<RoleEntity>;
+    'totalItems': number;
 }
 
 
@@ -44,10 +69,67 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
-     * 
+     * Create New Role 
+     * @param roleView 
+     */
+    public createEntity (roleView: RoleView) : Promise<libclient.ApiResponse<RoleEntity>> {
+
+        // verify required parameter 'roleView' is not null or undefined
+        if (roleView === null || roleView === undefined) {
+            throw new Error('Required parameter roleView was null or undefined when calling createEntity.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<RoleEntity>('POST', '/api/user/v1/role',
+            queryParameters, headerParams, formParams, isFile, false, roleView
+        );
+    }
+
+    /**
+     * Delete Role 
      * @param id 
      */
-    public getEntity (id: string) : Promise<libclient.ApiResponse<any>> {
+    public deleteEntity (id: string) : Promise<libclient.ApiResponse<any>> {
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling deleteEntity.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<any>('DELETE', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get Roles 
+     * @param query 
+     * @param pageNumber 
+     * @param itemCount 
+     */
+    public getEntities (query?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<RoleViewWithPagination>> {
+        let queryParameters: any = {};
+        if (query !== undefined) queryParameters['query'] = query;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<RoleViewWithPagination>('GET', '/api/user/v1/role',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get Role by Id 
+     * @param id 
+     */
+    public getEntity (id: string) : Promise<libclient.ApiResponse<RoleEntity>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
@@ -57,8 +139,33 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<any>('GET', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<RoleEntity>('GET', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Update Role 
+     * @param id 
+     * @param roleView 
+     */
+    public updateEntity (id: string, roleView: RoleView) : Promise<libclient.ApiResponse<RoleEntity>> {
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling updateEntity.');
+        }
+
+        // verify required parameter 'roleView' is not null or undefined
+        if (roleView === null || roleView === undefined) {
+            throw new Error('Required parameter roleView was null or undefined when calling updateEntity.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<RoleEntity>('PUT', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+            queryParameters, headerParams, formParams, isFile, false, roleView
         );
     }
 }
