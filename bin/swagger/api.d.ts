@@ -60,13 +60,12 @@ export declare class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
     'totalItems': number;
 }
-export declare class RoleEntity {
-    'name': string;
+export declare class RoleDetailView {
+    'id': string;
+    'code': string;
     'scope': string;
-    'id': any;
     'created': number;
     'updated': number;
-    'deleted': number;
 }
 export declare class RoleView {
     /**
@@ -79,7 +78,7 @@ export declare class RoleView {
     'scope': string;
 }
 export declare class RoleViewWithPagination {
-    'roles': Array<RoleEntity>;
+    'roles': Array<RoleDetailView>;
     'totalItems': number;
 }
 export declare enum MessageApiApiKeys {
@@ -123,7 +122,7 @@ export declare class RoleApi extends libclient.ApiClient {
      * Create New Role
      * @param roleView
      */
-    createEntity(roleView: RoleView): Promise<libclient.ApiResponse<RoleEntity>>;
+    createEntity(roleView: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
     /**
      * Delete Role
      * @param id
@@ -140,13 +139,13 @@ export declare class RoleApi extends libclient.ApiClient {
      * Get Role by Id
      * @param id
      */
-    getEntity(id: string): Promise<libclient.ApiResponse<RoleEntity>>;
+    getEntity(id: string): Promise<libclient.ApiResponse<RoleDetailView>>;
     /**
      * Update Role
      * @param id
      * @param roleView
      */
-    updateEntity(id: string, roleView: RoleView): Promise<libclient.ApiResponse<RoleEntity>>;
+    updateEntity(id: string, roleView: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
 }
 export declare enum SessionApiApiKeys {
 }

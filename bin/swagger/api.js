@@ -31,9 +31,9 @@ exports.MessageView = MessageView;
 class MessageViewWithPagination {
 }
 exports.MessageViewWithPagination = MessageViewWithPagination;
-class RoleEntity {
+class RoleDetailView {
 }
-exports.RoleEntity = RoleEntity;
+exports.RoleDetailView = RoleDetailView;
 class RoleView {
 }
 exports.RoleView = RoleView;
