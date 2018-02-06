@@ -69,13 +69,12 @@ export class MessageViewWithPagination {
     'totalItems': number;
 }
 
-export class RoleEntity {
-    'name': string;
+export class RoleDetailView {
+    'id': string;
+    'code': string;
     'scope': string;
-    'id': any;
     'created': number;
     'updated': number;
-    'deleted': number;
 }
 
 export class RoleView {
@@ -90,7 +89,7 @@ export class RoleView {
 }
 
 export class RoleViewWithPagination {
-    'roles': Array<RoleEntity>;
+    'roles': Array<RoleDetailView>;
     'totalItems': number;
 }
 
@@ -216,7 +215,7 @@ export class RoleApi extends libclient.ApiClient {
      * Create New Role 
      * @param roleView 
      */
-    public createEntity (roleView: RoleView) : Promise<libclient.ApiResponse<RoleEntity>> {
+    public createEntity (roleView: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
 
         // verify required parameter 'roleView' is not null or undefined
         if (roleView === null || roleView === undefined) {
@@ -226,7 +225,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<RoleEntity>('POST', '/api/user/v1/role',
+        return this.execute<RoleDetailView>('POST', '/api/user/v1/role',
             queryParameters, headerParams, formParams, isFile, false, roleView
         );
     }
@@ -273,7 +272,7 @@ export class RoleApi extends libclient.ApiClient {
      * Get Role by Id 
      * @param id 
      */
-    public getEntity (id: string) : Promise<libclient.ApiResponse<RoleEntity>> {
+    public getEntity (id: string) : Promise<libclient.ApiResponse<RoleDetailView>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
@@ -283,7 +282,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<RoleEntity>('GET', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<RoleDetailView>('GET', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -293,7 +292,7 @@ export class RoleApi extends libclient.ApiClient {
      * @param id 
      * @param roleView 
      */
-    public updateEntity (id: string, roleView: RoleView) : Promise<libclient.ApiResponse<RoleEntity>> {
+    public updateEntity (id: string, roleView: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
@@ -308,7 +307,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<RoleEntity>('PUT', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<RoleDetailView>('PUT', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, roleView
         );
     }
