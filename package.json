@@ -22,6 +22,7 @@
     "typescript": "^2.7.1"
   },
   "dependencies": {
+    "@gtm/lib.client": "thanhptr/tm.lib.client",
     "@tm/lib.client": "thanhptr/tm.lib.client",
     "inversify": "^4.9.0",
     "rimraf": "^2.6.2"
