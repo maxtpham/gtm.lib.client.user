@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@gtm/lib.client@thanhptr/tm.lib.client", "@tm/lib.client@thanhptr/tm.lib.client":
+"@gtm/lib.client@^1.0.1":
   version "1.0.1"
-  resolved "https://codeload.github.com/thanhptr/tm.lib.client/tar.gz/6ba3e7e945b58fba040c95979eb7dd6bcf7233a0"
+  resolved "https://registry.yarnpkg.com/@gtm/lib.client/-/lib.client-1.0.1.tgz#b3bfcb049ef2223410081a1fab941238ccec6b36"
   dependencies:
     "@gtm/lib.common" "^1.0.9"
     inversify "^4.10.0"
