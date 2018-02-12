@@ -18,11 +18,11 @@
     "url": "https://github.com/thanhptr/gtm.lib.client.user.git"
   },
   "devDependencies": {
-    "@types/node": "^9.4.0",
+    "@types/node": "^9.4.5",
     "typescript": "^2.7.1"
   },
   "dependencies": {
-    "@gtm/lib.client": "^1.0.1",
+    "@gtm/lib.client": "^1.0.4",
     "inversify": "^4.9.0",
     "rimraf": "^2.6.2"
   }
