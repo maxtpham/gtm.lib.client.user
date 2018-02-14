@@ -16,6 +16,9 @@ const libclient = require("@gtm/lib.client");
 class JwtToken {
 }
 exports.JwtToken = JwtToken;
+class MUserView {
+}
+exports.MUserView = MUserView;
 class MapOfBoolean extends null {
 }
 exports.MapOfBoolean = MapOfBoolean;
@@ -31,6 +34,12 @@ exports.MessageView = MessageView;
 class MessageViewWithPagination {
 }
 exports.MessageViewWithPagination = MessageViewWithPagination;
+/**
+* Allows manipulation and formatting of text strings and determination and location of substrings within strings.
+*/
+class ModelString {
+}
+exports.ModelString = ModelString;
 class RoleDetailView {
 }
 exports.RoleDetailView = RoleDetailView;
@@ -145,10 +154,6 @@ class RoleApi extends libclient.ApiClient {
      * @param roleView
      */
     createEntity(roleView) {
-        // verify required parameter 'roleView' is not null or undefined
-        if (roleView === null || roleView === undefined) {
-            throw new Error('Required parameter roleView was null or undefined when calling createEntity.');
-        }
         let queryParameters = {};
         let headerParams = this.defaultHeaders;
         let isFile = false;
@@ -214,10 +219,6 @@ class RoleApi extends libclient.ApiClient {
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling updateEntity.');
         }
-        // verify required parameter 'roleView' is not null or undefined
-        if (roleView === null || roleView === undefined) {
-            throw new Error('Required parameter roleView was null or undefined when calling updateEntity.');
-        }
         let queryParameters = {};
         let headerParams = this.defaultHeaders;
         let isFile = false;
@@ -274,11 +275,36 @@ class SystemApi extends libclient.ApiClient {
     }
 }
 exports.SystemApi = SystemApi;
+var UserApiApiKeys;
+(function (UserApiApiKeys) {
+})(UserApiApiKeys = exports.UserApiApiKeys || (exports.UserApiApiKeys = {}));
+class UserApi extends libclient.ApiClient {
+    constructor(basePath, accessToken) {
+        super(basePath, accessToken);
+    }
+    /**
+     * Get user by Id
+     * @param id
+     */
+    getEntity(id) {
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getEntity.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+}
+exports.UserApi = UserApi;
 function registerIoc(iocContainer, basePath, token) {
     libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);
     libclient.registerApiClient(iocContainer, SystemApi, SystemApi, basePath, token);
+    libclient.registerApiClient(iocContainer, UserApi, UserApi, basePath, token);
 }
 exports.registerIoc = registerIoc;
 //# sourceMappingURL=api.js.map

@@ -27,6 +27,10 @@ export declare class JwtToken {
     */
     'expires': number;
 }
+export declare class MUserView {
+    'id': ModelString;
+    'name': ModelString;
+}
 export declare class MapOfBoolean extends null<String, boolean> {
 }
 export declare class MessageDetailView {
@@ -59,6 +63,11 @@ export declare class MessageView {
 export declare class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
     'totalItems': number;
+}
+/**
+* Allows manipulation and formatting of text strings and determination and location of substrings within strings.
+*/
+export declare class ModelString {
 }
 export declare class RoleDetailView {
     'id': string;
@@ -122,12 +131,12 @@ export declare class RoleApi extends libclient.ApiClient {
      * Create New Role
      * @param roleView
      */
-    createEntity(roleView: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
+    createEntity(roleView?: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
     /**
      * Delete Role
      * @param id
      */
-    deleteEntity(id: string): Promise<libclient.ApiResponse<any>>;
+    deleteEntity(id: string): Promise<libclient.ApiResponse<ModelString>>;
     /**
      * Get Roles
      * @param query
@@ -145,7 +154,7 @@ export declare class RoleApi extends libclient.ApiClient {
      * @param id
      * @param roleView
      */
-    updateEntity(id: string, roleView: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
+    updateEntity(id: string, roleView?: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
 }
 export declare enum SessionApiApiKeys {
 }
@@ -168,5 +177,15 @@ export declare class SystemApi extends libclient.ApiClient {
      * Get current system version info
      */
     getVersion(): Promise<libclient.ApiResponse<string>>;
+}
+export declare enum UserApiApiKeys {
+}
+export declare class UserApi extends libclient.ApiClient {
+    constructor(basePath?: string, accessToken?: string);
+    /**
+     * Get user by Id
+     * @param id
+     */
+    getEntity(id: string): Promise<libclient.ApiResponse<MUserView>>;
 }
 export declare function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)): void;

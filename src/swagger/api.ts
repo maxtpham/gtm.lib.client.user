@@ -31,6 +31,11 @@ export class JwtToken {
     'expires': number;
 }
 
+export class MUserView {
+    'id': ModelString;
+    'name': ModelString;
+}
+
 export class MapOfBoolean extends null<String, boolean> {
 }
 
@@ -67,6 +72,12 @@ export class MessageView {
 export class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
     'totalItems': number;
+}
+
+/**
+* Allows manipulation and formatting of text strings and determination and location of substrings within strings.
+*/
+export class ModelString {
 }
 
 export class RoleDetailView {
@@ -215,12 +226,7 @@ export class RoleApi extends libclient.ApiClient {
      * Create New Role 
      * @param roleView 
      */
-    public createEntity (roleView: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
-
-        // verify required parameter 'roleView' is not null or undefined
-        if (roleView === null || roleView === undefined) {
-            throw new Error('Required parameter roleView was null or undefined when calling createEntity.');
-        }
+    public createEntity (roleView?: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
         let queryParameters: any = {};
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
@@ -234,7 +240,7 @@ export class RoleApi extends libclient.ApiClient {
      * Delete Role 
      * @param id 
      */
-    public deleteEntity (id: string) : Promise<libclient.ApiResponse<any>> {
+    public deleteEntity (id: string) : Promise<libclient.ApiResponse<ModelString>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
@@ -244,7 +250,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<any>('DELETE', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<ModelString>('DELETE', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -292,16 +298,11 @@ export class RoleApi extends libclient.ApiClient {
      * @param id 
      * @param roleView 
      */
-    public updateEntity (id: string, roleView: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
+    public updateEntity (id: string, roleView?: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
             throw new Error('Required parameter id was null or undefined when calling updateEntity.');
-        }
-
-        // verify required parameter 'roleView' is not null or undefined
-        if (roleView === null || roleView === undefined) {
-            throw new Error('Required parameter roleView was null or undefined when calling updateEntity.');
         }
         let queryParameters: any = {};
         let headerParams: any = this.defaultHeaders;
@@ -367,10 +368,38 @@ export class SystemApi extends libclient.ApiClient {
         );
     }
 }
+export enum UserApiApiKeys {
+}
+
+export class UserApi extends libclient.ApiClient {
+    constructor(basePath?: string, accessToken?: string) {
+        super(basePath, accessToken);
+    }
+
+    /**
+     * Get user by Id 
+     * @param id 
+     */
+    public getEntity (id: string) : Promise<libclient.ApiResponse<MUserView>> {
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getEntity.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MUserView>('GET', '/api/user/v1/user/{id}'.replace('{' + 'id' + '}', String(id)),
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+}
 
 export function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)) {
     libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);
     libclient.registerApiClient(iocContainer, SystemApi, SystemApi, basePath, token);
+    libclient.registerApiClient(iocContainer, UserApi, UserApi, basePath, token);
 }
