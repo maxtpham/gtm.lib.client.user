@@ -22,6 +22,10 @@ export class JwtToken {
     'session': string;
     'user': string;
     /**
+    * List of roles for quicky checking 
+    */
+    'roles': MapOfBoolean;
+    /**
     * List of scope or null is all scope (*) 
     */
     'scope': MapOfBoolean;
