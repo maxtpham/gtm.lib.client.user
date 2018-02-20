@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@gtm/lib.client@^1.0.4":
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/@gtm/lib.client/-/lib.client-1.0.4.tgz#ad7507ce0e7bb124d65c4d5ffd3fbb2b5d91246f"
+"@gtm/lib.client@^1.0.5":
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/@gtm/lib.client/-/lib.client-1.0.5.tgz#32683f1b6b2f9821ba1f491efa3ac09498aae138"
   dependencies:
     "@gtm/lib.common" "^1.0.9"
     inversify "^4.10.0"
@@ -105,9 +105,9 @@ rimraf@^2.6.2:
   dependencies:
     glob "^7.0.5"
 
-typescript@^2.7.1:
-  version "2.7.1"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.1.tgz#bb3682c2c791ac90e7c6210b26478a8da085c359"
+typescript@^2.7.2:
+  version "2.7.2"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.7.2.tgz#2d615a1ef4aee4f574425cdff7026edf81919836"
 
 wrappy@1:
   version "1.0.2"
