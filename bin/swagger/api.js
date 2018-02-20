@@ -34,12 +34,6 @@ exports.MessageView = MessageView;
 class MessageViewWithPagination {
 }
 exports.MessageViewWithPagination = MessageViewWithPagination;
-/**
-* Allows manipulation and formatting of text strings and determination and location of substrings within strings.
-*/
-class ModelString {
-}
-exports.ModelString = ModelString;
 class RoleDetailView {
 }
 exports.RoleDetailView = RoleDetailView;

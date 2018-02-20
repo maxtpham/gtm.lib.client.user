@@ -32,8 +32,8 @@ export class JwtToken {
 }
 
 export class MUserView {
-    'id': ModelString;
-    'name': ModelString;
+    'id': string;
+    'name': string;
 }
 
 export class MapOfBoolean extends null<String, boolean> {
@@ -72,12 +72,6 @@ export class MessageView {
 export class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
     'totalItems': number;
-}
-
-/**
-* Allows manipulation and formatting of text strings and determination and location of substrings within strings.
-*/
-export class ModelString {
 }
 
 export class RoleDetailView {
@@ -240,7 +234,7 @@ export class RoleApi extends libclient.ApiClient {
      * Delete Role 
      * @param id 
      */
-    public deleteEntity (id: string) : Promise<libclient.ApiResponse<ModelString>> {
+    public deleteEntity (id: string) : Promise<libclient.ApiResponse<string>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
@@ -250,7 +244,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<ModelString>('DELETE', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<string>('DELETE', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }

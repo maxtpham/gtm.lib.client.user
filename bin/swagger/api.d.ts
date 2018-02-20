@@ -28,8 +28,8 @@ export declare class JwtToken {
     'expires': number;
 }
 export declare class MUserView {
-    'id': ModelString;
-    'name': ModelString;
+    'id': string;
+    'name': string;
 }
 export declare class MapOfBoolean extends null<String, boolean> {
 }
@@ -63,11 +63,6 @@ export declare class MessageView {
 export declare class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
     'totalItems': number;
-}
-/**
-* Allows manipulation and formatting of text strings and determination and location of substrings within strings.
-*/
-export declare class ModelString {
 }
 export declare class RoleDetailView {
     'id': string;
@@ -136,7 +131,7 @@ export declare class RoleApi extends libclient.ApiClient {
      * Delete Role
      * @param id
      */
-    deleteEntity(id: string): Promise<libclient.ApiResponse<ModelString>>;
+    deleteEntity(id: string): Promise<libclient.ApiResponse<string>>;
     /**
      * Get Roles
      * @param query
