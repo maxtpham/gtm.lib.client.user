@@ -16,6 +16,9 @@ const libclient = require("@gtm/lib.client");
 class JwtToken {
 }
 exports.JwtToken = JwtToken;
+class LocationView {
+}
+exports.LocationView = LocationView;
 class MUserView {
 }
 exports.MUserView = MUserView;
@@ -34,6 +37,9 @@ exports.MessageView = MessageView;
 class MessageViewWithPagination {
 }
 exports.MessageViewWithPagination = MessageViewWithPagination;
+class ProfileView {
+}
+exports.ProfileView = ProfileView;
 class RoleDetailView {
 }
 exports.RoleDetailView = RoleDetailView;
@@ -43,6 +49,9 @@ exports.RoleView = RoleView;
 class RoleViewWithPagination {
 }
 exports.RoleViewWithPagination = RoleViewWithPagination;
+class UserRole {
+}
+exports.UserRole = UserRole;
 var MessageApiApiKeys;
 (function (MessageApiApiKeys) {
 })(MessageApiApiKeys = exports.MessageApiApiKeys || (exports.MessageApiApiKeys = {}));
@@ -289,7 +298,32 @@ class UserApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/user/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/user/entity/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     *
+     */
+    getProfileCurrent() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     *
+     * @param profileView
+     */
+    updateProfileCurrent(profileView) {
+        // verify required parameter 'profileView' is not null or undefined
+        if (profileView === null || profileView === undefined) {
+            throw new Error('Required parameter profileView was null or undefined when calling updateProfileCurrent.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, profileView);
     }
 }
 exports.UserApi = UserApi;

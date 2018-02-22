@@ -2,9 +2,9 @@
 # yarn lockfile v1
 
 
-"@gtm/lib.client@^1.0.6":
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/@gtm/lib.client/-/lib.client-1.0.6.tgz#cc5015ba045f4c25fd79e5adaa716d830ad0a6a9"
+"@gtm/lib.client@^1.0.7":
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/@gtm/lib.client/-/lib.client-1.0.7.tgz#7fb00225a472356b22eeea7416f6c253a7bf13fd"
   dependencies:
     "@gtm/lib.common" "^1.0.9"
     es6-promise "^4.2.4"

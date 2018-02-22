@@ -35,6 +35,17 @@ export class JwtToken {
     'expires': number;
 }
 
+export class LocationView {
+    /**
+    * longitude 
+    */
+    'x': number;
+    /**
+    * latitude 
+    */
+    'y': number;
+}
+
 export class MUserView {
     'id': string;
     'name': string;
@@ -78,6 +89,49 @@ export class MessageViewWithPagination {
     'totalItems': number;
 }
 
+export class ProfileView {
+    /**
+    * Google/FB profile id
+    */
+    'code': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham 
+    */
+    'name': string;
+    /**
+    * OAuth2 provider: google/facebook/builtin/.. 
+    */
+    'provider': string;
+    /**
+    * Link to [role] table 
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component 
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,.. 
+    */
+    'language': string;
+    /**
+    * male/female 
+    */
+    'gender': string;
+    /**
+    * +/- UTC time 
+    */
+    'timezone': number;
+}
+
 export class RoleDetailView {
     'id': string;
     'code': string;
@@ -100,6 +154,11 @@ export class RoleView {
 export class RoleViewWithPagination {
     'roles': Array<RoleDetailView>;
     'totalItems': number;
+}
+
+export class UserRole {
+    'id': any;
+    'code': string;
 }
 
 
@@ -388,8 +447,40 @@ export class UserApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<MUserView>('GET', '/api/user/v1/user/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<MUserView>('GET', '/api/user/v1/user/entity/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * 
+     */
+    public getProfileCurrent () : Promise<libclient.ApiResponse<ProfileView>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<ProfileView>('GET', '/api/user/v1/user/profile',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * 
+     * @param profileView 
+     */
+    public updateProfileCurrent (profileView: ProfileView) : Promise<libclient.ApiResponse<ProfileView>> {
+
+        // verify required parameter 'profileView' is not null or undefined
+        if (profileView === null || profileView === undefined) {
+            throw new Error('Required parameter profileView was null or undefined when calling updateProfileCurrent.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<ProfileView>('POST', '/api/user/v1/user/profile',
+            queryParameters, headerParams, formParams, isFile, false, profileView
         );
     }
 }

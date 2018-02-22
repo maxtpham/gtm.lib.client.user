@@ -31,6 +31,16 @@ export declare class JwtToken {
     */
     'expires': number;
 }
+export declare class LocationView {
+    /**
+    * longitude
+    */
+    'x': number;
+    /**
+    * latitude
+    */
+    'y': number;
+}
 export declare class MUserView {
     'id': string;
     'name': string;
@@ -68,6 +78,48 @@ export declare class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
     'totalItems': number;
 }
+export declare class ProfileView {
+    /**
+    * Google/FB profile id
+    */
+    'code': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham
+    */
+    'name': string;
+    /**
+    * OAuth2 provider: google/facebook/builtin/..
+    */
+    'provider': string;
+    /**
+    * Link to [role] table
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,..
+    */
+    'language': string;
+    /**
+    * male/female
+    */
+    'gender': string;
+    /**
+    * +/- UTC time
+    */
+    'timezone': number;
+}
 export declare class RoleDetailView {
     'id': string;
     'code': string;
@@ -88,6 +140,10 @@ export declare class RoleView {
 export declare class RoleViewWithPagination {
     'roles': Array<RoleDetailView>;
     'totalItems': number;
+}
+export declare class UserRole {
+    'id': any;
+    'code': string;
 }
 export declare enum MessageApiApiKeys {
 }
@@ -186,5 +242,14 @@ export declare class UserApi extends libclient.ApiClient {
      * @param id
      */
     getEntity(id: string): Promise<libclient.ApiResponse<MUserView>>;
+    /**
+     *
+     */
+    getProfileCurrent(): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
+     *
+     * @param profileView
+     */
+    updateProfileCurrent(profileView: ProfileView): Promise<libclient.ApiResponse<ProfileView>>;
 }
 export declare function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)): void;
