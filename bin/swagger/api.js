@@ -292,6 +292,16 @@ class UserApi extends libclient.ApiClient {
         super(basePath, accessToken);
     }
     /**
+     * Get all user
+     */
+    getAlls() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/getAlls', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Get user by Id
      * @param id
      */

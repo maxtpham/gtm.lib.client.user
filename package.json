@@ -6,9 +6,9 @@
   "typings": "bin/index",
   "scripts": {
     "clean": "rimraf bin/*",
-    "build": "yarn run clean && yarn && tsc",
-    "b": "yarn run build",
-    "prepublishOnly": "npm version patch && yarn run build && git push origin",
+    "build": "npm run clean && npm install && tsc",
+    "b": "npm run build",
+    "prepublishOnly": "npm version patch && npm run build && git push origin",
     "p": "npm publish --access public"
   },
   "keywords": [],
@@ -22,8 +22,8 @@
     "typescript": "^2.7.2"
   },
   "dependencies": {
-    "@gtm/lib.client": "^1.0.7",
-    "inversify": "^4.9.0",
+    "@gtm/lib.client": "^1.0.8",
+    "inversify": "^4.10.0",
     "rimraf": "^2.6.2"
   }
 }

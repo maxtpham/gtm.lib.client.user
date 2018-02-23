@@ -67,14 +67,14 @@ export class MessageDetailView {
 }
 
 export class MessageEntity {
-    'userId': string;
-    'toUserId': string;
-    'content': string;
-    'delivered': number;
     'id': any;
     'created': number;
     'updated': number;
     'deleted': number;
+    'userId': string;
+    'toUserId': string;
+    'content': string;
+    'delivered': number;
 }
 
 export class MessageView {
@@ -438,6 +438,19 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Get all user 
+     */
+    public getAlls () : Promise<libclient.ApiResponse<Array<MUserView>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/getAlls',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Get user by Id 
      * @param id 
      */
@@ -485,19 +498,6 @@ export class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/getByUserName',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get all user 
-     */
-    public getUsers () : Promise<libclient.ApiResponse<Array<MUserView>>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/getUsers',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }

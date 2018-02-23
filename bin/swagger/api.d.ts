@@ -59,14 +59,14 @@ export declare class MessageDetailView {
     'updated': number;
 }
 export declare class MessageEntity {
-    'userId': string;
-    'toUserId': string;
-    'content': string;
-    'delivered': number;
     'id': any;
     'created': number;
     'updated': number;
     'deleted': number;
+    'userId': string;
+    'toUserId': string;
+    'content': string;
+    'delivered': number;
 }
 export declare class MessageView {
     'userId': string;
@@ -239,6 +239,10 @@ export declare enum UserApiApiKeys {
 }
 export declare class UserApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
+    /**
+     * Get all user
+     */
+    getAlls(): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
      * Get user by Id
      * @param id
