@@ -164,8 +164,10 @@ export declare class MessageApi extends libclient.ApiClient {
      * @param query
      * @param pageNumber
      * @param itemCount
+     * @param from
+     * @param to
      */
-    getEntities(query?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
+    getEntities(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
     /**
      * Get Message by Id
      * @param id
@@ -241,11 +243,16 @@ export declare class UserApi extends libclient.ApiClient {
      * Get user by Id
      * @param id
      */
-    getEntity(id: string): Promise<libclient.ApiResponse<MUserView>>;
+    getById(id: string): Promise<libclient.ApiResponse<MUserView>>;
     /**
      *
      */
     getProfileCurrent(): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
+     *
+     * @param userName
+     */
+    getUserByName(userName: string): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
      *
      * @param profileView

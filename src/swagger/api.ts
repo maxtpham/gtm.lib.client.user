@@ -213,12 +213,16 @@ export class MessageApi extends libclient.ApiClient {
      * @param query 
      * @param pageNumber 
      * @param itemCount 
+     * @param from 
+     * @param to 
      */
-    public getEntities (query?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+    public getEntities (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
         let queryParameters: any = {};
         if (query !== undefined) queryParameters['query'] = query;
         if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (from !== undefined) queryParameters['from'] = from;
+        if (to !== undefined) queryParameters['to'] = to;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -437,17 +441,17 @@ export class UserApi extends libclient.ApiClient {
      * Get user by Id 
      * @param id 
      */
-    public getEntity (id: string) : Promise<libclient.ApiResponse<MUserView>> {
+    public getById (id: string) : Promise<libclient.ApiResponse<MUserView>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getById.');
         }
         let queryParameters: any = {};
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<MUserView>('GET', '/api/user/v1/user/entity/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<MUserView>('GET', '/api/user/v1/user/getById/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -461,6 +465,26 @@ export class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<ProfileView>('GET', '/api/user/v1/user/profile',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * 
+     * @param userName 
+     */
+    public getUserByName (userName: string) : Promise<libclient.ApiResponse<Array<MUserView>>> {
+
+        // verify required parameter 'userName' is not null or undefined
+        if (userName === null || userName === undefined) {
+            throw new Error('Required parameter userName was null or undefined when calling getUserByName.');
+        }
+        let queryParameters: any = {};
+        if (userName !== undefined) queryParameters['userName'] = userName;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/getByUserName',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }

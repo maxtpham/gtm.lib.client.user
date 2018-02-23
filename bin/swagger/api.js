@@ -94,8 +94,10 @@ class MessageApi extends libclient.ApiClient {
      * @param query
      * @param pageNumber
      * @param itemCount
+     * @param from
+     * @param to
      */
-    getEntities(query, pageNumber, itemCount) {
+    getEntities(query, pageNumber, itemCount, from, to) {
         let queryParameters = {};
         if (query !== undefined)
             queryParameters['query'] = query;
@@ -103,6 +105,10 @@ class MessageApi extends libclient.ApiClient {
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)
             queryParameters['itemCount'] = itemCount;
+        if (from !== undefined)
+            queryParameters['from'] = from;
+        if (to !== undefined)
+            queryParameters['to'] = to;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -289,16 +295,16 @@ class UserApi extends libclient.ApiClient {
      * Get user by Id
      * @param id
      */
-    getEntity(id) {
+    getById(id) {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getById.');
         }
         let queryParameters = {};
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/user/entity/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/user/getById/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      *
@@ -309,6 +315,23 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     *
+     * @param userName
+     */
+    getUserByName(userName) {
+        // verify required parameter 'userName' is not null or undefined
+        if (userName === null || userName === undefined) {
+            throw new Error('Required parameter userName was null or undefined when calling getUserByName.');
+        }
+        let queryParameters = {};
+        if (userName !== undefined)
+            queryParameters['userName'] = userName;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/getByUserName', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      *
