@@ -490,6 +490,19 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Get all user 
+     */
+    public getUsers () : Promise<libclient.ApiResponse<Array<MUserView>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/getUsers',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * 
      * @param profileView 
      */
