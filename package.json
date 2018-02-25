@@ -22,7 +22,7 @@
     "typescript": "^2.7.2"
   },
   "dependencies": {
-    "@gtm/lib.client": "^1.0.8",
+    "@gtm/lib.client": "^1.0.9",
     "inversify": "^4.10.0",
     "rimraf": "^2.6.2"
   }
