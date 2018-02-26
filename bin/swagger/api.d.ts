@@ -41,6 +41,41 @@ export declare class LocationView {
     */
     'y': number;
 }
+export declare class MProfileView {
+    'id': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham
+    */
+    'name': string;
+    /**
+    * Link to [role] table
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,..
+    */
+    'language': string;
+    /**
+    * male/female
+    */
+    'gender': string;
+    /**
+    * +/- UTC time
+    */
+    'timezone': number;
+}
 export declare class MUserView {
     'id': string;
     'name': string;
@@ -240,10 +275,6 @@ export declare enum UserApiApiKeys {
 export declare class UserApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
     /**
-     * Get all user
-     */
-    getAlls(): Promise<libclient.ApiResponse<Array<MUserView>>>;
-    /**
      * Get user by Id
      * @param id
      */
@@ -258,9 +289,27 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getUserByName(userName: string): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
+     * Get all user lite
+     */
+    getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    /**
+     * Get all user with profiles
+     */
+    getUserProfiles(): Promise<libclient.ApiResponse<Array<MProfileView>>>;
+    /**
      *
      * @param profileView
      */
     updateProfileCurrent(profileView: ProfileView): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
+     * Update user with profiles
+     * @param profile
+     */
+    updateUserPhone(profile: MProfileView): Promise<libclient.ApiResponse<MProfileView>>;
+    /**
+     * Update user with profiles
+     * @param profile
+     */
+    updateUserProfiles(profile: MProfileView): Promise<libclient.ApiResponse<MProfileView>>;
 }
 export declare function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)): void;
