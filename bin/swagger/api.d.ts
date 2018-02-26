@@ -275,10 +275,19 @@ export declare enum UserApiApiKeys {
 export declare class UserApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
     /**
+     * Get all user with profiles
+     */
+    getAllProfiles(): Promise<libclient.ApiResponse<Array<MProfileView>>>;
+    /**
      * Get user by Id
      * @param id
      */
     getById(id: string): Promise<libclient.ApiResponse<MUserView>>;
+    /**
+     * Get all user with profiles
+     * @param id
+     */
+    getProfileById(id: string): Promise<libclient.ApiResponse<MProfileView>>;
     /**
      *
      */
@@ -292,15 +301,6 @@ export declare class UserApi extends libclient.ApiClient {
      * Get all user lite
      */
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
-    /**
-     * Get all user with profiles
-     * @param id
-     */
-    getUserProfileById(id: string): Promise<libclient.ApiResponse<MProfileView>>;
-    /**
-     * Get all user with profiles
-     */
-    getUserProfiles(): Promise<libclient.ApiResponse<Array<MProfileView>>>;
     /**
      *
      * @param profileView

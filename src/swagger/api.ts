@@ -474,6 +474,19 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Get all user with profiles 
+     */
+    public getAllProfiles () : Promise<libclient.ApiResponse<Array<MProfileView>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MProfileView>>('GET', '/api/user/v1/user/get-all-profiles',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Get user by Id 
      * @param id 
      */
@@ -488,6 +501,26 @@ export class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<MUserView>('GET', '/api/user/v1/user/getById/{id}'.replace('{' + 'id' + '}', String(id)),
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get all user with profiles 
+     * @param id 
+     */
+    public getProfileById (id: string) : Promise<libclient.ApiResponse<MProfileView>> {
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getProfileById.');
+        }
+        let queryParameters: any = {};
+        if (id !== undefined) queryParameters['id'] = id;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MProfileView>('GET', '/api/user/v1/user/get-profile-by-id',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -534,39 +567,6 @@ export class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-user-lite',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get all user with profiles 
-     * @param id 
-     */
-    public getUserProfileById (id: string) : Promise<libclient.ApiResponse<MProfileView>> {
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getUserProfileById.');
-        }
-        let queryParameters: any = {};
-        if (id !== undefined) queryParameters['id'] = id;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MProfileView>('GET', '/api/user/v1/user/get-user-profile-by-id',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get all user with profiles 
-     */
-    public getUserProfiles () : Promise<libclient.ApiResponse<Array<MProfileView>>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MProfileView>>('GET', '/api/user/v1/user/get-user-profiles',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
