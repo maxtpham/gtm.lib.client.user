@@ -46,6 +46,42 @@ export class LocationView {
     'y': number;
 }
 
+export class MProfileView {
+    'id': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham 
+    */
+    'name': string;
+    /**
+    * Link to [role] table 
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component 
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,.. 
+    */
+    'language': string;
+    /**
+    * male/female 
+    */
+    'gender': string;
+    /**
+    * +/- UTC time 
+    */
+    'timezone': number;
+}
+
 export class MUserView {
     'id': string;
     'name': string;
@@ -438,19 +474,6 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get all user 
-     */
-    public getAlls () : Promise<libclient.ApiResponse<Array<MUserView>>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/getAlls',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
      * Get user by Id 
      * @param id 
      */
@@ -503,6 +526,32 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Get all user lite 
+     */
+    public getUserLite () : Promise<libclient.ApiResponse<Array<MUserView>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-user-lite',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get all user with profiles 
+     */
+    public getUserProfiles () : Promise<libclient.ApiResponse<Array<MProfileView>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MProfileView>>('GET', '/api/user/v1/user/get-user-profiles',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * 
      * @param profileView 
      */
@@ -518,6 +567,44 @@ export class UserApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<ProfileView>('POST', '/api/user/v1/user/profile',
             queryParameters, headerParams, formParams, isFile, false, profileView
+        );
+    }
+
+    /**
+     * Update user with profiles 
+     * @param profile 
+     */
+    public updateUserPhone (profile: MProfileView) : Promise<libclient.ApiResponse<MProfileView>> {
+
+        // verify required parameter 'profile' is not null or undefined
+        if (profile === null || profile === undefined) {
+            throw new Error('Required parameter profile was null or undefined when calling updateUserPhone.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MProfileView>('POST', '/api/user/v1/user/update-user-phone',
+            queryParameters, headerParams, formParams, isFile, false, profile
+        );
+    }
+
+    /**
+     * Update user with profiles 
+     * @param profile 
+     */
+    public updateUserProfiles (profile: MProfileView) : Promise<libclient.ApiResponse<MProfileView>> {
+
+        // verify required parameter 'profile' is not null or undefined
+        if (profile === null || profile === undefined) {
+            throw new Error('Required parameter profile was null or undefined when calling updateUserProfiles.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MProfileView>('POST', '/api/user/v1/user/update-user-profiles',
+            queryParameters, headerParams, formParams, isFile, false, profile
         );
     }
 }
