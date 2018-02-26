@@ -294,6 +294,11 @@ export declare class UserApi extends libclient.ApiClient {
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
      * Get all user with profiles
+     * @param id
+     */
+    getUserProfileById(id: string): Promise<libclient.ApiResponse<MProfileView>>;
+    /**
+     * Get all user with profiles
      */
     getUserProfiles(): Promise<libclient.ApiResponse<Array<MProfileView>>>;
     /**
