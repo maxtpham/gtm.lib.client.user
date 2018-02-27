@@ -19,6 +19,9 @@ exports.JwtToken = JwtToken;
 class LocationView {
 }
 exports.LocationView = LocationView;
+class MProfileView {
+}
+exports.MProfileView = MProfileView;
 class MUserView {
 }
 exports.MUserView = MUserView;
@@ -292,14 +295,14 @@ class UserApi extends libclient.ApiClient {
         super(basePath, accessToken);
     }
     /**
-     * Get all user
+     * Get all user with profiles
      */
-    getAlls() {
+    getAllProfiles() {
         let queryParameters = {};
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/user/getAlls', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/user/get-all-profiles', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Get user by Id
@@ -315,6 +318,23 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/user/getById/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Get all user with profiles
+     * @param id
+     */
+    getProfileById(id) {
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getProfileById.');
+        }
+        let queryParameters = {};
+        if (id !== undefined)
+            queryParameters['id'] = id;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/get-profile-by-id', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      *
@@ -344,6 +364,16 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/getByUserName', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get all user lite
+     */
+    getUserLite() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/get-user-lite', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      *
      * @param profileView
      */
@@ -357,6 +387,36 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('POST', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, profileView);
+    }
+    /**
+     * Update user with profiles
+     * @param profile
+     */
+    updateUserPhone(profile) {
+        // verify required parameter 'profile' is not null or undefined
+        if (profile === null || profile === undefined) {
+            throw new Error('Required parameter profile was null or undefined when calling updateUserPhone.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/update-user-phone', queryParameters, headerParams, formParams, isFile, false, profile);
+    }
+    /**
+     * Update user with profiles
+     * @param profile
+     */
+    updateUserProfiles(profile) {
+        // verify required parameter 'profile' is not null or undefined
+        if (profile === null || profile === undefined) {
+            throw new Error('Required parameter profile was null or undefined when calling updateUserProfiles.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/update-user-profiles', queryParameters, headerParams, formParams, isFile, false, profile);
     }
 }
 exports.UserApi = UserApi;
