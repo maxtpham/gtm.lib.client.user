@@ -374,6 +374,16 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/get-user-lite', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get all userviews
+     */
+    getUserViews() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/userviews', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      *
      * @param profileView
      */

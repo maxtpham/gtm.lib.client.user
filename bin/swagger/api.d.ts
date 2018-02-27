@@ -79,6 +79,7 @@ export declare class MProfileView {
 export declare class MUserView {
     'id': string;
     'name': string;
+    'phone': string;
 }
 export declare class MapOfBoolean extends null<String, boolean> {
 }
@@ -301,6 +302,10 @@ export declare class UserApi extends libclient.ApiClient {
      * Get all user lite
      */
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    /**
+     * Get all userviews
+     */
+    getUserViews(): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
      *
      * @param profileView
