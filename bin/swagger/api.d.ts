@@ -11,6 +11,27 @@
  */
 import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
+export declare class AttachmentView {
+    /**
+    * HTML Content-Type: image/png, image/jpeg, image/gif,..  This will be return to browser client to correctly load & show the image
+    */
+    'media': string;
+    /**
+    * Image raw/binary Content-Data will be stramming to browser client
+    */
+    'data': Binary;
+}
+export declare class Binary {
+    'sUBTYPEDEFAULT': number;
+    'sUBTYPEFUNCTION': number;
+    'sUBTYPEBYTEARRAY': number;
+    'sUBTYPEUUIDOLD': number;
+    'sUBTYPEUUID': number;
+    'sUBTYPEMD5': number;
+    'sUBTYPEUSERDEFINED': number;
+    'buffer': string;
+    'subType': number;
+}
 export declare class JwtToken {
     /**
     * User's display name
@@ -42,39 +63,17 @@ export declare class LocationView {
     'y': number;
 }
 export declare class MProfileView {
-    'id': string;
-    /**
-    * Google/FB display name, ex: Thanh Pham
-    */
     'name': string;
-    /**
-    * Link to [role] table
-    */
-    'roles': Array<UserRole>;
-    /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
-    */
-    'active': boolean;
-    /**
-    * UTC tick only date without time component
-    */
+    'gender': string;
     'birthday': number;
     'address': string;
-    'location': LocationView;
+    'localtion': LocationView;
+    'identityCard': string;
     'phone': string;
-    'email': string;
-    /**
-    * en, vn,..
-    */
-    'language': string;
-    /**
-    * male/female
-    */
-    'gender': string;
-    /**
-    * +/- UTC time
-    */
-    'timezone': number;
+    'job': string;
+    'bankRate': number;
+    'note': string;
+    'infos': string;
 }
 export declare class MUserView {
     'id': string;
@@ -177,6 +176,60 @@ export declare class RoleViewWithPagination {
     'roles': Array<RoleDetailView>;
     'totalItems': number;
 }
+export declare class UserEntity {
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+    /**
+    * Google/FB profile id
+    */
+    'code': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham
+    */
+    'name': string;
+    /**
+    * OAuth2 provider: google/facebook/builtin/..
+    */
+    'provider': string;
+    /**
+    * Link to [role] table
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,..
+    */
+    'language': string;
+    /**
+    * male/female
+    */
+    'gender': string;
+    /**
+    * +/- UTC time
+    */
+    'timezone': number;
+    /**
+    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    */
+    'profiles': any;
+    /**
+    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    */
+    'avatar': AttachmentView;
+}
 export declare class UserRole {
     'id': any;
     'code': string;
@@ -276,19 +329,10 @@ export declare enum UserApiApiKeys {
 export declare class UserApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
     /**
-     * Get all user with profiles
-     */
-    getAllProfiles(): Promise<libclient.ApiResponse<Array<MProfileView>>>;
-    /**
      * Get user by Id
      * @param id
      */
     getById(id: string): Promise<libclient.ApiResponse<MUserView>>;
-    /**
-     * Get all user with profiles
-     * @param id
-     */
-    getProfileById(id: string): Promise<libclient.ApiResponse<MProfileView>>;
     /**
      *
      */
@@ -303,10 +347,6 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
-     * Get all userviews
-     */
-    getUserViews(): Promise<libclient.ApiResponse<Array<MUserView>>>;
-    /**
      *
      * @param profileView
      */
@@ -315,11 +355,6 @@ export declare class UserApi extends libclient.ApiClient {
      * Update user with profiles
      * @param profile
      */
-    updateUserPhone(profile: MProfileView): Promise<libclient.ApiResponse<MProfileView>>;
-    /**
-     * Update user with profiles
-     * @param profile
-     */
-    updateUserProfiles(profile: MProfileView): Promise<libclient.ApiResponse<MProfileView>>;
+    updateUserProfiles(profile: MProfileView): Promise<libclient.ApiResponse<UserEntity>>;
 }
 export declare function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)): void;
