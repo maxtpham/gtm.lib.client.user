@@ -14,6 +14,29 @@ import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
 
 /* tslint:disable:no-unused-variable */
+export class AttachmentView {
+    /**
+    * HTML Content-Type: image/png, image/jpeg, image/gif,..  This will be return to browser client to correctly load & show the image  
+    */
+    'media': string;
+    /**
+    * Image raw/binary Content-Data will be stramming to browser client 
+    */
+    'data': Binary;
+}
+
+export class Binary {
+    'sUBTYPEDEFAULT': number;
+    'sUBTYPEFUNCTION': number;
+    'sUBTYPEBYTEARRAY': number;
+    'sUBTYPEUUIDOLD': number;
+    'sUBTYPEUUID': number;
+    'sUBTYPEMD5': number;
+    'sUBTYPEUSERDEFINED': number;
+    'buffer': string;
+    'subType': number;
+}
+
 export class JwtToken {
     /**
     * User's display name 
@@ -47,39 +70,17 @@ export class LocationView {
 }
 
 export class MProfileView {
-    'id': string;
-    /**
-    * Google/FB display name, ex: Thanh Pham 
-    */
     'name': string;
-    /**
-    * Link to [role] table 
-    */
-    'roles': Array<UserRole>;
-    /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
-    */
-    'active': boolean;
-    /**
-    * UTC tick only date without time component 
-    */
+    'gender': string;
     'birthday': number;
     'address': string;
-    'location': LocationView;
+    'localtion': LocationView;
+    'identityCard': string;
     'phone': string;
-    'email': string;
-    /**
-    * en, vn,.. 
-    */
-    'language': string;
-    /**
-    * male/female 
-    */
-    'gender': string;
-    /**
-    * +/- UTC time 
-    */
-    'timezone': number;
+    'job': string;
+    'bankRate': number;
+    'note': string;
+    'infos': string;
 }
 
 export class MUserView {
@@ -191,6 +192,61 @@ export class RoleView {
 export class RoleViewWithPagination {
     'roles': Array<RoleDetailView>;
     'totalItems': number;
+}
+
+export class UserEntity {
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+    /**
+    * Google/FB profile id
+    */
+    'code': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham 
+    */
+    'name': string;
+    /**
+    * OAuth2 provider: google/facebook/builtin/.. 
+    */
+    'provider': string;
+    /**
+    * Link to [role] table 
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component 
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,.. 
+    */
+    'language': string;
+    /**
+    * male/female 
+    */
+    'gender': string;
+    /**
+    * +/- UTC time 
+    */
+    'timezone': number;
+    /**
+    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    */
+    'profiles': any;
+    /**
+    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
+    */
+    'avatar': AttachmentView;
 }
 
 export class UserRole {
@@ -475,19 +531,6 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get all user with profiles 
-     */
-    public getAllProfiles () : Promise<libclient.ApiResponse<Array<MProfileView>>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MProfileView>>('GET', '/api/user/v1/user/get-all-profiles',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
      * Get user by Id 
      * @param id 
      */
@@ -502,26 +545,6 @@ export class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<MUserView>('GET', '/api/user/v1/user/getById/{id}'.replace('{' + 'id' + '}', String(id)),
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get all user with profiles 
-     * @param id 
-     */
-    public getProfileById (id: string) : Promise<libclient.ApiResponse<MProfileView>> {
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getProfileById.');
-        }
-        let queryParameters: any = {};
-        if (id !== undefined) queryParameters['id'] = id;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MProfileView>('GET', '/api/user/v1/user/get-profile-by-id',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -554,7 +577,7 @@ export class UserApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/getByUserName',
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-by-user-name',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -568,19 +591,6 @@ export class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-user-lite',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get all userviews 
-     */
-    public getUserViews () : Promise<libclient.ApiResponse<Array<MUserView>>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/userviews',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -608,26 +618,7 @@ export class UserApi extends libclient.ApiClient {
      * Update user with profiles 
      * @param profile 
      */
-    public updateUserPhone (profile: MProfileView) : Promise<libclient.ApiResponse<MProfileView>> {
-
-        // verify required parameter 'profile' is not null or undefined
-        if (profile === null || profile === undefined) {
-            throw new Error('Required parameter profile was null or undefined when calling updateUserPhone.');
-        }
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MProfileView>('POST', '/api/user/v1/user/update-user-phone',
-            queryParameters, headerParams, formParams, isFile, false, profile
-        );
-    }
-
-    /**
-     * Update user with profiles 
-     * @param profile 
-     */
-    public updateUserProfiles (profile: MProfileView) : Promise<libclient.ApiResponse<MProfileView>> {
+    public updateUserProfiles (profile: MProfileView) : Promise<libclient.ApiResponse<UserEntity>> {
 
         // verify required parameter 'profile' is not null or undefined
         if (profile === null || profile === undefined) {
@@ -637,7 +628,7 @@ export class UserApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<MProfileView>('POST', '/api/user/v1/user/update-user-profiles',
+        return this.execute<UserEntity>('POST', '/api/user/v1/user/update-user-profiles',
             queryParameters, headerParams, formParams, isFile, false, profile
         );
     }
