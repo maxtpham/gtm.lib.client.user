@@ -85,6 +85,11 @@ export class LocationView {
     'y': number;
 }
 
+export class MAccountView {
+    'userId': string;
+    'balance': number;
+}
+
 export class MProfileView {
     'name': string;
     'gender': string;
@@ -300,6 +305,25 @@ export class AccountApi extends libclient.ApiClient {
     }
 
     /**
+     * add balance of account 
+     * @param accountView 
+     */
+    public addBalance (accountView: MAccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling addBalance.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('POST', '/api/user/v1/account/add-balance',
+            queryParameters, headerParams, formParams, isFile, false, accountView
+        );
+    }
+
+    /**
      * get all account 
      */
     public getAccounts () : Promise<libclient.ApiResponse<Array<AccountEntity>>> {
@@ -342,6 +366,25 @@ export class AccountApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<AccountEntity>('GET', '/api/user/v1/account/my-account',
             queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * remove balance of account 
+     * @param accountView 
+     */
+    public removeBalance (accountView: MAccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling removeBalance.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('POST', '/api/user/v1/account/remove-balance',
+            queryParameters, headerParams, formParams, isFile, false, accountView
         );
     }
 }
