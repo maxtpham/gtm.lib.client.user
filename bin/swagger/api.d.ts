@@ -76,6 +76,10 @@ export declare class LocationView {
     */
     'y': number;
 }
+export declare class MAccountView {
+    'userId': string;
+    'balance': number;
+}
 export declare class MProfileView {
     'name': string;
     'gender': string;
@@ -259,6 +263,11 @@ export declare class AccountApi extends libclient.ApiClient {
      */
     addAccount(account: AccountView): Promise<libclient.ApiResponse<AccountEntity>>;
     /**
+     * add balance of account
+     * @param accountView
+     */
+    addBalance(accountView: MAccountView): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
      * get all account
      */
     getAccounts(): Promise<libclient.ApiResponse<Array<AccountEntity>>>;
@@ -271,6 +280,11 @@ export declare class AccountApi extends libclient.ApiClient {
      * get my-account
      */
     getMyAccount(): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
+     * remove balance of account
+     * @param accountView
+     */
+    removeBalance(accountView: MAccountView): Promise<libclient.ApiResponse<AccountEntity>>;
 }
 export declare enum MessageApiApiKeys {
 }

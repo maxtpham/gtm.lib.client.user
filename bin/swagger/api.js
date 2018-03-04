@@ -31,6 +31,9 @@ exports.JwtToken = JwtToken;
 class LocationView {
 }
 exports.LocationView = LocationView;
+class MAccountView {
+}
+exports.MAccountView = MAccountView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
@@ -93,6 +96,21 @@ class AccountApi extends libclient.ApiClient {
         return this.execute('POST', '/api/user/v1/account/create', queryParameters, headerParams, formParams, isFile, false, account);
     }
     /**
+     * add balance of account
+     * @param accountView
+     */
+    addBalance(accountView) {
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling addBalance.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/account/add-balance', queryParameters, headerParams, formParams, isFile, false, accountView);
+    }
+    /**
      * get all account
      */
     getAccounts() {
@@ -128,6 +146,21 @@ class AccountApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/account/my-account', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * remove balance of account
+     * @param accountView
+     */
+    removeBalance(accountView) {
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling removeBalance.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/account/remove-balance', queryParameters, headerParams, formParams, isFile, false, accountView);
     }
 }
 exports.AccountApi = AccountApi;
