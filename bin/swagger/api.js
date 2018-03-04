@@ -13,6 +13,12 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const libclient = require("@gtm/lib.client");
 /* tslint:disable:no-unused-variable */
+class AccountEntity {
+}
+exports.AccountEntity = AccountEntity;
+class AccountView {
+}
+exports.AccountView = AccountView;
 class AttachmentView {
 }
 exports.AttachmentView = AttachmentView;
@@ -64,6 +70,67 @@ exports.UserEntity = UserEntity;
 class UserRole {
 }
 exports.UserRole = UserRole;
+var AccountApiApiKeys;
+(function (AccountApiApiKeys) {
+})(AccountApiApiKeys = exports.AccountApiApiKeys || (exports.AccountApiApiKeys = {}));
+class AccountApi extends libclient.ApiClient {
+    constructor(basePath, accessToken) {
+        super(basePath, accessToken);
+    }
+    /**
+     * add account
+     * @param account
+     */
+    addAccount(account) {
+        // verify required parameter 'account' is not null or undefined
+        if (account === null || account === undefined) {
+            throw new Error('Required parameter account was null or undefined when calling addAccount.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/account/create', queryParameters, headerParams, formParams, isFile, false, account);
+    }
+    /**
+     * get all account
+     */
+    getAccounts() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/get-all', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * get account by id
+     * @param id
+     */
+    getById(id) {
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getById.');
+        }
+        let queryParameters = {};
+        if (id !== undefined)
+            queryParameters['id'] = id;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/get-by-id', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * get my-account
+     */
+    getMyAccount() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/my-account', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+}
+exports.AccountApi = AccountApi;
 var MessageApiApiKeys;
 (function (MessageApiApiKeys) {
 })(MessageApiApiKeys = exports.MessageApiApiKeys || (exports.MessageApiApiKeys = {}));
@@ -388,6 +455,7 @@ class UserApi extends libclient.ApiClient {
 }
 exports.UserApi = UserApi;
 function registerIoc(iocContainer, basePath, token) {
+    libclient.registerApiClient(iocContainer, AccountApi, AccountApi, basePath, token);
     libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);

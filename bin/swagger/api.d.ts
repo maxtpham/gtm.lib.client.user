@@ -11,6 +11,20 @@
  */
 import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
+export declare class AccountEntity {
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+    'userId': string;
+    'balance': number;
+    'bonus': number;
+}
+export declare class AccountView {
+    'userId': string;
+    'balance': number;
+    'bonus': number;
+}
 export declare class AttachmentView {
     /**
     * HTML Content-Type: image/png, image/jpeg, image/gif,..  This will be return to browser client to correctly load & show the image
@@ -234,6 +248,29 @@ export declare class UserEntity {
 export declare class UserRole {
     'id': any;
     'code': string;
+}
+export declare enum AccountApiApiKeys {
+}
+export declare class AccountApi extends libclient.ApiClient {
+    constructor(basePath?: string, accessToken?: string);
+    /**
+     * add account
+     * @param account
+     */
+    addAccount(account: AccountView): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
+     * get all account
+     */
+    getAccounts(): Promise<libclient.ApiResponse<Array<AccountEntity>>>;
+    /**
+     * get account by id
+     * @param id
+     */
+    getById(id: string): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
+     * get my-account
+     */
+    getMyAccount(): Promise<libclient.ApiResponse<AccountEntity>>;
 }
 export declare enum MessageApiApiKeys {
 }
