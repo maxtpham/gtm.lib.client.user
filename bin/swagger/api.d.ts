@@ -74,6 +74,7 @@ export declare class MProfileView {
     'bankRate': number;
     'note': string;
     'infos': string;
+    'houseHolder': string;
 }
 export declare class MUserView {
     'id': string;
