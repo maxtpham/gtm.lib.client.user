@@ -138,6 +138,23 @@ class AccountApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/account/get-by-id', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * get account by id
+     * @param userId
+     */
+    getByUserId(userId) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getByUserId.');
+        }
+        let queryParameters = {};
+        if (userId !== undefined)
+            queryParameters['userId'] = userId;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/get-by-user-id', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * get my-account
      */
     getMyAccount() {

@@ -277,6 +277,11 @@ export declare class AccountApi extends libclient.ApiClient {
      */
     getById(id: string): Promise<libclient.ApiResponse<AccountEntity>>;
     /**
+     * get account by id
+     * @param userId
+     */
+    getByUserId(userId: string): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
      * get my-account
      */
     getMyAccount(): Promise<libclient.ApiResponse<AccountEntity>>;
