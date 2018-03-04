@@ -14,6 +14,22 @@ import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
 
 /* tslint:disable:no-unused-variable */
+export class AccountEntity {
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+    'userId': string;
+    'balance': number;
+    'bonus': number;
+}
+
+export class AccountView {
+    'userId': string;
+    'balance': number;
+    'bonus': number;
+}
+
 export class AttachmentView {
     /**
     * HTML Content-Type: image/png, image/jpeg, image/gif,..  This will be return to browser client to correctly load & show the image  
@@ -256,6 +272,79 @@ export class UserRole {
 }
 
 
+export enum AccountApiApiKeys {
+}
+
+export class AccountApi extends libclient.ApiClient {
+    constructor(basePath?: string, accessToken?: string) {
+        super(basePath, accessToken);
+    }
+
+    /**
+     * add account 
+     * @param account 
+     */
+    public addAccount (account: AccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'account' is not null or undefined
+        if (account === null || account === undefined) {
+            throw new Error('Required parameter account was null or undefined when calling addAccount.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('POST', '/api/user/v1/account/create',
+            queryParameters, headerParams, formParams, isFile, false, account
+        );
+    }
+
+    /**
+     * get all account 
+     */
+    public getAccounts () : Promise<libclient.ApiResponse<Array<AccountEntity>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<AccountEntity>>('GET', '/api/user/v1/account/get-all',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * get account by id 
+     * @param id 
+     */
+    public getById (id: string) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getById.');
+        }
+        let queryParameters: any = {};
+        if (id !== undefined) queryParameters['id'] = id;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('GET', '/api/user/v1/account/get-by-id',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * get my-account 
+     */
+    public getMyAccount () : Promise<libclient.ApiResponse<AccountEntity>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('GET', '/api/user/v1/account/my-account',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+}
 export enum MessageApiApiKeys {
 }
 
@@ -636,6 +725,7 @@ export class UserApi extends libclient.ApiClient {
 }
 
 export function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)) {
+    libclient.registerApiClient(iocContainer, AccountApi, AccountApi, basePath, token);
     libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);
