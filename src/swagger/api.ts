@@ -357,6 +357,26 @@ export class AccountApi extends libclient.ApiClient {
     }
 
     /**
+     * get account by id 
+     * @param userId 
+     */
+    public getByUserId (userId: string) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getByUserId.');
+        }
+        let queryParameters: any = {};
+        if (userId !== undefined) queryParameters['userId'] = userId;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('GET', '/api/user/v1/account/get-by-user-id',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * get my-account 
      */
     public getMyAccount () : Promise<libclient.ApiResponse<AccountEntity>> {
