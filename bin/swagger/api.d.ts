@@ -101,17 +101,6 @@ export declare class MUserView {
 }
 export declare class MapOfBoolean extends null<String, boolean> {
 }
-export declare class MessageDetailView {
-    'id': string;
-    'userId': string;
-    'userName': string;
-    'toUserId': string;
-    'toUserName': string;
-    'content': string;
-    'delivered': number;
-    'created': number;
-    'updated': number;
-}
 export declare class MessageEntity {
     'id': any;
     'created': number;
@@ -128,8 +117,8 @@ export declare class MessageView {
     'content': string;
     'delivered': number;
 }
-export declare class MessageViewWithPagination {
-    'messages': Array<MessageDetailView>;
+export declare class MessageViewWithPaginationApp {
+    'messages': Array<any>;
     'totalItems': number;
 }
 export declare class ProfileView {
@@ -253,6 +242,63 @@ export declare class UserRole {
     'id': any;
     'code': string;
 }
+export declare class UserViewDetails {
+    /**
+    * Google/FB profile id
+    */
+    'code': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham
+    */
+    'name': string;
+    /**
+    * OAuth2 provider: google/facebook/builtin/..
+    */
+    'provider': string;
+    /**
+    * Link to [role] table
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,..
+    */
+    'language': string;
+    /**
+    * male/female
+    */
+    'gender': string;
+    /**
+    * +/- UTC time
+    */
+    'timezone': number;
+    /**
+    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    */
+    'profiles': any;
+    /**
+    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    */
+    'avatar': AttachmentView;
+    'id': string;
+    'created': number;
+    'updated': number;
+}
+export declare class UserViewWithPagination {
+    'users': Array<UserViewDetails>;
+    'totalItems': number;
+}
 export declare enum AccountApiApiKeys {
 }
 export declare class AccountApi extends libclient.ApiClient {
@@ -307,18 +353,18 @@ export declare class MessageApi extends libclient.ApiClient {
     deleteEntity(id: string): Promise<libclient.ApiResponse<any>>;
     /**
      * Get Messages
+     * @param id
+     */
+    getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
+    /**
+     * Get List Messages For App
      * @param query
      * @param pageNumber
      * @param itemCount
      * @param from
      * @param to
      */
-    getEntities(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
-    /**
-     * Get Message by Id
-     * @param id
-     */
-    getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
+    getListMessageForApp(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
     /**
      * Update Message
      * @param id
@@ -390,6 +436,18 @@ export declare class UserApi extends libclient.ApiClient {
      * @param id
      */
     getById(id: string): Promise<libclient.ApiResponse<MUserView>>;
+    /**
+     * Get user details by Id
+     * @param id
+     */
+    getDetailViewById(id: string): Promise<libclient.ApiResponse<UserViewDetails>>;
+    /**
+     * Get users with pagination
+     * @param query
+     * @param pageNumber
+     * @param itemCount
+     */
+    getEntities(query?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
     /**
      *
      */
