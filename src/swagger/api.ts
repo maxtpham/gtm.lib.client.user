@@ -114,18 +114,6 @@ export class MUserView {
 export class MapOfBoolean extends null<String, boolean> {
 }
 
-export class MessageDetailView {
-    'id': string;
-    'userId': string;
-    'userName': string;
-    'toUserId': string;
-    'toUserName': string;
-    'content': string;
-    'delivered': number;
-    'created': number;
-    'updated': number;
-}
-
 export class MessageEntity {
     'id': any;
     'created': number;
@@ -144,8 +132,8 @@ export class MessageView {
     'delivered': number;
 }
 
-export class MessageViewWithPagination {
-    'messages': Array<MessageDetailView>;
+export class MessageViewWithPaginationApp {
+    'messages': Array<any>;
     'totalItems': number;
 }
 
@@ -274,6 +262,65 @@ export class UserEntity {
 export class UserRole {
     'id': any;
     'code': string;
+}
+
+export class UserViewDetails {
+    /**
+    * Google/FB profile id
+    */
+    'code': string;
+    /**
+    * Google/FB display name, ex: Thanh Pham 
+    */
+    'name': string;
+    /**
+    * OAuth2 provider: google/facebook/builtin/.. 
+    */
+    'provider': string;
+    /**
+    * Link to [role] table 
+    */
+    'roles': Array<UserRole>;
+    /**
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    */
+    'active': boolean;
+    /**
+    * UTC tick only date without time component 
+    */
+    'birthday': number;
+    'address': string;
+    'location': LocationView;
+    'phone': string;
+    'email': string;
+    /**
+    * en, vn,.. 
+    */
+    'language': string;
+    /**
+    * male/female 
+    */
+    'gender': string;
+    /**
+    * +/- UTC time 
+    */
+    'timezone': number;
+    /**
+    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    */
+    'profiles': any;
+    /**
+    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
+    */
+    'avatar': AttachmentView;
+    'id': string;
+    'created': number;
+    'updated': number;
+}
+
+export class UserViewWithPagination {
+    'users': Array<UserViewDetails>;
+    'totalItems': number;
 }
 
 
@@ -456,29 +503,6 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get Messages 
-     * @param query 
-     * @param pageNumber 
-     * @param itemCount 
-     * @param from 
-     * @param to 
-     */
-    public getEntities (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
-        let queryParameters: any = {};
-        if (query !== undefined) queryParameters['query'] = query;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
-        if (from !== undefined) queryParameters['from'] = from;
-        if (to !== undefined) queryParameters['to'] = to;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get Message by Id 
      * @param id 
      */
     public getEntity (id: string) : Promise<libclient.ApiResponse<MessageEntity>> {
@@ -492,6 +516,29 @@ export class MessageApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<MessageEntity>('GET', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)),
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get List Messages For App
+     * @param query 
+     * @param pageNumber 
+     * @param itemCount 
+     * @param from 
+     * @param to 
+     */
+    public getListMessageForApp (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
+        let queryParameters: any = {};
+        if (query !== undefined) queryParameters['query'] = query;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (from !== undefined) queryParameters['from'] = from;
+        if (to !== undefined) queryParameters['to'] = to;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MessageViewWithPaginationApp>('GET', '/api/user/v1/Message',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -703,6 +750,44 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Get user details by Id 
+     * @param id 
+     */
+    public getDetailViewById (id: string) : Promise<libclient.ApiResponse<UserViewDetails>> {
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getDetailViewById.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<UserViewDetails>('GET', '/api/user/v1/user/details/{id}'.replace('{' + 'id' + '}', String(id)),
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get users with pagination 
+     * @param query 
+     * @param pageNumber 
+     * @param itemCount 
+     */
+    public getEntities (query?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<UserViewWithPagination>> {
+        let queryParameters: any = {};
+        if (query !== undefined) queryParameters['query'] = query;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<UserViewWithPagination>('GET', '/api/user/v1/user/entities',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * 
      */
     public getProfileCurrent () : Promise<libclient.ApiResponse<ProfileView>> {
@@ -745,6 +830,25 @@ export class UserApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-user-lite',
             queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Update user with profiles 
+     * @param avatar 
+     */
+    public updateAvatar (avatar: AttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
+
+        // verify required parameter 'avatar' is not null or undefined
+        if (avatar === null || avatar === undefined) {
+            throw new Error('Required parameter avatar was null or undefined when calling updateAvatar.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<UserEntity>('POST', '/api/user/v1/user/update-avatar',
+            queryParameters, headerParams, formParams, isFile, false, avatar
         );
     }
 
