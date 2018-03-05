@@ -43,18 +43,15 @@ exports.MUserView = MUserView;
 class MapOfBoolean extends null {
 }
 exports.MapOfBoolean = MapOfBoolean;
-class MessageDetailView {
-}
-exports.MessageDetailView = MessageDetailView;
 class MessageEntity {
 }
 exports.MessageEntity = MessageEntity;
 class MessageView {
 }
 exports.MessageView = MessageView;
-class MessageViewWithPagination {
+class MessageViewWithPaginationApp {
 }
-exports.MessageViewWithPagination = MessageViewWithPagination;
+exports.MessageViewWithPaginationApp = MessageViewWithPaginationApp;
 class ProfileView {
 }
 exports.ProfileView = ProfileView;
@@ -73,6 +70,12 @@ exports.UserEntity = UserEntity;
 class UserRole {
 }
 exports.UserRole = UserRole;
+class UserViewDetails {
+}
+exports.UserViewDetails = UserViewDetails;
+class UserViewWithPagination {
+}
+exports.UserViewWithPagination = UserViewWithPagination;
 var AccountApiApiKeys;
 (function (AccountApiApiKeys) {
 })(AccountApiApiKeys = exports.AccountApiApiKeys || (exports.AccountApiApiKeys = {}));
@@ -220,13 +223,28 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get Messages
+     * @param id
+     */
+    getEntity(id) {
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getEntity.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Get List Messages For App
      * @param query
      * @param pageNumber
      * @param itemCount
      * @param from
      * @param to
      */
-    getEntities(query, pageNumber, itemCount, from, to) {
+    getListMessageForApp(query, pageNumber, itemCount, from, to) {
         let queryParameters = {};
         if (query !== undefined)
             queryParameters['query'] = query;
@@ -242,21 +260,6 @@ class MessageApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/Message', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get Message by Id
-     * @param id
-     */
-    getEntity(id) {
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getEntity.');
-        }
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Update Message
@@ -436,6 +439,40 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/getById/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get user details by Id
+     * @param id
+     */
+    getDetailViewById(id) {
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling getDetailViewById.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/details/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Get users with pagination
+     * @param query
+     * @param pageNumber
+     * @param itemCount
+     */
+    getEntities(query, pageNumber, itemCount) {
+        let queryParameters = {};
+        if (query !== undefined)
+            queryParameters['query'] = query;
+        if (pageNumber !== undefined)
+            queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined)
+            queryParameters['itemCount'] = itemCount;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/entities', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      *
      */
     getProfileCurrent() {
@@ -471,6 +508,21 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/user/get-user-lite', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Update user with profiles
+     * @param avatar
+     */
+    updateAvatar(avatar) {
+        // verify required parameter 'avatar' is not null or undefined
+        if (avatar === null || avatar === undefined) {
+            throw new Error('Required parameter avatar was null or undefined when calling updateAvatar.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/update-avatar', queryParameters, headerParams, formParams, isFile, false, avatar);
     }
     /**
      *
