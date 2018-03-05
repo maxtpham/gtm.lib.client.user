@@ -510,6 +510,21 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/get-user-lite', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Update user with profiles
+     * @param avatar
+     */
+    updateAvatar(avatar) {
+        // verify required parameter 'avatar' is not null or undefined
+        if (avatar === null || avatar === undefined) {
+            throw new Error('Required parameter avatar was null or undefined when calling updateAvatar.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/update-avatar', queryParameters, headerParams, formParams, isFile, false, avatar);
+    }
+    /**
      *
      * @param profileView
      */

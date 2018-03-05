@@ -834,6 +834,25 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Update user with profiles 
+     * @param avatar 
+     */
+    public updateAvatar (avatar: AttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
+
+        // verify required parameter 'avatar' is not null or undefined
+        if (avatar === null || avatar === undefined) {
+            throw new Error('Required parameter avatar was null or undefined when calling updateAvatar.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<UserEntity>('POST', '/api/user/v1/user/update-avatar',
+            queryParameters, headerParams, formParams, isFile, false, avatar
+        );
+    }
+
+    /**
      * 
      * @param profileView 
      */

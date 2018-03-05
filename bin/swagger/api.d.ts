@@ -462,6 +462,11 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
+     * Update user with profiles
+     * @param avatar
+     */
+    updateAvatar(avatar: AttachmentView): Promise<libclient.ApiResponse<UserEntity>>;
+    /**
      *
      * @param profileView
      */
