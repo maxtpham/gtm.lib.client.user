@@ -43,12 +43,21 @@ exports.MUserView = MUserView;
 class MapOfBoolean extends null {
 }
 exports.MapOfBoolean = MapOfBoolean;
+class MessageDetailView {
+}
+exports.MessageDetailView = MessageDetailView;
+class MessageDetailViewApp {
+}
+exports.MessageDetailViewApp = MessageDetailViewApp;
 class MessageEntity {
 }
 exports.MessageEntity = MessageEntity;
 class MessageView {
 }
 exports.MessageView = MessageView;
+class MessageViewWithPagination {
+}
+exports.MessageViewWithPagination = MessageViewWithPagination;
 class MessageViewWithPaginationApp {
 }
 exports.MessageViewWithPaginationApp = MessageViewWithPaginationApp;
@@ -223,6 +232,31 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get Messages
+     * @param query
+     * @param pageNumber
+     * @param itemCount
+     * @param from
+     * @param to
+     */
+    getEntities(query, pageNumber, itemCount, from, to) {
+        let queryParameters = {};
+        if (query !== undefined)
+            queryParameters['query'] = query;
+        if (pageNumber !== undefined)
+            queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined)
+            queryParameters['itemCount'] = itemCount;
+        if (from !== undefined)
+            queryParameters['from'] = from;
+        if (to !== undefined)
+            queryParameters['to'] = to;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Get Message by Id
      * @param id
      */
     getEntity(id) {
@@ -234,7 +268,7 @@ class MessageApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/Message/getbyid/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Get List Messages For App
@@ -259,7 +293,7 @@ class MessageApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/Message/getforapp', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Update Message
@@ -422,6 +456,26 @@ var UserApiApiKeys;
 class UserApi extends libclient.ApiClient {
     constructor(basePath, accessToken) {
         super(basePath, accessToken);
+    }
+    /**
+     * Create or update User Role
+     * @param userId
+     * @param roleType
+     */
+    createOrUpdateUserRole(userId, roleType) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling createOrUpdateUserRole.');
+        }
+        // verify required parameter 'roleType' is not null or undefined
+        if (roleType === null || roleType === undefined) {
+            throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRole.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/create-or-update-role/{userId}/{roleType}'.replace('{' + 'userId' + '}', String(userId)).replace('{' + 'roleType' + '}', String(roleType)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Get user by Id
