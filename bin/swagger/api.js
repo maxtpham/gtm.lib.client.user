@@ -34,6 +34,9 @@ exports.LocationView = LocationView;
 class MAccountView {
 }
 exports.MAccountView = MAccountView;
+class MAttachmentView {
+}
+exports.MAttachmentView = MAttachmentView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
