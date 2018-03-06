@@ -112,6 +112,11 @@ export declare class MessageDetailView {
     'created': number;
     'updated': number;
 }
+export declare class MessageDetailViewApp {
+    'userId': string;
+    'userName': string;
+    'messageDetailView': Array<MessageDetailView>;
+}
 export declare class MessageEntity {
     'id': any;
     'created': number;
@@ -133,7 +138,7 @@ export declare class MessageViewWithPagination {
     'totalItems': number;
 }
 export declare class MessageViewWithPaginationApp {
-    'messages': Array<any>;
+    'messages': Array<MessageDetailViewApp>;
     'totalItems': number;
 }
 export declare class ProfileView {

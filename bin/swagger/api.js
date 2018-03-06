@@ -46,6 +46,9 @@ exports.MapOfBoolean = MapOfBoolean;
 class MessageDetailView {
 }
 exports.MessageDetailView = MessageDetailView;
+class MessageDetailViewApp {
+}
+exports.MessageDetailViewApp = MessageDetailViewApp;
 class MessageEntity {
 }
 exports.MessageEntity = MessageEntity;

@@ -126,6 +126,12 @@ export class MessageDetailView {
     'updated': number;
 }
 
+export class MessageDetailViewApp {
+    'userId': string;
+    'userName': string;
+    'messageDetailView': Array<MessageDetailView>;
+}
+
 export class MessageEntity {
     'id': any;
     'created': number;
@@ -150,7 +156,7 @@ export class MessageViewWithPagination {
 }
 
 export class MessageViewWithPaginationApp {
-    'messages': Array<any>;
+    'messages': Array<MessageDetailViewApp>;
     'totalItems': number;
 }
 
