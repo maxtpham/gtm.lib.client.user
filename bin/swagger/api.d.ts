@@ -101,6 +101,17 @@ export declare class MUserView {
 }
 export declare class MapOfBoolean extends null<String, boolean> {
 }
+export declare class MessageDetailView {
+    'id': string;
+    'userId': string;
+    'userName': string;
+    'toUserId': string;
+    'toUserName': string;
+    'content': string;
+    'delivered': number;
+    'created': number;
+    'updated': number;
+}
 export declare class MessageEntity {
     'id': any;
     'created': number;
@@ -116,6 +127,10 @@ export declare class MessageView {
     'toUserId': string;
     'content': string;
     'delivered': number;
+}
+export declare class MessageViewWithPagination {
+    'messages': Array<MessageDetailView>;
+    'totalItems': number;
 }
 export declare class MessageViewWithPaginationApp {
     'messages': Array<any>;
@@ -353,6 +368,15 @@ export declare class MessageApi extends libclient.ApiClient {
     deleteEntity(id: string): Promise<libclient.ApiResponse<any>>;
     /**
      * Get Messages
+     * @param query
+     * @param pageNumber
+     * @param itemCount
+     * @param from
+     * @param to
+     */
+    getEntities(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
+    /**
+     * Get Message by Id
      * @param id
      */
     getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
@@ -431,6 +455,12 @@ export declare enum UserApiApiKeys {
 }
 export declare class UserApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
+    /**
+     * Create or update User Role
+     * @param userId
+     * @param roleType
+     */
+    createOrUpdateUserRole(userId: string, roleType: string): Promise<libclient.ApiResponse<ProfileView>>;
     /**
      * Get user by Id
      * @param id

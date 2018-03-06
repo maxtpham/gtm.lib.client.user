@@ -114,6 +114,18 @@ export class MUserView {
 export class MapOfBoolean extends null<String, boolean> {
 }
 
+export class MessageDetailView {
+    'id': string;
+    'userId': string;
+    'userName': string;
+    'toUserId': string;
+    'toUserName': string;
+    'content': string;
+    'delivered': number;
+    'created': number;
+    'updated': number;
+}
+
 export class MessageEntity {
     'id': any;
     'created': number;
@@ -130,6 +142,11 @@ export class MessageView {
     'toUserId': string;
     'content': string;
     'delivered': number;
+}
+
+export class MessageViewWithPagination {
+    'messages': Array<MessageDetailView>;
+    'totalItems': number;
 }
 
 export class MessageViewWithPaginationApp {
@@ -503,6 +520,29 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get Messages 
+     * @param query 
+     * @param pageNumber 
+     * @param itemCount 
+     * @param from 
+     * @param to 
+     */
+    public getEntities (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+        let queryParameters: any = {};
+        if (query !== undefined) queryParameters['query'] = query;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (from !== undefined) queryParameters['from'] = from;
+        if (to !== undefined) queryParameters['to'] = to;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get Message by Id 
      * @param id 
      */
     public getEntity (id: string) : Promise<libclient.ApiResponse<MessageEntity>> {
@@ -515,7 +555,7 @@ export class MessageApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<MessageEntity>('GET', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<MessageEntity>('GET', '/api/user/v1/Message/getbyid/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -538,7 +578,7 @@ export class MessageApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<MessageViewWithPaginationApp>('GET', '/api/user/v1/Message',
+        return this.execute<MessageViewWithPaginationApp>('GET', '/api/user/v1/Message/getforapp',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -728,6 +768,31 @@ export enum UserApiApiKeys {
 export class UserApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string) {
         super(basePath, accessToken);
+    }
+
+    /**
+     * Create or update User Role 
+     * @param userId 
+     * @param roleType 
+     */
+    public createOrUpdateUserRole (userId: string, roleType: string) : Promise<libclient.ApiResponse<ProfileView>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling createOrUpdateUserRole.');
+        }
+
+        // verify required parameter 'roleType' is not null or undefined
+        if (roleType === null || roleType === undefined) {
+            throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRole.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<ProfileView>('POST', '/api/user/v1/user/create-or-update-role/{userId}/{roleType}'.replace('{' + 'userId' + '}', String(userId)).replace('{' + 'roleType' + '}', String(roleType)),
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
     }
 
     /**
