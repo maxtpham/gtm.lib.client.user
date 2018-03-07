@@ -141,6 +141,12 @@ export declare class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
     'totalItems': number;
 }
+export declare class MessageViewWithPaginationAnUserApp {
+    'userId': string;
+    'userName': string;
+    'messages': Array<MessageDetailView>;
+    'totalItems': number;
+}
 export declare class MessageViewWithPaginationApp {
     'messages': Array<MessageDetailViewApp>;
     'totalItems': number;
@@ -193,6 +199,8 @@ export declare class RoleDetailView {
     'scope': string;
     'created': number;
     'updated': number;
+}
+export declare class RoleType {
 }
 export declare class RoleView {
     /**
@@ -265,6 +273,10 @@ export declare class UserEntity {
 export declare class UserRole {
     'id': any;
     'code': string;
+}
+export declare class UserRoleView {
+    'userId': string;
+    'roleType': RoleType;
 }
 export declare class UserViewDetails {
     /**
@@ -399,6 +411,16 @@ export declare class MessageApi extends libclient.ApiClient {
      */
     getListMessageForApp(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
     /**
+     * Get List Messages with an user for App
+     * @param userIdToGetMessage
+     * @param query
+     * @param pageNumber
+     * @param itemCount
+     * @param from
+     * @param to
+     */
+    getListMessageOfUser(userIdToGetMessage: string, query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
+    /**
      * Update Message
      * @param id
      * @param messageView
@@ -466,10 +488,9 @@ export declare class UserApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
     /**
      * Create or update User Role
-     * @param userId
-     * @param roleType
+     * @param userRoleView
      */
-    createOrUpdateUserRole(userId: string, roleType: string): Promise<libclient.ApiResponse<ProfileView>>;
+    createOrUpdateUserRole(userRoleView: UserRoleView): Promise<libclient.ApiResponse<ProfileView>>;
     /**
      * Get user by Id
      * @param id

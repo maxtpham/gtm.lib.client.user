@@ -61,6 +61,9 @@ exports.MessageView = MessageView;
 class MessageViewWithPagination {
 }
 exports.MessageViewWithPagination = MessageViewWithPagination;
+class MessageViewWithPaginationAnUserApp {
+}
+exports.MessageViewWithPaginationAnUserApp = MessageViewWithPaginationAnUserApp;
 class MessageViewWithPaginationApp {
 }
 exports.MessageViewWithPaginationApp = MessageViewWithPaginationApp;
@@ -70,6 +73,9 @@ exports.ProfileView = ProfileView;
 class RoleDetailView {
 }
 exports.RoleDetailView = RoleDetailView;
+class RoleType {
+}
+exports.RoleType = RoleType;
 class RoleView {
 }
 exports.RoleView = RoleView;
@@ -82,6 +88,9 @@ exports.UserEntity = UserEntity;
 class UserRole {
 }
 exports.UserRole = UserRole;
+class UserRoleView {
+}
+exports.UserRoleView = UserRoleView;
 class UserViewDetails {
 }
 exports.UserViewDetails = UserViewDetails;
@@ -299,6 +308,38 @@ class MessageApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/Message/getforapp', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get List Messages with an user for App
+     * @param userIdToGetMessage
+     * @param query
+     * @param pageNumber
+     * @param itemCount
+     * @param from
+     * @param to
+     */
+    getListMessageOfUser(userIdToGetMessage, query, pageNumber, itemCount, from, to) {
+        // verify required parameter 'userIdToGetMessage' is not null or undefined
+        if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
+            throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageOfUser.');
+        }
+        let queryParameters = {};
+        if (userIdToGetMessage !== undefined)
+            queryParameters['userIdToGetMessage'] = userIdToGetMessage;
+        if (query !== undefined)
+            queryParameters['query'] = query;
+        if (pageNumber !== undefined)
+            queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined)
+            queryParameters['itemCount'] = itemCount;
+        if (from !== undefined)
+            queryParameters['from'] = from;
+        if (to !== undefined)
+            queryParameters['to'] = to;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message/getforanuserapp', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Update Message
      * @param id
      * @param messageView
@@ -462,23 +503,18 @@ class UserApi extends libclient.ApiClient {
     }
     /**
      * Create or update User Role
-     * @param userId
-     * @param roleType
+     * @param userRoleView
      */
-    createOrUpdateUserRole(userId, roleType) {
-        // verify required parameter 'userId' is not null or undefined
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling createOrUpdateUserRole.');
-        }
-        // verify required parameter 'roleType' is not null or undefined
-        if (roleType === null || roleType === undefined) {
-            throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRole.');
+    createOrUpdateUserRole(userRoleView) {
+        // verify required parameter 'userRoleView' is not null or undefined
+        if (userRoleView === null || userRoleView === undefined) {
+            throw new Error('Required parameter userRoleView was null or undefined when calling createOrUpdateUserRole.');
         }
         let queryParameters = {};
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('POST', '/api/user/v1/user/create-or-update-role/{userId}/{roleType}'.replace('{' + 'userId' + '}', String(userId)).replace('{' + 'roleType' + '}', String(roleType)), queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('POST', '/api/user/v1/user/create-or-update-role', queryParameters, headerParams, formParams, isFile, false, userRoleView);
     }
     /**
      * Get user by Id
