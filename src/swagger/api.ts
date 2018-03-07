@@ -216,6 +216,9 @@ export class RoleDetailView {
     'updated': number;
 }
 
+export class RoleType {
+}
+
 export class RoleView {
     /**
     * role code 
@@ -290,6 +293,11 @@ export class UserEntity {
 export class UserRole {
     'id': any;
     'code': string;
+}
+
+export class UserRoleView {
+    'userId': string;
+    'roleType': RoleType;
 }
 
 export class UserViewDetails {
@@ -783,26 +791,20 @@ export class UserApi extends libclient.ApiClient {
 
     /**
      * Create or update User Role 
-     * @param userId 
-     * @param roleType 
+     * @param userRoleView 
      */
-    public createOrUpdateUserRole (userId: string, roleType: string) : Promise<libclient.ApiResponse<ProfileView>> {
+    public createOrUpdateUserRole (userRoleView: UserRoleView) : Promise<libclient.ApiResponse<ProfileView>> {
 
-        // verify required parameter 'userId' is not null or undefined
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling createOrUpdateUserRole.');
-        }
-
-        // verify required parameter 'roleType' is not null or undefined
-        if (roleType === null || roleType === undefined) {
-            throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRole.');
+        // verify required parameter 'userRoleView' is not null or undefined
+        if (userRoleView === null || userRoleView === undefined) {
+            throw new Error('Required parameter userRoleView was null or undefined when calling createOrUpdateUserRole.');
         }
         let queryParameters: any = {};
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<ProfileView>('POST', '/api/user/v1/user/create-or-update-role/{userId}/{roleType}'.replace('{' + 'userId' + '}', String(userId)).replace('{' + 'roleType' + '}', String(roleType)),
-            queryParameters, headerParams, formParams, isFile, false, undefined
+        return this.execute<ProfileView>('POST', '/api/user/v1/user/create-or-update-role',
+            queryParameters, headerParams, formParams, isFile, false, userRoleView
         );
     }
 
