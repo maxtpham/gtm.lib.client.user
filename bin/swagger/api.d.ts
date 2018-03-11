@@ -102,6 +102,7 @@ export declare class MUserView {
     'id': string;
     'name': string;
     'phone': string;
+    'houseHolder': any;
 }
 export declare class MapOfBoolean extends null<String, boolean> {
 }
