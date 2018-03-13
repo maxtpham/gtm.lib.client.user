@@ -214,6 +214,10 @@ export class ProfileView {
     * +/- UTC time 
     */
     'timezone': number;
+    /**
+    * First Login 
+    */
+    'isFirstLogin': boolean;
 }
 
 export class RoleDetailView {
@@ -289,6 +293,10 @@ export class UserEntity {
     */
     'timezone': number;
     /**
+    * First Login 
+    */
+    'isFirstLogin': boolean;
+    /**
     * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
@@ -349,6 +357,10 @@ export class UserViewDetails {
     * +/- UTC time 
     */
     'timezone': number;
+    /**
+    * First Login 
+    */
+    'isFirstLogin': boolean;
     /**
     * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
