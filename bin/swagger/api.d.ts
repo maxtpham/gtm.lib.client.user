@@ -193,6 +193,10 @@ export declare class ProfileView {
     * +/- UTC time
     */
     'timezone': number;
+    /**
+    * First Login
+    */
+    'isFirstLogin': boolean;
 }
 export declare class RoleDetailView {
     'id': string;
@@ -263,6 +267,10 @@ export declare class UserEntity {
     */
     'timezone': number;
     /**
+    * First Login
+    */
+    'isFirstLogin': boolean;
+    /**
     * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
@@ -320,6 +328,10 @@ export declare class UserViewDetails {
     * +/- UTC time
     */
     'timezone': number;
+    /**
+    * First Login
+    */
+    'isFirstLogin': boolean;
     /**
     * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
@@ -492,6 +504,11 @@ export declare class UserApi extends libclient.ApiClient {
      * @param userRoleView
      */
     createOrUpdateUserRole(userRoleView: UserRoleView): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
+     * Create or update User Role
+     * @param roleType
+     */
+    createOrUpdateUserRoleMobile(roleType: string): Promise<libclient.ApiResponse<ProfileView>>;
     /**
      * Get user by Id
      * @param id
