@@ -284,24 +284,9 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get List Messages For App
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageForApp(query, pageNumber, itemCount, from, to) {
+    getListMessageForApp() {
         let queryParameters = {};
-        if (query !== undefined)
-            queryParameters['query'] = query;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -310,13 +295,8 @@ class MessageApi extends libclient.ApiClient {
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageOfUser(userIdToGetMessage, query, pageNumber, itemCount, from, to) {
+    getListMessageOfUser(userIdToGetMessage) {
         // verify required parameter 'userIdToGetMessage' is not null or undefined
         if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
             throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageOfUser.');
@@ -324,20 +304,20 @@ class MessageApi extends libclient.ApiClient {
         let queryParameters = {};
         if (userIdToGetMessage !== undefined)
             queryParameters['userIdToGetMessage'] = userIdToGetMessage;
-        if (query !== undefined)
-            queryParameters['query'] = query;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/Message/getforanuserapp', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Get Messages to notification
+     */
+    getMessageToNotification() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message/get-message-to-notification', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Update Message

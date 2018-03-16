@@ -114,6 +114,7 @@ export declare class MessageDetailView {
     'toUserName': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
     'created': number;
     'updated': number;
 }
@@ -131,12 +132,14 @@ export declare class MessageEntity {
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 export declare class MessageView {
     'userId': string;
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 export declare class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
@@ -146,11 +149,9 @@ export declare class MessageViewWithPaginationAnUserApp {
     'userId': string;
     'userName': string;
     'messages': Array<MessageDetailView>;
-    'totalItems': number;
 }
 export declare class MessageViewWithPaginationApp {
     'messages': Array<MessageDetailViewApp>;
-    'totalItems': number;
 }
 export declare class ProfileView {
     /**
@@ -416,23 +417,17 @@ export declare class MessageApi extends libclient.ApiClient {
     getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
     /**
      * Get List Messages For App
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageForApp(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
+    getListMessageForApp(): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageOfUser(userIdToGetMessage: string, query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
+    getListMessageOfUser(userIdToGetMessage: string): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
+    /**
+     * Get Messages to notification
+     */
+    getMessageToNotification(): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
     /**
      * Update Message
      * @param id

@@ -128,6 +128,7 @@ export class MessageDetailView {
     'toUserName': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
     'created': number;
     'updated': number;
 }
@@ -147,6 +148,7 @@ export class MessageEntity {
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 
 export class MessageView {
@@ -154,6 +156,7 @@ export class MessageView {
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 
 export class MessageViewWithPagination {
@@ -165,12 +168,10 @@ export class MessageViewWithPaginationAnUserApp {
     'userId': string;
     'userName': string;
     'messages': Array<MessageDetailView>;
-    'totalItems': number;
 }
 
 export class MessageViewWithPaginationApp {
     'messages': Array<MessageDetailViewApp>;
-    'totalItems': number;
 }
 
 export class ProfileView {
@@ -601,19 +602,9 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get List Messages For App
-     * @param query 
-     * @param pageNumber 
-     * @param itemCount 
-     * @param from 
-     * @param to 
      */
-    public getListMessageForApp (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
+    public getListMessageForApp () : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
         let queryParameters: any = {};
-        if (query !== undefined) queryParameters['query'] = query;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
-        if (from !== undefined) queryParameters['from'] = from;
-        if (to !== undefined) queryParameters['to'] = to;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -625,13 +616,8 @@ export class MessageApi extends libclient.ApiClient {
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage 
-     * @param query 
-     * @param pageNumber 
-     * @param itemCount 
-     * @param from 
-     * @param to 
      */
-    public getListMessageOfUser (userIdToGetMessage: string, query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>> {
+    public getListMessageOfUser (userIdToGetMessage: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>> {
 
         // verify required parameter 'userIdToGetMessage' is not null or undefined
         if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
@@ -639,15 +625,23 @@ export class MessageApi extends libclient.ApiClient {
         }
         let queryParameters: any = {};
         if (userIdToGetMessage !== undefined) queryParameters['userIdToGetMessage'] = userIdToGetMessage;
-        if (query !== undefined) queryParameters['query'] = query;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
-        if (from !== undefined) queryParameters['from'] = from;
-        if (to !== undefined) queryParameters['to'] = to;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
         return this.execute<MessageViewWithPaginationAnUserApp>('GET', '/api/user/v1/Message/getforanuserapp',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get Messages to notification
+     */
+    public getMessageToNotification () : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message/get-message-to-notification',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
