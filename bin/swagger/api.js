@@ -34,9 +34,6 @@ exports.LocationView = LocationView;
 class MAccountView {
 }
 exports.MAccountView = MAccountView;
-class MAttachmentView {
-}
-exports.MAttachmentView = MAttachmentView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
@@ -91,6 +88,9 @@ exports.UserRole = UserRole;
 class UserRoleView {
 }
 exports.UserRoleView = UserRoleView;
+class UserUpdateView {
+}
+exports.UserUpdateView = UserUpdateView;
 class UserViewDetails {
 }
 exports.UserViewDetails = UserViewDetails;
@@ -284,24 +284,9 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get List Messages For App
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageForApp(query, pageNumber, itemCount, from, to) {
+    getListMessageForApp() {
         let queryParameters = {};
-        if (query !== undefined)
-            queryParameters['query'] = query;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -310,13 +295,8 @@ class MessageApi extends libclient.ApiClient {
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageOfUser(userIdToGetMessage, query, pageNumber, itemCount, from, to) {
+    getListMessageOfUser(userIdToGetMessage) {
         // verify required parameter 'userIdToGetMessage' is not null or undefined
         if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
             throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageOfUser.');
@@ -324,20 +304,20 @@ class MessageApi extends libclient.ApiClient {
         let queryParameters = {};
         if (userIdToGetMessage !== undefined)
             queryParameters['userIdToGetMessage'] = userIdToGetMessage;
-        if (query !== undefined)
-            queryParameters['query'] = query;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/Message/getforanuserapp', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Get Messages to notification
+     */
+    getMessageToNotification() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message/get-message-to-notification', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Update Message
@@ -517,6 +497,23 @@ class UserApi extends libclient.ApiClient {
         return this.execute('POST', '/api/user/v1/user/create-or-update-role', queryParameters, headerParams, formParams, isFile, false, userRoleView);
     }
     /**
+     * Create or update User Role
+     * @param roleType
+     */
+    createOrUpdateUserRoleMobile(roleType) {
+        // verify required parameter 'roleType' is not null or undefined
+        if (roleType === null || roleType === undefined) {
+            throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRoleMobile.');
+        }
+        let queryParameters = {};
+        if (roleType !== undefined)
+            queryParameters['roleType'] = roleType;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/create-or-update-role-mobile', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Get user by Id
      * @param id
      */
@@ -631,6 +628,26 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('POST', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, profileView);
+    }
+    /**
+     * Update user details
+     * @param userId
+     * @param userDetails
+     */
+    updateUserDetail(userId, userDetails) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling updateUserDetail.');
+        }
+        // verify required parameter 'userDetails' is not null or undefined
+        if (userDetails === null || userDetails === undefined) {
+            throw new Error('Required parameter userDetails was null or undefined when calling updateUserDetail.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/update-user-details/{userId}'.replace('{' + 'userId' + '}', String(userId)), queryParameters, headerParams, formParams, isFile, false, userDetails);
     }
     /**
      * Update user with profiles

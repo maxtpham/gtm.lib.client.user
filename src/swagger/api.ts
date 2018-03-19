@@ -90,11 +90,6 @@ export class MAccountView {
     'balance': number;
 }
 
-export class MAttachmentView {
-    'media': string;
-    'data': string;
-}
-
 export class MProfileView {
     'name': string;
     'gender': string;
@@ -128,6 +123,7 @@ export class MessageDetailView {
     'toUserName': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
     'created': number;
     'updated': number;
 }
@@ -147,6 +143,7 @@ export class MessageEntity {
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 
 export class MessageView {
@@ -154,6 +151,7 @@ export class MessageView {
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 
 export class MessageViewWithPagination {
@@ -165,12 +163,10 @@ export class MessageViewWithPaginationAnUserApp {
     'userId': string;
     'userName': string;
     'messages': Array<MessageDetailView>;
-    'totalItems': number;
 }
 
 export class MessageViewWithPaginationApp {
     'messages': Array<MessageDetailViewApp>;
-    'totalItems': number;
 }
 
 export class ProfileView {
@@ -191,7 +187,7 @@ export class ProfileView {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
     'active': boolean;
     /**
@@ -214,6 +210,10 @@ export class ProfileView {
     * +/- UTC time 
     */
     'timezone': number;
+    /**
+    * First Login 
+    */
+    'isFirstLogin': boolean;
 }
 
 export class RoleDetailView {
@@ -265,7 +265,7 @@ export class UserEntity {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
     'active': boolean;
     /**
@@ -289,11 +289,15 @@ export class UserEntity {
     */
     'timezone': number;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * First Login 
+    */
+    'isFirstLogin': boolean;
+    /**
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login  
     */
     'avatar': AttachmentView;
 }
@@ -306,6 +310,18 @@ export class UserRole {
 export class UserRoleView {
     'userId': string;
     'roleType': RoleType;
+}
+
+export class UserUpdateView {
+    'name': string;
+    'phone': string;
+    'dob': number;
+    'email': string;
+    'gender': string;
+    'status': boolean;
+    'role': Array<UserRole>;
+    'address': string;
+    'avatar': AttachmentView;
 }
 
 export class UserViewDetails {
@@ -326,7 +342,7 @@ export class UserViewDetails {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
     'active': boolean;
     /**
@@ -350,11 +366,15 @@ export class UserViewDetails {
     */
     'timezone': number;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * First Login 
+    */
+    'isFirstLogin': boolean;
+    /**
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login  
     */
     'avatar': AttachmentView;
     'id': string;
@@ -589,19 +609,9 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get List Messages For App
-     * @param query 
-     * @param pageNumber 
-     * @param itemCount 
-     * @param from 
-     * @param to 
      */
-    public getListMessageForApp (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
+    public getListMessageForApp () : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
         let queryParameters: any = {};
-        if (query !== undefined) queryParameters['query'] = query;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
-        if (from !== undefined) queryParameters['from'] = from;
-        if (to !== undefined) queryParameters['to'] = to;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -613,13 +623,8 @@ export class MessageApi extends libclient.ApiClient {
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage 
-     * @param query 
-     * @param pageNumber 
-     * @param itemCount 
-     * @param from 
-     * @param to 
      */
-    public getListMessageOfUser (userIdToGetMessage: string, query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>> {
+    public getListMessageOfUser (userIdToGetMessage: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>> {
 
         // verify required parameter 'userIdToGetMessage' is not null or undefined
         if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
@@ -627,15 +632,23 @@ export class MessageApi extends libclient.ApiClient {
         }
         let queryParameters: any = {};
         if (userIdToGetMessage !== undefined) queryParameters['userIdToGetMessage'] = userIdToGetMessage;
-        if (query !== undefined) queryParameters['query'] = query;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
-        if (from !== undefined) queryParameters['from'] = from;
-        if (to !== undefined) queryParameters['to'] = to;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
         return this.execute<MessageViewWithPaginationAnUserApp>('GET', '/api/user/v1/Message/getforanuserapp',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get Messages to notification
+     */
+    public getMessageToNotification () : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message/get-message-to-notification',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -847,6 +860,26 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Create or update User Role 
+     * @param roleType 
+     */
+    public createOrUpdateUserRoleMobile (roleType: number) : Promise<libclient.ApiResponse<ProfileView>> {
+
+        // verify required parameter 'roleType' is not null or undefined
+        if (roleType === null || roleType === undefined) {
+            throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRoleMobile.');
+        }
+        let queryParameters: any = {};
+        if (roleType !== undefined) queryParameters['roleType'] = roleType;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<ProfileView>('POST', '/api/user/v1/user/create-or-update-role-mobile',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Get user by Id 
      * @param id 
      */
@@ -953,7 +986,7 @@ export class UserApi extends libclient.ApiClient {
      * Update user with profiles 
      * @param avatar 
      */
-    public updateAvatar (avatar: MAttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
+    public updateAvatar (avatar: AttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
 
         // verify required parameter 'avatar' is not null or undefined
         if (avatar === null || avatar === undefined) {
@@ -984,6 +1017,31 @@ export class UserApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<ProfileView>('POST', '/api/user/v1/user/profile',
             queryParameters, headerParams, formParams, isFile, false, profileView
+        );
+    }
+
+    /**
+     * Update user details 
+     * @param userId 
+     * @param userDetails 
+     */
+    public updateUserDetail (userId: string, userDetails: UserUpdateView) : Promise<libclient.ApiResponse<UserEntity>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling updateUserDetail.');
+        }
+
+        // verify required parameter 'userDetails' is not null or undefined
+        if (userDetails === null || userDetails === undefined) {
+            throw new Error('Required parameter userDetails was null or undefined when calling updateUserDetail.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<UserEntity>('POST', '/api/user/v1/user/update-user-details/{userId}'.replace('{' + 'userId' + '}', String(userId)),
+            queryParameters, headerParams, formParams, isFile, false, userDetails
         );
     }
 

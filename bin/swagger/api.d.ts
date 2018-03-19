@@ -80,10 +80,6 @@ export declare class MAccountView {
     'userId': string;
     'balance': number;
 }
-export declare class MAttachmentView {
-    'media': string;
-    'data': string;
-}
 export declare class MProfileView {
     'name': string;
     'gender': string;
@@ -114,6 +110,7 @@ export declare class MessageDetailView {
     'toUserName': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
     'created': number;
     'updated': number;
 }
@@ -131,12 +128,14 @@ export declare class MessageEntity {
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 export declare class MessageView {
     'userId': string;
     'toUserId': string;
     'content': string;
     'delivered': number;
+    'announced': boolean;
 }
 export declare class MessageViewWithPagination {
     'messages': Array<MessageDetailView>;
@@ -146,11 +145,9 @@ export declare class MessageViewWithPaginationAnUserApp {
     'userId': string;
     'userName': string;
     'messages': Array<MessageDetailView>;
-    'totalItems': number;
 }
 export declare class MessageViewWithPaginationApp {
     'messages': Array<MessageDetailViewApp>;
-    'totalItems': number;
 }
 export declare class ProfileView {
     /**
@@ -170,7 +167,7 @@ export declare class ProfileView {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     /**
@@ -193,6 +190,10 @@ export declare class ProfileView {
     * +/- UTC time
     */
     'timezone': number;
+    /**
+    * First Login
+    */
+    'isFirstLogin': boolean;
 }
 export declare class RoleDetailView {
     'id': string;
@@ -239,7 +240,7 @@ export declare class UserEntity {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     /**
@@ -263,11 +264,15 @@ export declare class UserEntity {
     */
     'timezone': number;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * First Login
+    */
+    'isFirstLogin': boolean;
+    /**
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
 }
@@ -278,6 +283,17 @@ export declare class UserRole {
 export declare class UserRoleView {
     'userId': string;
     'roleType': RoleType;
+}
+export declare class UserUpdateView {
+    'name': string;
+    'phone': string;
+    'dob': number;
+    'email': string;
+    'gender': string;
+    'status': boolean;
+    'role': Array<UserRole>;
+    'address': string;
+    'avatar': AttachmentView;
 }
 export declare class UserViewDetails {
     /**
@@ -297,7 +313,7 @@ export declare class UserViewDetails {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     /**
@@ -321,11 +337,15 @@ export declare class UserViewDetails {
     */
     'timezone': number;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * First Login
+    */
+    'isFirstLogin': boolean;
+    /**
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
     'id': string;
@@ -404,23 +424,17 @@ export declare class MessageApi extends libclient.ApiClient {
     getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
     /**
      * Get List Messages For App
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageForApp(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
+    getListMessageForApp(): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
-     * @param query
-     * @param pageNumber
-     * @param itemCount
-     * @param from
-     * @param to
      */
-    getListMessageOfUser(userIdToGetMessage: string, query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
+    getListMessageOfUser(userIdToGetMessage: string): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
+    /**
+     * Get Messages to notification
+     */
+    getMessageToNotification(): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
     /**
      * Update Message
      * @param id
@@ -493,6 +507,11 @@ export declare class UserApi extends libclient.ApiClient {
      */
     createOrUpdateUserRole(userRoleView: UserRoleView): Promise<libclient.ApiResponse<ProfileView>>;
     /**
+     * Create or update User Role
+     * @param roleType
+     */
+    createOrUpdateUserRoleMobile(roleType: number): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
      * Get user by Id
      * @param id
      */
@@ -526,12 +545,18 @@ export declare class UserApi extends libclient.ApiClient {
      * Update user with profiles
      * @param avatar
      */
-    updateAvatar(avatar: MAttachmentView): Promise<libclient.ApiResponse<UserEntity>>;
+    updateAvatar(avatar: AttachmentView): Promise<libclient.ApiResponse<UserEntity>>;
     /**
      *
      * @param profileView
      */
     updateProfileCurrent(profileView: ProfileView): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
+     * Update user details
+     * @param userId
+     * @param userDetails
+     */
+    updateUserDetail(userId: string, userDetails: UserUpdateView): Promise<libclient.ApiResponse<UserEntity>>;
     /**
      * Update user with profiles
      * @param profile
