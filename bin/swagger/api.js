@@ -34,9 +34,6 @@ exports.LocationView = LocationView;
 class MAccountView {
 }
 exports.MAccountView = MAccountView;
-class MAttachmentView {
-}
-exports.MAttachmentView = MAttachmentView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
@@ -91,6 +88,9 @@ exports.UserRole = UserRole;
 class UserRoleView {
 }
 exports.UserRoleView = UserRoleView;
+class UserUpdateView {
+}
+exports.UserUpdateView = UserUpdateView;
 class UserViewDetails {
 }
 exports.UserViewDetails = UserViewDetails;
@@ -628,6 +628,26 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('POST', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, profileView);
+    }
+    /**
+     * Update user details
+     * @param userId
+     * @param userDetails
+     */
+    updateUserDetail(userId, userDetails) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling updateUserDetail.');
+        }
+        // verify required parameter 'userDetails' is not null or undefined
+        if (userDetails === null || userDetails === undefined) {
+            throw new Error('Required parameter userDetails was null or undefined when calling updateUserDetail.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/update-user-details/{userId}'.replace('{' + 'userId' + '}', String(userId)), queryParameters, headerParams, formParams, isFile, false, userDetails);
     }
     /**
      * Update user with profiles
