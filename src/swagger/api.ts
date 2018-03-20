@@ -90,11 +90,6 @@ export class MAccountView {
     'balance': number;
 }
 
-export class MAttachmentView {
-    'media': string;
-    'data': string;
-}
-
 export class MProfileView {
     'name': string;
     'gender': string;
@@ -315,6 +310,18 @@ export class UserRole {
 export class UserRoleView {
     'userId': string;
     'roleType': RoleType;
+}
+
+export class UserUpdateView {
+    'name': string;
+    'phone': string;
+    'dob': number;
+    'email': string;
+    'gender': string;
+    'status': boolean;
+    'role': Array<UserRole>;
+    'address': string;
+    'avatar': AttachmentView;
 }
 
 export class UserViewDetails {
@@ -979,7 +986,7 @@ export class UserApi extends libclient.ApiClient {
      * Update user with profiles 
      * @param avatar 
      */
-    public updateAvatar (avatar: MAttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
+    public updateAvatar (avatar: AttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
 
         // verify required parameter 'avatar' is not null or undefined
         if (avatar === null || avatar === undefined) {
@@ -1010,6 +1017,31 @@ export class UserApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<ProfileView>('POST', '/api/user/v1/user/profile',
             queryParameters, headerParams, formParams, isFile, false, profileView
+        );
+    }
+
+    /**
+     * Update user details 
+     * @param userId 
+     * @param userDetails 
+     */
+    public updateUserDetail (userId: string, userDetails: UserUpdateView) : Promise<libclient.ApiResponse<UserEntity>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling updateUserDetail.');
+        }
+
+        // verify required parameter 'userDetails' is not null or undefined
+        if (userDetails === null || userDetails === undefined) {
+            throw new Error('Required parameter userDetails was null or undefined when calling updateUserDetail.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<UserEntity>('POST', '/api/user/v1/user/update-user-details/{userId}'.replace('{' + 'userId' + '}', String(userId)),
+            queryParameters, headerParams, formParams, isFile, false, userDetails
         );
     }
 
