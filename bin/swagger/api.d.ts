@@ -80,6 +80,10 @@ export declare class MAccountView {
     'userId': string;
     'balance': number;
 }
+export declare class MAvatarView {
+    'media': string;
+    'data': string;
+}
 export declare class MProfileView {
     'name': string;
     'gender': string;
@@ -293,7 +297,6 @@ export declare class UserUpdateView {
     'status': boolean;
     'role': Array<UserRole>;
     'address': string;
-    'avatar': AttachmentView;
 }
 export declare class UserViewDetails {
     /**
@@ -545,7 +548,7 @@ export declare class UserApi extends libclient.ApiClient {
      * Update user with profiles
      * @param avatar
      */
-    updateAvatar(avatar: AttachmentView): Promise<libclient.ApiResponse<UserEntity>>;
+    updateAvatar(avatar: MAvatarView): Promise<libclient.ApiResponse<UserEntity>>;
     /**
      *
      * @param profileView
