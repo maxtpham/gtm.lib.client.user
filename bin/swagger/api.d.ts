@@ -525,11 +525,12 @@ export declare class UserApi extends libclient.ApiClient {
     getDetailViewById(id: string): Promise<libclient.ApiResponse<UserViewDetails>>;
     /**
      * Get users with pagination
-     * @param query
+     * @param status
+     * @param userId
      * @param pageNumber
      * @param itemCount
      */
-    getEntities(query?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
+    getEntities(status?: string, userId?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
     /**
      *
      */

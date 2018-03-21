@@ -545,14 +545,17 @@ class UserApi extends libclient.ApiClient {
     }
     /**
      * Get users with pagination
-     * @param query
+     * @param status
+     * @param userId
      * @param pageNumber
      * @param itemCount
      */
-    getEntities(query, pageNumber, itemCount) {
+    getEntities(status, userId, pageNumber, itemCount) {
         let queryParameters = {};
-        if (query !== undefined)
-            queryParameters['query'] = query;
+        if (status !== undefined)
+            queryParameters['status'] = status;
+        if (userId !== undefined)
+            queryParameters['userId'] = userId;
         if (pageNumber !== undefined)
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)

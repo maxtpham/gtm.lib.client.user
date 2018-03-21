@@ -921,13 +921,15 @@ export class UserApi extends libclient.ApiClient {
 
     /**
      * Get users with pagination 
-     * @param query 
+     * @param status 
+     * @param userId 
      * @param pageNumber 
      * @param itemCount 
      */
-    public getEntities (query?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<UserViewWithPagination>> {
+    public getEntities (status?: string, userId?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<UserViewWithPagination>> {
         let queryParameters: any = {};
-        if (query !== undefined) queryParameters['query'] = query;
+        if (status !== undefined) queryParameters['status'] = status;
+        if (userId !== undefined) queryParameters['userId'] = userId;
         if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
         let headerParams: any = this.defaultHeaders;
