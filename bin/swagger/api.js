@@ -244,24 +244,21 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get Messages
-     * @param query
-     * @param pageNumber
-     * @param itemCount
      * @param from
      * @param to
+     * @param pageNumber
+     * @param itemCount
      */
-    getEntities(query, pageNumber, itemCount, from, to) {
+    getEntities(from, to, pageNumber, itemCount) {
         let queryParameters = {};
-        if (query !== undefined)
-            queryParameters['query'] = query;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
         if (from !== undefined)
             queryParameters['from'] = from;
         if (to !== undefined)
             queryParameters['to'] = to;
+        if (pageNumber !== undefined)
+            queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined)
+            queryParameters['itemCount'] = itemCount;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};

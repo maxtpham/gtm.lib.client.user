@@ -293,7 +293,6 @@ export declare class UserUpdateView {
     'status': boolean;
     'role': Array<UserRole>;
     'address': string;
-    'avatar': AttachmentView;
 }
 export declare class UserViewDetails {
     /**
@@ -410,13 +409,12 @@ export declare class MessageApi extends libclient.ApiClient {
     deleteEntity(id: string): Promise<libclient.ApiResponse<any>>;
     /**
      * Get Messages
-     * @param query
-     * @param pageNumber
-     * @param itemCount
      * @param from
      * @param to
+     * @param pageNumber
+     * @param itemCount
      */
-    getEntities(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
+    getEntities(from?: string, to?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
     /**
      * Get Message by Id
      * @param id

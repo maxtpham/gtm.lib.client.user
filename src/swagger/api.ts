@@ -321,7 +321,6 @@ export class UserUpdateView {
     'status': boolean;
     'role': Array<UserRole>;
     'address': string;
-    'avatar': AttachmentView;
 }
 
 export class UserViewDetails {
@@ -567,19 +566,17 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get Messages 
-     * @param query 
-     * @param pageNumber 
-     * @param itemCount 
      * @param from 
      * @param to 
+     * @param pageNumber 
+     * @param itemCount 
      */
-    public getEntities (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+    public getEntities (from?: string, to?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
         let queryParameters: any = {};
-        if (query !== undefined) queryParameters['query'] = query;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
         if (from !== undefined) queryParameters['from'] = from;
         if (to !== undefined) queryParameters['to'] = to;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
