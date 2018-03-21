@@ -90,6 +90,11 @@ export class MAccountView {
     'balance': number;
 }
 
+export class MAvatarView {
+    'media': string;
+    'data': string;
+}
+
 export class MProfileView {
     'name': string;
     'gender': string;
@@ -983,7 +988,7 @@ export class UserApi extends libclient.ApiClient {
      * Update user with profiles 
      * @param avatar 
      */
-    public updateAvatar (avatar: AttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
+    public updateAvatar (avatar: MAvatarView) : Promise<libclient.ApiResponse<UserEntity>> {
 
         // verify required parameter 'avatar' is not null or undefined
         if (avatar === null || avatar === undefined) {
