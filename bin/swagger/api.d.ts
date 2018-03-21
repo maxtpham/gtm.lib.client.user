@@ -174,6 +174,7 @@ export declare class ProfileView {
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
+    'status': UserStatus;
     /**
     * UTC tick only date without time component
     */
@@ -247,6 +248,7 @@ export declare class UserEntity {
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
+    'status': UserStatus;
     /**
     * UTC tick only date without time component
     */
@@ -288,13 +290,15 @@ export declare class UserRoleView {
     'userId': string;
     'roleType': RoleType;
 }
+export declare class UserStatus {
+}
 export declare class UserUpdateView {
     'name': string;
     'phone': string;
     'dob': number;
     'email': string;
     'gender': string;
-    'status': boolean;
+    'status': UserStatus;
     'role': Array<UserRole>;
     'address': string;
 }
@@ -319,6 +323,7 @@ export declare class UserViewDetails {
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
+    'status': UserStatus;
     /**
     * UTC tick only date without time component
     */

@@ -91,6 +91,9 @@ exports.UserRole = UserRole;
 class UserRoleView {
 }
 exports.UserRoleView = UserRoleView;
+class UserStatus {
+}
+exports.UserStatus = UserStatus;
 class UserUpdateView {
 }
 exports.UserUpdateView = UserUpdateView;
