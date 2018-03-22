@@ -80,10 +80,6 @@ export declare class MAccountView {
     'userId': string;
     'balance': number;
 }
-export declare class MAvatarView {
-    'media': string;
-    'data': string;
-}
 export declare class MProfileView {
     'name': string;
     'gender': string;
@@ -171,10 +167,9 @@ export declare class ProfileView {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
-    'status': UserStatus;
     /**
     * UTC tick only date without time component
     */
@@ -245,10 +240,9 @@ export declare class UserEntity {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
-    'status': UserStatus;
     /**
     * UTC tick only date without time component
     */
@@ -274,11 +268,11 @@ export declare class UserEntity {
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
 }
@@ -290,17 +284,16 @@ export declare class UserRoleView {
     'userId': string;
     'roleType': RoleType;
 }
-export declare class UserStatus {
-}
 export declare class UserUpdateView {
     'name': string;
     'phone': string;
     'birthday': number;
     'email': string;
     'gender': string;
-    'status': UserStatus;
+    'status': boolean;
     'role': Array<UserRole>;
     'address': string;
+    'avatar': AttachmentView;
 }
 export declare class UserViewDetails {
     /**
@@ -320,10 +313,9 @@ export declare class UserViewDetails {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
-    'status': UserStatus;
     /**
     * UTC tick only date without time component
     */
@@ -349,11 +341,11 @@ export declare class UserViewDetails {
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
     'id': string;
@@ -418,12 +410,13 @@ export declare class MessageApi extends libclient.ApiClient {
     deleteEntity(id: string): Promise<libclient.ApiResponse<any>>;
     /**
      * Get Messages
-     * @param from
-     * @param to
+     * @param query
      * @param pageNumber
      * @param itemCount
+     * @param from
+     * @param to
      */
-    getEntities(from?: string, to?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
+    getEntities(query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
     /**
      * Get Message by Id
      * @param id
@@ -530,12 +523,11 @@ export declare class UserApi extends libclient.ApiClient {
     getDetailViewById(id: string): Promise<libclient.ApiResponse<UserViewDetails>>;
     /**
      * Get users with pagination
-     * @param status
-     * @param userId
+     * @param query
      * @param pageNumber
      * @param itemCount
      */
-    getEntities(status?: string, userId?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
+    getEntities(query?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
     /**
      *
      */
@@ -553,7 +545,7 @@ export declare class UserApi extends libclient.ApiClient {
      * Update user with profiles
      * @param avatar
      */
-    updateAvatar(avatar: MAvatarView): Promise<libclient.ApiResponse<UserEntity>>;
+    updateAvatar(avatar: AttachmentView): Promise<libclient.ApiResponse<UserEntity>>;
     /**
      *
      * @param profileView

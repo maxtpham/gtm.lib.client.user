@@ -34,9 +34,6 @@ exports.LocationView = LocationView;
 class MAccountView {
 }
 exports.MAccountView = MAccountView;
-class MAvatarView {
-}
-exports.MAvatarView = MAvatarView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
@@ -91,9 +88,6 @@ exports.UserRole = UserRole;
 class UserRoleView {
 }
 exports.UserRoleView = UserRoleView;
-class UserStatus {
-}
-exports.UserStatus = UserStatus;
 class UserUpdateView {
 }
 exports.UserUpdateView = UserUpdateView;
@@ -250,21 +244,24 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get Messages
-     * @param from
-     * @param to
+     * @param query
      * @param pageNumber
      * @param itemCount
+     * @param from
+     * @param to
      */
-    getEntities(from, to, pageNumber, itemCount) {
+    getEntities(query, pageNumber, itemCount, from, to) {
         let queryParameters = {};
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
+        if (query !== undefined)
+            queryParameters['query'] = query;
         if (pageNumber !== undefined)
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)
             queryParameters['itemCount'] = itemCount;
+        if (from !== undefined)
+            queryParameters['from'] = from;
+        if (to !== undefined)
+            queryParameters['to'] = to;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -548,17 +545,14 @@ class UserApi extends libclient.ApiClient {
     }
     /**
      * Get users with pagination
-     * @param status
-     * @param userId
+     * @param query
      * @param pageNumber
      * @param itemCount
      */
-    getEntities(status, userId, pageNumber, itemCount) {
+    getEntities(query, pageNumber, itemCount) {
         let queryParameters = {};
-        if (status !== undefined)
-            queryParameters['status'] = status;
-        if (userId !== undefined)
-            queryParameters['userId'] = userId;
+        if (query !== undefined)
+            queryParameters['query'] = query;
         if (pageNumber !== undefined)
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)
