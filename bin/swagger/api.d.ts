@@ -295,7 +295,7 @@ export declare class UserStatus {
 export declare class UserUpdateView {
     'name': string;
     'phone': string;
-    'dob': number;
+    'birthday': number;
     'email': string;
     'gender': string;
     'status': UserStatus;

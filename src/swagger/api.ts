@@ -325,7 +325,7 @@ export class UserStatus {
 export class UserUpdateView {
     'name': string;
     'phone': string;
-    'dob': number;
+    'birthday': number;
     'email': string;
     'gender': string;
     'status': UserStatus;
