@@ -90,6 +90,11 @@ export class MAccountView {
     'balance': number;
 }
 
+export class MAvatarView {
+    'media': string;
+    'data': string;
+}
+
 export class MProfileView {
     'name': string;
     'gender': string;
@@ -187,9 +192,10 @@ export class ProfileView {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
     'active': boolean;
+    'status': UserStatus;
     /**
     * UTC tick only date without time component 
     */
@@ -265,9 +271,10 @@ export class UserEntity {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
     'active': boolean;
+    'status': UserStatus;
     /**
     * UTC tick only date without time component 
     */
@@ -293,11 +300,11 @@ export class UserEntity {
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login  
+    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
     */
     'avatar': AttachmentView;
 }
@@ -312,16 +319,18 @@ export class UserRoleView {
     'roleType': RoleType;
 }
 
+export class UserStatus {
+}
+
 export class UserUpdateView {
     'name': string;
     'phone': string;
     'birthday': number;
     'email': string;
     'gender': string;
-    'status': boolean;
+    'status': UserStatus;
     'role': Array<UserRole>;
     'address': string;
-    'avatar': AttachmentView;
 }
 
 export class UserViewDetails {
@@ -342,9 +351,10 @@ export class UserViewDetails {
     */
     'roles': Array<UserRole>;
     /**
-    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
     'active': boolean;
+    'status': UserStatus;
     /**
     * UTC tick only date without time component 
     */
@@ -370,11 +380,11 @@ export class UserViewDetails {
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login  
+    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
     */
     'avatar': AttachmentView;
     'id': string;
@@ -567,19 +577,17 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get Messages 
-     * @param query 
-     * @param pageNumber 
-     * @param itemCount 
      * @param from 
      * @param to 
+     * @param pageNumber 
+     * @param itemCount 
      */
-    public getEntities (query?: string, pageNumber?: number, itemCount?: number, from?: string, to?: string) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+    public getEntities (from?: string, to?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
         let queryParameters: any = {};
-        if (query !== undefined) queryParameters['query'] = query;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
         if (from !== undefined) queryParameters['from'] = from;
         if (to !== undefined) queryParameters['to'] = to;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -919,13 +927,15 @@ export class UserApi extends libclient.ApiClient {
 
     /**
      * Get users with pagination 
-     * @param query 
+     * @param status 
+     * @param userId 
      * @param pageNumber 
      * @param itemCount 
      */
-    public getEntities (query?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<UserViewWithPagination>> {
+    public getEntities (status?: string, userId?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<UserViewWithPagination>> {
         let queryParameters: any = {};
-        if (query !== undefined) queryParameters['query'] = query;
+        if (status !== undefined) queryParameters['status'] = status;
+        if (userId !== undefined) queryParameters['userId'] = userId;
         if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
         let headerParams: any = this.defaultHeaders;
@@ -986,7 +996,7 @@ export class UserApi extends libclient.ApiClient {
      * Update user with profiles 
      * @param avatar 
      */
-    public updateAvatar (avatar: AttachmentView) : Promise<libclient.ApiResponse<UserEntity>> {
+    public updateAvatar (avatar: MAvatarView) : Promise<libclient.ApiResponse<UserEntity>> {
 
         // verify required parameter 'avatar' is not null or undefined
         if (avatar === null || avatar === undefined) {
