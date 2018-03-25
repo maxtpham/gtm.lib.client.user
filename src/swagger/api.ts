@@ -388,6 +388,7 @@ export class UserViewDetails {
     */
     'avatar': AttachmentView;
     'id': string;
+    'account': AccountView;
     'created': number;
     'updated': number;
 }
