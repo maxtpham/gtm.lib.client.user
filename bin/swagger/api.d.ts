@@ -200,6 +200,13 @@ export declare class ProfileView {
     */
     'isFirstLogin': boolean;
 }
+export declare class ProviderSession {
+    'name': string;
+    'accessToken': string;
+    'refreshToken': string;
+    'expiresIn': number;
+    'tokenType': string;
+}
 export declare class RoleDetailView {
     'id': string;
     'code': string;
@@ -221,6 +228,20 @@ export declare class RoleView {
 }
 export declare class RoleViewWithPagination {
     'roles': Array<RoleDetailView>;
+    'totalItems': number;
+}
+export declare class SessionView {
+    'id': string;
+    'userId': string;
+    'code': string;
+    'name': string;
+    'roles': Array<string>;
+    'scope': string;
+    'expiresIn': number;
+    'provider': ProviderSession;
+}
+export declare class SessionViewWithPagination {
+    'sessions': Array<SessionView>;
     'totalItems': number;
 }
 export declare class UserEntity {
@@ -491,6 +512,13 @@ export declare class SessionApi extends libclient.ApiClient {
      * Check current session info
      */
     getCurrent(): Promise<libclient.ApiResponse<JwtToken>>;
+    /**
+     * Get sessions with pagination
+     * @param userId
+     * @param pageNumber
+     * @param itemCount
+     */
+    getEntities(userId?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<SessionViewWithPagination>>;
 }
 export declare enum SystemApiApiKeys {
 }

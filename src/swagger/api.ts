@@ -222,6 +222,14 @@ export class ProfileView {
     'isFirstLogin': boolean;
 }
 
+export class ProviderSession {
+    'name': string;
+    'accessToken': string;
+    'refreshToken': string;
+    'expiresIn': number;
+    'tokenType': string;
+}
+
 export class RoleDetailView {
     'id': string;
     'code': string;
@@ -246,6 +254,22 @@ export class RoleView {
 
 export class RoleViewWithPagination {
     'roles': Array<RoleDetailView>;
+    'totalItems': number;
+}
+
+export class SessionView {
+    'id': string;
+    'userId': string;
+    'code': string;
+    'name': string;
+    'roles': Array<string>;
+    'scope': string;
+    'expiresIn': number;
+    'provider': ProviderSession;
+}
+
+export class SessionViewWithPagination {
+    'sessions': Array<SessionView>;
     'totalItems': number;
 }
 
@@ -803,6 +827,25 @@ export class SessionApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<JwtToken>('GET', '/api/user/v1/session/current',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Get sessions with pagination 
+     * @param userId 
+     * @param pageNumber 
+     * @param itemCount 
+     */
+    public getEntities (userId?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<SessionViewWithPagination>> {
+        let queryParameters: any = {};
+        if (userId !== undefined) queryParameters['userId'] = userId;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<SessionViewWithPagination>('GET', '/api/user/v1/session/entities',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }

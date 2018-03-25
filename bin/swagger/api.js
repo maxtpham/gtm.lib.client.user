@@ -70,6 +70,9 @@ exports.MessageViewWithPaginationApp = MessageViewWithPaginationApp;
 class ProfileView {
 }
 exports.ProfileView = ProfileView;
+class ProviderSession {
+}
+exports.ProviderSession = ProviderSession;
 class RoleDetailView {
 }
 exports.RoleDetailView = RoleDetailView;
@@ -82,6 +85,12 @@ exports.RoleView = RoleView;
 class RoleViewWithPagination {
 }
 exports.RoleViewWithPagination = RoleViewWithPagination;
+class SessionView {
+}
+exports.SessionView = SessionView;
+class SessionViewWithPagination {
+}
+exports.SessionViewWithPagination = SessionViewWithPagination;
 class UserEntity {
 }
 exports.UserEntity = UserEntity;
@@ -445,6 +454,25 @@ class SessionApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/session/current', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Get sessions with pagination
+     * @param userId
+     * @param pageNumber
+     * @param itemCount
+     */
+    getEntities(userId, pageNumber, itemCount) {
+        let queryParameters = {};
+        if (userId !== undefined)
+            queryParameters['userId'] = userId;
+        if (pageNumber !== undefined)
+            queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined)
+            queryParameters['itemCount'] = itemCount;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/session/entities', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
 }
 exports.SessionApi = SessionApi;
