@@ -239,6 +239,8 @@ export declare class SessionView {
     'scope': string;
     'expiresIn': number;
     'provider': ProviderSession;
+    'created': number;
+    'updated': number;
 }
 export declare class SessionViewWithPagination {
     'sessions': Array<SessionView>;

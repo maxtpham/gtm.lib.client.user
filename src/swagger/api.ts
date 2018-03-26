@@ -266,6 +266,8 @@ export class SessionView {
     'scope': string;
     'expiresIn': number;
     'provider': ProviderSession;
+    'created': number;
+    'updated': number;
 }
 
 export class SessionViewWithPagination {
