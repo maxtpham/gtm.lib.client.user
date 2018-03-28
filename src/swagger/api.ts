@@ -109,10 +109,17 @@ export class MProfileView {
     'houseHolder': string;
 }
 
+export class MUserFind {
+    'name': string;
+    'phone': string;
+    'email': string;
+}
+
 export class MUserView {
     'id': string;
     'name': string;
     'phone': string;
+    'email': string;
     'houseHolder': any;
 }
 
@@ -958,6 +965,25 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * 
+     * @param mUserFind 
+     */
+    public findUser (mUserFind: MUserFind) : Promise<libclient.ApiResponse<Array<MUserView>>> {
+
+        // verify required parameter 'mUserFind' is not null or undefined
+        if (mUserFind === null || mUserFind === undefined) {
+            throw new Error('Required parameter mUserFind was null or undefined when calling findUser.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('POST', '/api/user/v1/user/find-user',
+            queryParameters, headerParams, formParams, isFile, false, mUserFind
+        );
+    }
+
+    /**
      * Get user by Id 
      * @param id 
      */
@@ -1043,27 +1069,7 @@ export class UserApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<UserAccount>('POST', '/api/user/v1/user/get-user-account/{userId}'.replace('{' + 'userId' + '}', String(userId)),
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * 
-     * @param userName 
-     */
-    public getUserByName (userName: string) : Promise<libclient.ApiResponse<Array<MUserView>>> {
-
-        // verify required parameter 'userName' is not null or undefined
-        if (userName === null || userName === undefined) {
-            throw new Error('Required parameter userName was null or undefined when calling getUserByName.');
-        }
-        let queryParameters: any = {};
-        if (userName !== undefined) queryParameters['userName'] = userName;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-by-user-name',
+        return this.execute<UserAccount>('GET', '/api/user/v1/user/get-user-account/{userId}'.replace('{' + 'userId' + '}', String(userId)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
