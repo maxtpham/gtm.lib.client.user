@@ -40,6 +40,9 @@ exports.MAvatarView = MAvatarView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
+class MUserFind {
+}
+exports.MUserFind = MUserFind;
 class MUserView {
 }
 exports.MUserView = MUserView;
@@ -558,6 +561,21 @@ class UserApi extends libclient.ApiClient {
         return this.execute('POST', '/api/user/v1/user/create-or-update-role-mobile', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     *
+     * @param mUserFind
+     */
+    findUser(mUserFind) {
+        // verify required parameter 'mUserFind' is not null or undefined
+        if (mUserFind === null || mUserFind === undefined) {
+            throw new Error('Required parameter mUserFind was null or undefined when calling findUser.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/find-user', queryParameters, headerParams, formParams, isFile, false, mUserFind);
+    }
+    /**
      * Get user by Id
      * @param id
      */
@@ -618,23 +636,6 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     *
-     * @param userName
-     */
-    getUserByName(userName) {
-        // verify required parameter 'userName' is not null or undefined
-        if (userName === null || userName === undefined) {
-            throw new Error('Required parameter userName was null or undefined when calling getUserByName.');
-        }
-        let queryParameters = {};
-        if (userName !== undefined)
-            queryParameters['userName'] = userName;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/user/get-by-user-name', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Get all user lite

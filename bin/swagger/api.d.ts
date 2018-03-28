@@ -97,10 +97,16 @@ export declare class MProfileView {
     'infos': string;
     'houseHolder': string;
 }
+export declare class MUserFind {
+    'name': string;
+    'phone': string;
+    'email': string;
+}
 export declare class MUserView {
     'id': string;
     'name': string;
     'phone': string;
+    'email': string;
     'houseHolder': any;
 }
 export declare class MapOfBoolean extends null<String, boolean> {
@@ -566,6 +572,11 @@ export declare class UserApi extends libclient.ApiClient {
      */
     createOrUpdateUserRoleMobile(roleType: number): Promise<libclient.ApiResponse<ProfileView>>;
     /**
+     *
+     * @param mUserFind
+     */
+    findUser(mUserFind: MUserFind): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    /**
      * Get user by Id
      * @param id
      */
@@ -587,11 +598,6 @@ export declare class UserApi extends libclient.ApiClient {
      *
      */
     getProfileCurrent(): Promise<libclient.ApiResponse<ProfileView>>;
-    /**
-     *
-     * @param userName
-     */
-    getUserByName(userName: string): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
      * Get all user lite
      */
