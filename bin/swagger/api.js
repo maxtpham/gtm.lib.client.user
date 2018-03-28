@@ -91,6 +91,12 @@ exports.SessionView = SessionView;
 class SessionViewWithPagination {
 }
 exports.SessionViewWithPagination = SessionViewWithPagination;
+class UserAccount {
+}
+exports.UserAccount = UserAccount;
+class UserAccountView {
+}
+exports.UserAccountView = UserAccountView;
 class UserEntity {
 }
 exports.UserEntity = UserEntity;
@@ -121,14 +127,21 @@ class AccountApi extends libclient.ApiClient {
     }
     /**
      * add account
+     * @param userId
      * @param account
      */
-    addAccount(account) {
+    addAccount(userId, account) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling addAccount.');
+        }
         // verify required parameter 'account' is not null or undefined
         if (account === null || account === undefined) {
             throw new Error('Required parameter account was null or undefined when calling addAccount.');
         }
         let queryParameters = {};
+        if (userId !== undefined)
+            queryParameters['userId'] = userId;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -434,7 +447,7 @@ class RoleApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('PUT', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, roleView);
+        return this.execute('POST', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, roleView);
     }
 }
 exports.RoleApi = RoleApi;
@@ -662,6 +675,29 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('POST', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, profileView);
+    }
+    /**
+     * Update user details
+     * @param userId
+     * @param userAccountView
+     * @param type
+     */
+    updateUserAccount(userId, userAccountView, type) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling updateUserAccount.');
+        }
+        // verify required parameter 'userAccountView' is not null or undefined
+        if (userAccountView === null || userAccountView === undefined) {
+            throw new Error('Required parameter userAccountView was null or undefined when calling updateUserAccount.');
+        }
+        let queryParameters = {};
+        if (type !== undefined)
+            queryParameters['type'] = type;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/update-user-account/{userId}'.replace('{' + 'userId' + '}', String(userId)), queryParameters, headerParams, formParams, isFile, false, userAccountView);
     }
     /**
      * Update user details
