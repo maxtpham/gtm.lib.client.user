@@ -588,6 +588,11 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getProfileCurrent(): Promise<libclient.ApiResponse<ProfileView>>;
     /**
+     * Get user account
+     * @param userId
+     */
+    getUserAccount(userId: string): Promise<libclient.ApiResponse<UserAccount>>;
+    /**
      *
      * @param userName
      */
@@ -607,7 +612,7 @@ export declare class UserApi extends libclient.ApiClient {
      */
     updateProfileCurrent(profileView: ProfileView): Promise<libclient.ApiResponse<ProfileView>>;
     /**
-     * Update user details
+     * Update user account
      * @param userId
      * @param userAccountView
      * @param type

@@ -620,6 +620,21 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get user account
+     * @param userId
+     */
+    getUserAccount(userId) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getUserAccount.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/get-user-account/{userId}'.replace('{' + 'userId' + '}', String(userId)), queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      *
      * @param userName
      */
@@ -677,7 +692,7 @@ class UserApi extends libclient.ApiClient {
         return this.execute('POST', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, profileView);
     }
     /**
-     * Update user details
+     * Update user account
      * @param userId
      * @param userAccountView
      * @param type
