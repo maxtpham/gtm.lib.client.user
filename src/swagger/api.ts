@@ -25,7 +25,6 @@ export class AccountEntity {
 }
 
 export class AccountView {
-    'userId': string;
     'balance': number;
     'bonus': number;
 }
@@ -110,10 +109,17 @@ export class MProfileView {
     'houseHolder': string;
 }
 
+export class MUserFind {
+    'name': string;
+    'phone': string;
+    'email': string;
+}
+
 export class MUserView {
     'id': string;
     'name': string;
     'phone': string;
+    'email': string;
     'houseHolder': any;
 }
 
@@ -191,6 +197,10 @@ export class ProfileView {
     * Link to [role] table 
     */
     'roles': Array<UserRole>;
+    /**
+    * user account 
+    */
+    'account': UserAccount;
     /**
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
@@ -275,6 +285,16 @@ export class SessionViewWithPagination {
     'totalItems': number;
 }
 
+export class UserAccount {
+    'balance': number;
+    'bonus': number;
+}
+
+export class UserAccountView {
+    'balance': number;
+    'bonus': number;
+}
+
 export class UserEntity {
     'id': any;
     'created': number;
@@ -296,6 +316,10 @@ export class UserEntity {
     * Link to [role] table 
     */
     'roles': Array<UserRole>;
+    /**
+    * user account 
+    */
+    'account': UserAccount;
     /**
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
@@ -376,6 +400,7 @@ export class UserViewDetails {
     * Link to [role] table 
     */
     'roles': Array<UserRole>;
+    'account': AccountView;
     /**
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
     */
@@ -414,7 +439,6 @@ export class UserViewDetails {
     */
     'avatar': AttachmentView;
     'id': string;
-    'account': AccountView;
     'created': number;
     'updated': number;
 }
@@ -435,15 +459,22 @@ export class AccountApi extends libclient.ApiClient {
 
     /**
      * add account 
+     * @param userId 
      * @param account 
      */
-    public addAccount (account: AccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
+    public addAccount (userId: string, account: AccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling addAccount.');
+        }
 
         // verify required parameter 'account' is not null or undefined
         if (account === null || account === undefined) {
             throw new Error('Required parameter account was null or undefined when calling addAccount.');
         }
         let queryParameters: any = {};
+        if (userId !== undefined) queryParameters['userId'] = userId;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -807,7 +838,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<RoleDetailView>('PUT', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<RoleDetailView>('POST', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, roleView
         );
     }
@@ -934,6 +965,25 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * 
+     * @param mUserFind 
+     */
+    public findUser (mUserFind: MUserFind) : Promise<libclient.ApiResponse<Array<MUserView>>> {
+
+        // verify required parameter 'mUserFind' is not null or undefined
+        if (mUserFind === null || mUserFind === undefined) {
+            throw new Error('Required parameter mUserFind was null or undefined when calling findUser.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('POST', '/api/user/v1/user/find-user',
+            queryParameters, headerParams, formParams, isFile, false, mUserFind
+        );
+    }
+
+    /**
      * Get user by Id 
      * @param id 
      */
@@ -1006,26 +1056,6 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * 
-     * @param userName 
-     */
-    public getUserByName (userName: string) : Promise<libclient.ApiResponse<Array<MUserView>>> {
-
-        // verify required parameter 'userName' is not null or undefined
-        if (userName === null || userName === undefined) {
-            throw new Error('Required parameter userName was null or undefined when calling getUserByName.');
-        }
-        let queryParameters: any = {};
-        if (userName !== undefined) queryParameters['userName'] = userName;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-by-user-name',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
      * Get all user lite 
      */
     public getUserLite () : Promise<libclient.ApiResponse<Array<MUserView>>> {
@@ -1073,6 +1103,33 @@ export class UserApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<ProfileView>('POST', '/api/user/v1/user/profile',
             queryParameters, headerParams, formParams, isFile, false, profileView
+        );
+    }
+
+    /**
+     * Update user details 
+     * @param userId 
+     * @param userAccountView 
+     * @param type 
+     */
+    public updateUserAccount (userId: string, userAccountView: UserAccountView, type?: string) : Promise<libclient.ApiResponse<UserAccount>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling updateUserAccount.');
+        }
+
+        // verify required parameter 'userAccountView' is not null or undefined
+        if (userAccountView === null || userAccountView === undefined) {
+            throw new Error('Required parameter userAccountView was null or undefined when calling updateUserAccount.');
+        }
+        let queryParameters: any = {};
+        if (type !== undefined) queryParameters['type'] = type;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<UserAccount>('POST', '/api/user/v1/user/update-user-account/{userId}'.replace('{' + 'userId' + '}', String(userId)),
+            queryParameters, headerParams, formParams, isFile, false, userAccountView
         );
     }
 
