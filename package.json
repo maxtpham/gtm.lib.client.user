@@ -1,6 +1,6 @@
 {
   "name": "@gtm/lib.client.user",
-  "version": "1.0.90",
+  "version": "1.0.91",
   "description": "API client",
   "main": "bin/index.js",
   "typings": "bin/index",
@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@types/node": "^9.6.0",
-    "typescript": "^2.7.2"
+    "typescript": "^2.8.1"
   },
   "dependencies": {
     "@gtm/lib.client": "^1.0.10",

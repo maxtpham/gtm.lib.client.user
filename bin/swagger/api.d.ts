@@ -21,7 +21,6 @@ export declare class AccountEntity {
     'bonus': number;
 }
 export declare class AccountView {
-    'userId': string;
     'balance': number;
     'bonus': number;
 }
@@ -171,6 +170,10 @@ export declare class ProfileView {
     */
     'roles': Array<UserRole>;
     /**
+    * user account
+    */
+    'account': UserAccount;
+    /**
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
@@ -246,6 +249,14 @@ export declare class SessionViewWithPagination {
     'sessions': Array<SessionView>;
     'totalItems': number;
 }
+export declare class UserAccount {
+    'balance': number;
+    'bonus': number;
+}
+export declare class UserAccountView {
+    'balance': number;
+    'bonus': number;
+}
 export declare class UserEntity {
     'id': any;
     'created': number;
@@ -267,6 +278,10 @@ export declare class UserEntity {
     * Link to [role] table
     */
     'roles': Array<UserRole>;
+    /**
+    * user account
+    */
+    'account': UserAccount;
     /**
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
@@ -342,6 +357,7 @@ export declare class UserViewDetails {
     * Link to [role] table
     */
     'roles': Array<UserRole>;
+    'account': AccountView;
     /**
     * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
@@ -380,7 +396,6 @@ export declare class UserViewDetails {
     */
     'avatar': AttachmentView;
     'id': string;
-    'account': AccountView;
     'created': number;
     'updated': number;
 }
@@ -394,9 +409,10 @@ export declare class AccountApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
     /**
      * add account
+     * @param userId
      * @param account
      */
-    addAccount(account: AccountView): Promise<libclient.ApiResponse<AccountEntity>>;
+    addAccount(userId: string, account: AccountView): Promise<libclient.ApiResponse<AccountEntity>>;
     /**
      * add balance of account
      * @param accountView
@@ -590,6 +606,13 @@ export declare class UserApi extends libclient.ApiClient {
      * @param profileView
      */
     updateProfileCurrent(profileView: ProfileView): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
+     * Update user details
+     * @param userId
+     * @param userAccountView
+     * @param type
+     */
+    updateUserAccount(userId: string, userAccountView: UserAccountView, type?: string): Promise<libclient.ApiResponse<UserAccount>>;
     /**
      * Update user details
      * @param userId
