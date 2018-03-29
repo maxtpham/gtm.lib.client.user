@@ -604,6 +604,11 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getUserAccount(userId: string): Promise<libclient.ApiResponse<UserAccount>>;
     /**
+     *
+     * @param userName
+     */
+    getUserByName(userName: string): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    /**
      * Get all user lite
      */
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
