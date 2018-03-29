@@ -1075,6 +1075,26 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * 
+     * @param userName 
+     */
+    public getUserByName (userName: string) : Promise<libclient.ApiResponse<Array<MUserView>>> {
+
+        // verify required parameter 'userName' is not null or undefined
+        if (userName === null || userName === undefined) {
+            throw new Error('Required parameter userName was null or undefined when calling getUserByName.');
+        }
+        let queryParameters: any = {};
+        if (userName !== undefined) queryParameters['userName'] = userName;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-by-user-name',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Get all user lite 
      */
     public getUserLite () : Promise<libclient.ApiResponse<Array<MUserView>>> {
