@@ -653,6 +653,23 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/get-user-account/{userId}'.replace('{' + 'userId' + '}', String(userId)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     *
+     * @param userName
+     */
+    getUserByName(userName) {
+        // verify required parameter 'userName' is not null or undefined
+        if (userName === null || userName === undefined) {
+            throw new Error('Required parameter userName was null or undefined when calling getUserByName.');
+        }
+        let queryParameters = {};
+        if (userName !== undefined)
+            queryParameters['userName'] = userName;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/get-by-user-name', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Get all user lite
      */
     getUserLite() {
