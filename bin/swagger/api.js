@@ -279,8 +279,10 @@ class MessageApi extends libclient.ApiClient {
      * @param to
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(from, to, pageNumber, itemCount) {
+    getEntities(from, to, pageNumber, itemCount, sortName, sortType) {
         let queryParameters = {};
         if (from !== undefined)
             queryParameters['from'] = from;
@@ -290,6 +292,10 @@ class MessageApi extends libclient.ApiClient {
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)
             queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -407,8 +413,10 @@ class RoleApi extends libclient.ApiClient {
      * @param query
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(query, pageNumber, itemCount) {
+    getEntities(query, pageNumber, itemCount, sortName, sortType) {
         let queryParameters = {};
         if (query !== undefined)
             queryParameters['query'] = query;
@@ -416,6 +424,10 @@ class RoleApi extends libclient.ApiClient {
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)
             queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -476,8 +488,10 @@ class SessionApi extends libclient.ApiClient {
      * @param userId
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(userId, pageNumber, itemCount) {
+    getEntities(userId, pageNumber, itemCount, sortName, sortType) {
         let queryParameters = {};
         if (userId !== undefined)
             queryParameters['userId'] = userId;
@@ -485,6 +499,10 @@ class SessionApi extends libclient.ApiClient {
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)
             queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -611,8 +629,10 @@ class UserApi extends libclient.ApiClient {
      * @param userId
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(status, userId, pageNumber, itemCount) {
+    getEntities(status, userId, pageNumber, itemCount, sortName, sortType) {
         let queryParameters = {};
         if (status !== undefined)
             queryParameters['status'] = status;
@@ -622,6 +642,10 @@ class UserApi extends libclient.ApiClient {
             queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined)
             queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};

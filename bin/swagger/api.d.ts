@@ -468,8 +468,10 @@ export declare class MessageApi extends libclient.ApiClient {
      * @param to
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(from?: string, to?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
+    getEntities(from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
     /**
      * Get Message by Id
      * @param id
@@ -514,8 +516,10 @@ export declare class RoleApi extends libclient.ApiClient {
      * @param query
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(query?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<RoleViewWithPagination>>;
+    getEntities(query?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<RoleViewWithPagination>>;
     /**
      * Get Role by Id
      * @param id
@@ -541,8 +545,10 @@ export declare class SessionApi extends libclient.ApiClient {
      * @param userId
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(userId?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<SessionViewWithPagination>>;
+    getEntities(userId?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<SessionViewWithPagination>>;
 }
 export declare enum SystemApiApiKeys {
 }
@@ -592,8 +598,10 @@ export declare class UserApi extends libclient.ApiClient {
      * @param userId
      * @param pageNumber
      * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getEntities(status?: string, userId?: string, pageNumber?: number, itemCount?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
+    getEntities(status?: string, userId?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
     /**
      *
      */

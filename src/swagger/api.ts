@@ -639,13 +639,17 @@ export class MessageApi extends libclient.ApiClient {
      * @param to 
      * @param pageNumber 
      * @param itemCount 
+     * @param sortName 
+     * @param sortType 
      */
-    public getEntities (from?: string, to?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+    public getEntities (from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
         let queryParameters: any = {};
         if (from !== undefined) queryParameters['from'] = from;
         if (to !== undefined) queryParameters['to'] = to;
         if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined) queryParameters['sortName'] = sortName;
+        if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -790,12 +794,16 @@ export class RoleApi extends libclient.ApiClient {
      * @param query 
      * @param pageNumber 
      * @param itemCount 
+     * @param sortName 
+     * @param sortType 
      */
-    public getEntities (query?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<RoleViewWithPagination>> {
+    public getEntities (query?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<RoleViewWithPagination>> {
         let queryParameters: any = {};
         if (query !== undefined) queryParameters['query'] = query;
         if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined) queryParameters['sortName'] = sortName;
+        if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -869,12 +877,16 @@ export class SessionApi extends libclient.ApiClient {
      * @param userId 
      * @param pageNumber 
      * @param itemCount 
+     * @param sortName 
+     * @param sortType 
      */
-    public getEntities (userId?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<SessionViewWithPagination>> {
+    public getEntities (userId?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<SessionViewWithPagination>> {
         let queryParameters: any = {};
         if (userId !== undefined) queryParameters['userId'] = userId;
         if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined) queryParameters['sortName'] = sortName;
+        if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -1027,13 +1039,17 @@ export class UserApi extends libclient.ApiClient {
      * @param userId 
      * @param pageNumber 
      * @param itemCount 
+     * @param sortName 
+     * @param sortType 
      */
-    public getEntities (status?: string, userId?: string, pageNumber?: number, itemCount?: number) : Promise<libclient.ApiResponse<UserViewWithPagination>> {
+    public getEntities (status?: string, userId?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<UserViewWithPagination>> {
         let queryParameters: any = {};
         if (status !== undefined) queryParameters['status'] = status;
         if (userId !== undefined) queryParameters['userId'] = userId;
         if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
         if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined) queryParameters['sortName'] = sortName;
+        if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
