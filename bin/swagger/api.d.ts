@@ -220,8 +220,11 @@ export declare class RoleDetailView {
     'id': string;
     'code': string;
     'scope': string;
+    'status': RoleStatus;
     'created': number;
     'updated': number;
+}
+export declare class RoleStatus {
 }
 export declare class RoleType {
 }
@@ -234,6 +237,10 @@ export declare class RoleView {
     * role scope
     */
     'scope': string;
+    /**
+    * role status
+    */
+    'status': RoleStatus;
 }
 export declare class RoleViewWithPagination {
     'roles': Array<RoleDetailView>;

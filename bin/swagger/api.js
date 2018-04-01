@@ -79,6 +79,9 @@ exports.ProviderSession = ProviderSession;
 class RoleDetailView {
 }
 exports.RoleDetailView = RoleDetailView;
+class RoleStatus {
+}
+exports.RoleStatus = RoleStatus;
 class RoleType {
 }
 exports.RoleType = RoleType;
