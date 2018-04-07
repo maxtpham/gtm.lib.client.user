@@ -11,15 +11,6 @@
  */
 import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
-export declare class AccountEntity {
-    'id': any;
-    'created': number;
-    'updated': number;
-    'deleted': number;
-    'userId': string;
-    'balance': number;
-    'bonus': number;
-}
 export declare class AccountView {
     'balance': number;
     'bonus': number;
@@ -75,10 +66,6 @@ export declare class LocationView {
     */
     'y': number;
 }
-export declare class MAccountView {
-    'userId': string;
-    'balance': number;
-}
 export declare class MAvatarView {
     'media': string;
     'data': string;
@@ -96,11 +83,6 @@ export declare class MProfileView {
     'note': string;
     'infos': string;
     'houseHolder': string;
-}
-export declare class MUserFind {
-    'name': string;
-    'phone': string;
-    'email': string;
 }
 export declare class MUserView {
     'id': string;
@@ -416,45 +398,6 @@ export declare class UserViewWithPagination {
     'users': Array<UserViewDetails>;
     'totalItems': number;
 }
-export declare enum AccountApiApiKeys {
-}
-export declare class AccountApi extends libclient.ApiClient {
-    constructor(basePath?: string, accessToken?: string);
-    /**
-     * add account
-     * @param userId
-     * @param account
-     */
-    addAccount(userId: string, account: AccountView): Promise<libclient.ApiResponse<AccountEntity>>;
-    /**
-     * add balance of account
-     * @param accountView
-     */
-    addBalance(accountView: MAccountView): Promise<libclient.ApiResponse<AccountEntity>>;
-    /**
-     * get all account
-     */
-    getAccounts(): Promise<libclient.ApiResponse<Array<AccountEntity>>>;
-    /**
-     * get account by id
-     * @param id
-     */
-    getById(id: string): Promise<libclient.ApiResponse<AccountEntity>>;
-    /**
-     * get account by id
-     * @param userId
-     */
-    getByUserId(userId: string): Promise<libclient.ApiResponse<AccountEntity>>;
-    /**
-     * get my-account
-     */
-    getMyAccount(): Promise<libclient.ApiResponse<AccountEntity>>;
-    /**
-     * remove balance of account
-     * @param accountView
-     */
-    removeBalance(accountView: MAccountView): Promise<libclient.ApiResponse<AccountEntity>>;
-}
 export declare enum MessageApiApiKeys {
 }
 export declare class MessageApi extends libclient.ApiClient {
@@ -532,12 +475,6 @@ export declare class RoleApi extends libclient.ApiClient {
      * @param id
      */
     getEntity(id: string): Promise<libclient.ApiResponse<RoleDetailView>>;
-    /**
-     * Update Role
-     * @param id
-     * @param roleView
-     */
-    updateEntity(id: string, roleView?: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
 }
 export declare enum SessionApiApiKeys {
 }
@@ -586,9 +523,9 @@ export declare class UserApi extends libclient.ApiClient {
     createOrUpdateUserRoleMobile(roleType: number): Promise<libclient.ApiResponse<ProfileView>>;
     /**
      *
-     * @param mUserFind
+     * @param find
      */
-    findUser(mUserFind: MUserFind): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    findUser(find: string): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
      * Get user by Id
      * @param id
