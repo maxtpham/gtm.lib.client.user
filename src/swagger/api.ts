@@ -633,7 +633,7 @@ export class RoleApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<string>('POST', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+        return this.execute<string>('DELETE', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
@@ -677,6 +677,26 @@ export class RoleApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<RoleDetailView>('GET', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
             queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Update Role 
+     * @param id 
+     * @param roleView 
+     */
+    public updateEntity (id: string, roleView?: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
+
+        // verify required parameter 'id' is not null or undefined
+        if (id === null || id === undefined) {
+            throw new Error('Required parameter id was null or undefined when calling updateEntity.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<RoleDetailView>('POST', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)),
+            queryParameters, headerParams, formParams, isFile, false, roleView
         );
     }
 }

@@ -475,6 +475,12 @@ export declare class RoleApi extends libclient.ApiClient {
      * @param id
      */
     getEntity(id: string): Promise<libclient.ApiResponse<RoleDetailView>>;
+    /**
+     * Update Role
+     * @param id
+     * @param roleView
+     */
+    updateEntity(id: string, roleView?: RoleView): Promise<libclient.ApiResponse<RoleDetailView>>;
 }
 export declare enum SessionApiApiKeys {
 }
