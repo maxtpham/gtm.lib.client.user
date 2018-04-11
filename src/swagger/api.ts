@@ -14,16 +14,6 @@ import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
 
 /* tslint:disable:no-unused-variable */
-export class AccountEntity {
-    'id': any;
-    'created': number;
-    'updated': number;
-    'deleted': number;
-    'userId': string;
-    'balance': number;
-    'bonus': number;
-}
-
 export class AccountView {
     'balance': number;
     'bonus': number;
@@ -84,11 +74,6 @@ export class LocationView {
     'y': number;
 }
 
-export class MAccountView {
-    'userId': string;
-    'balance': number;
-}
-
 export class MAvatarView {
     'media': string;
     'data': string;
@@ -107,12 +92,6 @@ export class MProfileView {
     'note': string;
     'infos': string;
     'houseHolder': string;
-}
-
-export class MUserFind {
-    'name': string;
-    'phone': string;
-    'email': string;
 }
 
 export class MUserView {
@@ -457,144 +436,6 @@ export class UserViewWithPagination {
 }
 
 
-export enum AccountApiApiKeys {
-}
-
-export class AccountApi extends libclient.ApiClient {
-    constructor(basePath?: string, accessToken?: string) {
-        super(basePath, accessToken);
-    }
-
-    /**
-     * add account 
-     * @param userId 
-     * @param account 
-     */
-    public addAccount (userId: string, account: AccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
-
-        // verify required parameter 'userId' is not null or undefined
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling addAccount.');
-        }
-
-        // verify required parameter 'account' is not null or undefined
-        if (account === null || account === undefined) {
-            throw new Error('Required parameter account was null or undefined when calling addAccount.');
-        }
-        let queryParameters: any = {};
-        if (userId !== undefined) queryParameters['userId'] = userId;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<AccountEntity>('POST', '/api/user/v1/account/create',
-            queryParameters, headerParams, formParams, isFile, false, account
-        );
-    }
-
-    /**
-     * add balance of account 
-     * @param accountView 
-     */
-    public addBalance (accountView: MAccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
-
-        // verify required parameter 'accountView' is not null or undefined
-        if (accountView === null || accountView === undefined) {
-            throw new Error('Required parameter accountView was null or undefined when calling addBalance.');
-        }
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<AccountEntity>('POST', '/api/user/v1/account/add-balance',
-            queryParameters, headerParams, formParams, isFile, false, accountView
-        );
-    }
-
-    /**
-     * get all account 
-     */
-    public getAccounts () : Promise<libclient.ApiResponse<Array<AccountEntity>>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<AccountEntity>>('GET', '/api/user/v1/account/get-all',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * get account by id 
-     * @param id 
-     */
-    public getById (id: string) : Promise<libclient.ApiResponse<AccountEntity>> {
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getById.');
-        }
-        let queryParameters: any = {};
-        if (id !== undefined) queryParameters['id'] = id;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<AccountEntity>('GET', '/api/user/v1/account/get-by-id',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * get account by id 
-     * @param userId 
-     */
-    public getByUserId (userId: string) : Promise<libclient.ApiResponse<AccountEntity>> {
-
-        // verify required parameter 'userId' is not null or undefined
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling getByUserId.');
-        }
-        let queryParameters: any = {};
-        if (userId !== undefined) queryParameters['userId'] = userId;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<AccountEntity>('GET', '/api/user/v1/account/get-by-user-id',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * get my-account 
-     */
-    public getMyAccount () : Promise<libclient.ApiResponse<AccountEntity>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<AccountEntity>('GET', '/api/user/v1/account/my-account',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * remove balance of account 
-     * @param accountView 
-     */
-    public removeBalance (accountView: MAccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
-
-        // verify required parameter 'accountView' is not null or undefined
-        if (accountView === null || accountView === undefined) {
-            throw new Error('Required parameter accountView was null or undefined when calling removeBalance.');
-        }
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<AccountEntity>('POST', '/api/user/v1/account/remove-balance',
-            queryParameters, headerParams, formParams, isFile, false, accountView
-        );
-    }
-}
 export enum MessageApiApiKeys {
 }
 
@@ -798,6 +639,19 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
+     * Get all role entities 
+     */
+    public getAllEntities () : Promise<libclient.ApiResponse<Array<RoleDetailView>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<RoleDetailView>>('GET', '/api/user/v1/role/get-all',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Get Roles 
      * @param query 
      * @param pageNumber 
@@ -967,15 +821,22 @@ export class UserApi extends libclient.ApiClient {
     /**
      * Create or update User Role 
      * @param roleType 
+     * @param userIdCurrent 
      */
-    public createOrUpdateUserRoleMobile (roleType: number) : Promise<libclient.ApiResponse<ProfileView>> {
+    public createOrUpdateUserRoleMobile (roleType: number, userIdCurrent: string) : Promise<libclient.ApiResponse<ProfileView>> {
 
         // verify required parameter 'roleType' is not null or undefined
         if (roleType === null || roleType === undefined) {
             throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRoleMobile.');
         }
+
+        // verify required parameter 'userIdCurrent' is not null or undefined
+        if (userIdCurrent === null || userIdCurrent === undefined) {
+            throw new Error('Required parameter userIdCurrent was null or undefined when calling createOrUpdateUserRoleMobile.');
+        }
         let queryParameters: any = {};
         if (roleType !== undefined) queryParameters['roleType'] = roleType;
+        if (userIdCurrent !== undefined) queryParameters['userIdCurrent'] = userIdCurrent;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -986,20 +847,21 @@ export class UserApi extends libclient.ApiClient {
 
     /**
      * 
-     * @param mUserFind 
+     * @param find 
      */
-    public findUser (mUserFind: MUserFind) : Promise<libclient.ApiResponse<Array<MUserView>>> {
+    public findUser (find: string) : Promise<libclient.ApiResponse<Array<MUserView>>> {
 
-        // verify required parameter 'mUserFind' is not null or undefined
-        if (mUserFind === null || mUserFind === undefined) {
-            throw new Error('Required parameter mUserFind was null or undefined when calling findUser.');
+        // verify required parameter 'find' is not null or undefined
+        if (find === null || find === undefined) {
+            throw new Error('Required parameter find was null or undefined when calling findUser.');
         }
         let queryParameters: any = {};
+        if (find !== undefined) queryParameters['find'] = find;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<Array<MUserView>>('POST', '/api/user/v1/user/find-user',
-            queryParameters, headerParams, formParams, isFile, false, mUserFind
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/find-user',
+            queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
 
@@ -1242,7 +1104,6 @@ export class UserApi extends libclient.ApiClient {
 }
 
 export function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)) {
-    libclient.registerApiClient(iocContainer, AccountApi, AccountApi, basePath, token);
     libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);

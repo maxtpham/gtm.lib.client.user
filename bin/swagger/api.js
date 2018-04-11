@@ -13,9 +13,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const libclient = require("@gtm/lib.client");
 /* tslint:disable:no-unused-variable */
-class AccountEntity {
-}
-exports.AccountEntity = AccountEntity;
 class AccountView {
 }
 exports.AccountView = AccountView;
@@ -31,18 +28,12 @@ exports.JwtToken = JwtToken;
 class LocationView {
 }
 exports.LocationView = LocationView;
-class MAccountView {
-}
-exports.MAccountView = MAccountView;
 class MAvatarView {
 }
 exports.MAvatarView = MAvatarView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
-class MUserFind {
-}
-exports.MUserFind = MUserFind;
 class MUserView {
 }
 exports.MUserView = MUserView;
@@ -124,121 +115,6 @@ exports.UserViewDetails = UserViewDetails;
 class UserViewWithPagination {
 }
 exports.UserViewWithPagination = UserViewWithPagination;
-var AccountApiApiKeys;
-(function (AccountApiApiKeys) {
-})(AccountApiApiKeys = exports.AccountApiApiKeys || (exports.AccountApiApiKeys = {}));
-class AccountApi extends libclient.ApiClient {
-    constructor(basePath, accessToken) {
-        super(basePath, accessToken);
-    }
-    /**
-     * add account
-     * @param userId
-     * @param account
-     */
-    addAccount(userId, account) {
-        // verify required parameter 'userId' is not null or undefined
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling addAccount.');
-        }
-        // verify required parameter 'account' is not null or undefined
-        if (account === null || account === undefined) {
-            throw new Error('Required parameter account was null or undefined when calling addAccount.');
-        }
-        let queryParameters = {};
-        if (userId !== undefined)
-            queryParameters['userId'] = userId;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('POST', '/api/user/v1/account/create', queryParameters, headerParams, formParams, isFile, false, account);
-    }
-    /**
-     * add balance of account
-     * @param accountView
-     */
-    addBalance(accountView) {
-        // verify required parameter 'accountView' is not null or undefined
-        if (accountView === null || accountView === undefined) {
-            throw new Error('Required parameter accountView was null or undefined when calling addBalance.');
-        }
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('POST', '/api/user/v1/account/add-balance', queryParameters, headerParams, formParams, isFile, false, accountView);
-    }
-    /**
-     * get all account
-     */
-    getAccounts() {
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/account/get-all', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * get account by id
-     * @param id
-     */
-    getById(id) {
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getById.');
-        }
-        let queryParameters = {};
-        if (id !== undefined)
-            queryParameters['id'] = id;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/account/get-by-id', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * get account by id
-     * @param userId
-     */
-    getByUserId(userId) {
-        // verify required parameter 'userId' is not null or undefined
-        if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling getByUserId.');
-        }
-        let queryParameters = {};
-        if (userId !== undefined)
-            queryParameters['userId'] = userId;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/account/get-by-user-id', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * get my-account
-     */
-    getMyAccount() {
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/account/my-account', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * remove balance of account
-     * @param accountView
-     */
-    removeBalance(accountView) {
-        // verify required parameter 'accountView' is not null or undefined
-        if (accountView === null || accountView === undefined) {
-            throw new Error('Required parameter accountView was null or undefined when calling removeBalance.');
-        }
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('POST', '/api/user/v1/account/remove-balance', queryParameters, headerParams, formParams, isFile, false, accountView);
-    }
-}
-exports.AccountApi = AccountApi;
 var MessageApiApiKeys;
 (function (MessageApiApiKeys) {
 })(MessageApiApiKeys = exports.MessageApiApiKeys || (exports.MessageApiApiKeys = {}));
@@ -412,6 +288,16 @@ class RoleApi extends libclient.ApiClient {
         return this.execute('DELETE', '/api/user/v1/role/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get all role entities
+     */
+    getAllEntities() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/role/get-all', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Get Roles
      * @param query
      * @param pageNumber
@@ -567,15 +453,22 @@ class UserApi extends libclient.ApiClient {
     /**
      * Create or update User Role
      * @param roleType
+     * @param userIdCurrent
      */
-    createOrUpdateUserRoleMobile(roleType) {
+    createOrUpdateUserRoleMobile(roleType, userIdCurrent) {
         // verify required parameter 'roleType' is not null or undefined
         if (roleType === null || roleType === undefined) {
             throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRoleMobile.');
         }
+        // verify required parameter 'userIdCurrent' is not null or undefined
+        if (userIdCurrent === null || userIdCurrent === undefined) {
+            throw new Error('Required parameter userIdCurrent was null or undefined when calling createOrUpdateUserRoleMobile.');
+        }
         let queryParameters = {};
         if (roleType !== undefined)
             queryParameters['roleType'] = roleType;
+        if (userIdCurrent !== undefined)
+            queryParameters['userIdCurrent'] = userIdCurrent;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -583,18 +476,20 @@ class UserApi extends libclient.ApiClient {
     }
     /**
      *
-     * @param mUserFind
+     * @param find
      */
-    findUser(mUserFind) {
-        // verify required parameter 'mUserFind' is not null or undefined
-        if (mUserFind === null || mUserFind === undefined) {
-            throw new Error('Required parameter mUserFind was null or undefined when calling findUser.');
+    findUser(find) {
+        // verify required parameter 'find' is not null or undefined
+        if (find === null || find === undefined) {
+            throw new Error('Required parameter find was null or undefined when calling findUser.');
         }
         let queryParameters = {};
+        if (find !== undefined)
+            queryParameters['find'] = find;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('POST', '/api/user/v1/user/find-user', queryParameters, headerParams, formParams, isFile, false, mUserFind);
+        return this.execute('GET', '/api/user/v1/user/find-user', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Get user by Id
@@ -797,7 +692,6 @@ class UserApi extends libclient.ApiClient {
 }
 exports.UserApi = UserApi;
 function registerIoc(iocContainer, basePath, token) {
-    libclient.registerApiClient(iocContainer, AccountApi, AccountApi, basePath, token);
     libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);
