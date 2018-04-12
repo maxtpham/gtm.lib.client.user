@@ -525,7 +525,7 @@ export declare class UserApi extends libclient.ApiClient {
      * Create or update User Role
      * @param userRoleView
      */
-    createOrUpdateUserRoleMobile(userRoleView: UserRoleView): Promise<libclient.ApiResponse<ProfileView>>;
+    createOrUpdateUserRole(userRoleView: UserRoleView): Promise<libclient.ApiResponse<ProfileView>>;
     /**
      *
      * @param find

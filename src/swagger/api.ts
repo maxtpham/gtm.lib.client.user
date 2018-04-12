@@ -803,17 +803,17 @@ export class UserApi extends libclient.ApiClient {
      * Create or update User Role 
      * @param userRoleView 
      */
-    public createOrUpdateUserRoleMobile (userRoleView: UserRoleView) : Promise<libclient.ApiResponse<ProfileView>> {
+    public createOrUpdateUserRole (userRoleView: UserRoleView) : Promise<libclient.ApiResponse<ProfileView>> {
 
         // verify required parameter 'userRoleView' is not null or undefined
         if (userRoleView === null || userRoleView === undefined) {
-            throw new Error('Required parameter userRoleView was null or undefined when calling createOrUpdateUserRoleMobile.');
+            throw new Error('Required parameter userRoleView was null or undefined when calling createOrUpdateUserRole.');
         }
         let queryParameters: any = {};
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<ProfileView>('POST', '/api/user/v1/user/create-or-update-role-mobile',
+        return this.execute<ProfileView>('POST', '/api/user/v1/user/create-or-update-role',
             queryParameters, headerParams, formParams, isFile, false, userRoleView
         );
     }
