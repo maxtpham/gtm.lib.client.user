@@ -439,21 +439,6 @@ class UserApi extends libclient.ApiClient {
      * Create or update User Role
      * @param userRoleView
      */
-    createOrUpdateUserRole(userRoleView) {
-        // verify required parameter 'userRoleView' is not null or undefined
-        if (userRoleView === null || userRoleView === undefined) {
-            throw new Error('Required parameter userRoleView was null or undefined when calling createOrUpdateUserRole.');
-        }
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('POST', '/api/user/v1/user/create-or-update-role', queryParameters, headerParams, formParams, isFile, false, userRoleView);
-    }
-    /**
-     * Create or update User Role
-     * @param userRoleView
-     */
     createOrUpdateUserRoleMobile(userRoleView) {
         // verify required parameter 'userRoleView' is not null or undefined
         if (userRoleView === null || userRoleView === undefined) {
