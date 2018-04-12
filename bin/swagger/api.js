@@ -452,27 +452,18 @@ class UserApi extends libclient.ApiClient {
     }
     /**
      * Create or update User Role
-     * @param roleType
-     * @param userIdCurrent
+     * @param userRoleView
      */
-    createOrUpdateUserRoleMobile(roleType, userIdCurrent) {
-        // verify required parameter 'roleType' is not null or undefined
-        if (roleType === null || roleType === undefined) {
-            throw new Error('Required parameter roleType was null or undefined when calling createOrUpdateUserRoleMobile.');
-        }
-        // verify required parameter 'userIdCurrent' is not null or undefined
-        if (userIdCurrent === null || userIdCurrent === undefined) {
-            throw new Error('Required parameter userIdCurrent was null or undefined when calling createOrUpdateUserRoleMobile.');
+    createOrUpdateUserRoleMobile(userRoleView) {
+        // verify required parameter 'userRoleView' is not null or undefined
+        if (userRoleView === null || userRoleView === undefined) {
+            throw new Error('Required parameter userRoleView was null or undefined when calling createOrUpdateUserRoleMobile.');
         }
         let queryParameters = {};
-        if (roleType !== undefined)
-            queryParameters['roleType'] = roleType;
-        if (userIdCurrent !== undefined)
-            queryParameters['userIdCurrent'] = userIdCurrent;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('POST', '/api/user/v1/user/create-or-update-role-mobile', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('POST', '/api/user/v1/user/create-or-update-role-mobile', queryParameters, headerParams, formParams, isFile, false, userRoleView);
     }
     /**
      *
