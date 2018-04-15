@@ -536,6 +536,16 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/profile', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     *
+     */
+    getProfileCurrentForMobile() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/profile-for-mobile', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Get user account
      * @param userId
      */

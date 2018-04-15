@@ -556,6 +556,10 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getProfileCurrent(): Promise<libclient.ApiResponse<ProfileView>>;
     /**
+     *
+     */
+    getProfileCurrentForMobile(): Promise<libclient.ApiResponse<ProfileView>>;
+    /**
      * Get user account
      * @param userId
      */
