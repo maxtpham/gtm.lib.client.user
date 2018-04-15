@@ -915,6 +915,19 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * 
+     */
+    public getProfileCurrentForMobile () : Promise<libclient.ApiResponse<ProfileView>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<ProfileView>('GET', '/api/user/v1/user/profile-for-mobile',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Get user account 
      * @param userId 
      */
