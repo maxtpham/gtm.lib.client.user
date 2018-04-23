@@ -79,6 +79,10 @@ export class MAvatarView {
     'data': string;
 }
 
+export class MFCMView {
+    'fcmToken': string;
+}
+
 export class MProfileView {
     'name': string;
     'gender': string;
@@ -902,6 +906,26 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Update user with profiles 
+     * @param userId 
+     */
+    public getFCMForMobile (userId: string) : Promise<libclient.ApiResponse<MFCMView>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getFCMForMobile.');
+        }
+        let queryParameters: any = {};
+        if (userId !== undefined) queryParameters['userId'] = userId;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MFCMView>('GET', '/api/user/v1/user/get-fcm-for-mobile',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * 
      */
     public getProfileCurrent () : Promise<libclient.ApiResponse<ProfileView>> {
@@ -976,6 +1000,25 @@ export class UserApi extends libclient.ApiClient {
         let formParams: any = {};
         return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-user-lite',
             queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * Update user with profiles 
+     * @param fcms 
+     */
+    public setFCMForMobile (fcms: MFCMView) : Promise<libclient.ApiResponse<string>> {
+
+        // verify required parameter 'fcms' is not null or undefined
+        if (fcms === null || fcms === undefined) {
+            throw new Error('Required parameter fcms was null or undefined when calling setFCMForMobile.');
+        }
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<string>('POST', '/api/user/v1/user/set-fcm-for-mobile',
+            queryParameters, headerParams, formParams, isFile, false, fcms
         );
     }
 
