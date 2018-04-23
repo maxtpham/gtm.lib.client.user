@@ -31,6 +31,9 @@ exports.LocationView = LocationView;
 class MAvatarView {
 }
 exports.MAvatarView = MAvatarView;
+class MFCMView {
+}
+exports.MFCMView = MFCMView;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
@@ -526,6 +529,23 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/entities', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Update user with profiles
+     * @param userId
+     */
+    getFCMForMobile(userId) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getFCMForMobile.');
+        }
+        let queryParameters = {};
+        if (userId !== undefined)
+            queryParameters['userId'] = userId;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/get-fcm-for-mobile', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      *
      */
     getProfileCurrent() {
@@ -586,6 +606,21 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/user/get-user-lite', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * Update user with profiles
+     * @param fcms
+     */
+    setFCMForMobile(fcms) {
+        // verify required parameter 'fcms' is not null or undefined
+        if (fcms === null || fcms === undefined) {
+            throw new Error('Required parameter fcms was null or undefined when calling setFCMForMobile.');
+        }
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('POST', '/api/user/v1/user/set-fcm-for-mobile', queryParameters, headerParams, formParams, isFile, false, fcms);
     }
     /**
      * Update user with profiles

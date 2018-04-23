@@ -70,6 +70,9 @@ export declare class MAvatarView {
     'media': string;
     'data': string;
 }
+export declare class MFCMView {
+    'fcmToken': string;
+}
 export declare class MProfileView {
     'name': string;
     'gender': string;
@@ -552,6 +555,11 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getEntities(status?: string, userId?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
     /**
+     * Update user with profiles
+     * @param userId
+     */
+    getFCMForMobile(userId: string): Promise<libclient.ApiResponse<MFCMView>>;
+    /**
      *
      */
     getProfileCurrent(): Promise<libclient.ApiResponse<ProfileView>>;
@@ -573,6 +581,11 @@ export declare class UserApi extends libclient.ApiClient {
      * Get all user lite
      */
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    /**
+     * Update user with profiles
+     * @param fcms
+     */
+    setFCMForMobile(fcms: MFCMView): Promise<libclient.ApiResponse<string>>;
     /**
      * Update user with profiles
      * @param avatar
