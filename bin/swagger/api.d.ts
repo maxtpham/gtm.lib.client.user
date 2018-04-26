@@ -555,7 +555,7 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getEntities(status?: string, userId?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<UserViewWithPagination>>;
     /**
-     * Update user with profiles
+     * getFCMForMobile
      * @param userId
      */
     getFCMForMobile(userId: string): Promise<libclient.ApiResponse<MFCMView>>;
@@ -582,7 +582,7 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getUserLite(): Promise<libclient.ApiResponse<Array<MUserView>>>;
     /**
-     * Update user with profiles
+     * setFCMForMobile
      * @param fcms
      */
     setFCMForMobile(fcms: MFCMView): Promise<libclient.ApiResponse<string>>;

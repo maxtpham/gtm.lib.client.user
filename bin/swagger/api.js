@@ -529,7 +529,7 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/entities', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
-     * Update user with profiles
+     * getFCMForMobile
      * @param userId
      */
     getFCMForMobile(userId) {
@@ -608,7 +608,7 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/get-user-lite', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
-     * Update user with profiles
+     * setFCMForMobile
      * @param fcms
      */
     setFCMForMobile(fcms) {

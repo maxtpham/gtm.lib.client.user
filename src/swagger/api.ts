@@ -906,7 +906,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Update user with profiles 
+     * getFCMForMobile 
      * @param userId 
      */
     public getFCMForMobile (userId: string) : Promise<libclient.ApiResponse<MFCMView>> {
@@ -1004,7 +1004,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Update user with profiles 
+     * setFCMForMobile 
      * @param fcms 
      */
     public setFCMForMobile (fcms: MFCMView) : Promise<libclient.ApiResponse<string>> {
