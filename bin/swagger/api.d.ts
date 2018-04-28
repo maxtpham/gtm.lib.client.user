@@ -13,6 +13,7 @@ import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
 export declare class AccountView {
     'balance': number;
+    'balanceGold': number;
     'bonus': number;
 }
 export declare class AttachmentView {
@@ -249,10 +250,12 @@ export declare class SessionViewWithPagination {
 }
 export declare class UserAccount {
     'balance': number;
+    'balanceGold': number;
     'bonus': number;
 }
 export declare class UserAccountView {
     'balance': number;
+    'balanceGold': number;
     'bonus': number;
 }
 export declare class UserEntity {
