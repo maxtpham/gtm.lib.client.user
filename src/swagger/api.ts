@@ -16,6 +16,7 @@ import * as libclient from '@gtm/lib.client';
 /* tslint:disable:no-unused-variable */
 export class AccountView {
     'balance': number;
+    'balanceGold': number;
     'bonus': number;
 }
 
@@ -278,11 +279,13 @@ export class SessionViewWithPagination {
 
 export class UserAccount {
     'balance': number;
+    'balanceGold': number;
     'bonus': number;
 }
 
 export class UserAccountView {
     'balance': number;
+    'balanceGold': number;
     'bonus': number;
 }
 
