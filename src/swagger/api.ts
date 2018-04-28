@@ -926,6 +926,26 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
+     * Get lend user for app 
+     * @param find 
+     */
+    public getLenderUserForApp (find: string) : Promise<libclient.ApiResponse<Array<MUserView>>> {
+
+        // verify required parameter 'find' is not null or undefined
+        if (find === null || find === undefined) {
+            throw new Error('Required parameter find was null or undefined when calling getLenderUserForApp.');
+        }
+        let queryParameters: any = {};
+        if (find !== undefined) queryParameters['find'] = find;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/get-lender-for-app',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * 
      */
     public getProfileCurrent () : Promise<libclient.ApiResponse<ProfileView>> {

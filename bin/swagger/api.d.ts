@@ -560,6 +560,11 @@ export declare class UserApi extends libclient.ApiClient {
      */
     getFCMForMobile(userId: string): Promise<libclient.ApiResponse<MFCMView>>;
     /**
+     * Get lend user for app
+     * @param find
+     */
+    getLenderUserForApp(find: string): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    /**
      *
      */
     getProfileCurrent(): Promise<libclient.ApiResponse<ProfileView>>;

@@ -546,6 +546,23 @@ class UserApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/user/get-fcm-for-mobile', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get lend user for app
+     * @param find
+     */
+    getLenderUserForApp(find) {
+        // verify required parameter 'find' is not null or undefined
+        if (find === null || find === undefined) {
+            throw new Error('Required parameter find was null or undefined when calling getLenderUserForApp.');
+        }
+        let queryParameters = {};
+        if (find !== undefined)
+            queryParameters['find'] = find;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/get-lender-for-app', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      *
      */
     getProfileCurrent() {
