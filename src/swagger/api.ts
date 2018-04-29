@@ -580,6 +580,19 @@ export class MessageApi extends libclient.ApiClient {
     }
 
     /**
+     * Get Messages to notification update
+     */
+    public getMessageToNotificationUpdate () : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message/get-message-to-notification-update',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Update Message 
      * @param id 
      * @param messageView 

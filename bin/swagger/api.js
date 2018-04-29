@@ -236,6 +236,16 @@ class MessageApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/Message/get-message-to-notification', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get Messages to notification update
+     */
+    getMessageToNotificationUpdate() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message/get-message-to-notification-update', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Update Message
      * @param id
      * @param messageView
