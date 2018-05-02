@@ -200,9 +200,27 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get List Messages For App
+     * @param from
+     * @param to
+     * @param pageNumber
+     * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getListMessageForApp() {
+    getListMessageForApp(from, to, pageNumber, itemCount, sortName, sortType) {
         let queryParameters = {};
+        if (from !== undefined)
+            queryParameters['from'] = from;
+        if (to !== undefined)
+            queryParameters['to'] = to;
+        if (pageNumber !== undefined)
+            queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined)
+            queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
@@ -211,8 +229,14 @@ class MessageApi extends libclient.ApiClient {
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
+     * @param from
+     * @param to
+     * @param pageNumber
+     * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getListMessageOfUser(userIdToGetMessage) {
+    getListMessageOfUser(userIdToGetMessage, from, to, pageNumber, itemCount, sortName, sortType) {
         // verify required parameter 'userIdToGetMessage' is not null or undefined
         if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
             throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageOfUser.');
@@ -220,6 +244,18 @@ class MessageApi extends libclient.ApiClient {
         let queryParameters = {};
         if (userIdToGetMessage !== undefined)
             queryParameters['userIdToGetMessage'] = userIdToGetMessage;
+        if (from !== undefined)
+            queryParameters['from'] = from;
+        if (to !== undefined)
+            queryParameters['to'] = to;
+        if (pageNumber !== undefined)
+            queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined)
+            queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
