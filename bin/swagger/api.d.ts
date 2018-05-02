@@ -435,13 +435,25 @@ export declare class MessageApi extends libclient.ApiClient {
     getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
     /**
      * Get List Messages For App
+     * @param from
+     * @param to
+     * @param pageNumber
+     * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getListMessageForApp(): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
+    getListMessageForApp(from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
+     * @param from
+     * @param to
+     * @param pageNumber
+     * @param itemCount
+     * @param sortName
+     * @param sortType
      */
-    getListMessageOfUser(userIdToGetMessage: string): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
+    getListMessageOfUser(userIdToGetMessage: string, from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
     /**
      * Get Messages to notification
      */
