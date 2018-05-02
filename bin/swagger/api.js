@@ -227,6 +227,29 @@ class MessageApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/Message/getforapp', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     * Get List Messages for current user
+     * @param userIdToGetMessage
+     * @param sortName
+     * @param sortType
+     */
+    getListMessageForCurrentUser(userIdToGetMessage, sortName, sortType) {
+        // verify required parameter 'userIdToGetMessage' is not null or undefined
+        if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
+            throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageForCurrentUser.');
+        }
+        let queryParameters = {};
+        if (userIdToGetMessage !== undefined)
+            queryParameters['userIdToGetMessage'] = userIdToGetMessage;
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message/get-messages-for-current-user', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
      * @param from

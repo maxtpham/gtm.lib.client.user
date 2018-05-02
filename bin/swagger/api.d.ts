@@ -444,6 +444,13 @@ export declare class MessageApi extends libclient.ApiClient {
      */
     getListMessageForApp(from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
     /**
+     * Get List Messages for current user
+     * @param userIdToGetMessage
+     * @param sortName
+     * @param sortType
+     */
+    getListMessageForCurrentUser(userIdToGetMessage: string, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<Array<MessageDetailView>>>;
+    /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage
      * @param from
