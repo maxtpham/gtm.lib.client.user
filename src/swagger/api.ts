@@ -535,9 +535,21 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get List Messages For App
+     * @param from 
+     * @param to 
+     * @param pageNumber 
+     * @param itemCount 
+     * @param sortName 
+     * @param sortType 
      */
-    public getListMessageForApp () : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
+    public getListMessageForApp (from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
         let queryParameters: any = {};
+        if (from !== undefined) queryParameters['from'] = from;
+        if (to !== undefined) queryParameters['to'] = to;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined) queryParameters['sortName'] = sortName;
+        if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
@@ -549,8 +561,14 @@ export class MessageApi extends libclient.ApiClient {
     /**
      * Get List Messages with an user for App
      * @param userIdToGetMessage 
+     * @param from 
+     * @param to 
+     * @param pageNumber 
+     * @param itemCount 
+     * @param sortName 
+     * @param sortType 
      */
-    public getListMessageOfUser (userIdToGetMessage: string) : Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>> {
+    public getListMessageOfUser (userIdToGetMessage: string, from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>> {
 
         // verify required parameter 'userIdToGetMessage' is not null or undefined
         if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
@@ -558,6 +576,12 @@ export class MessageApi extends libclient.ApiClient {
         }
         let queryParameters: any = {};
         if (userIdToGetMessage !== undefined) queryParameters['userIdToGetMessage'] = userIdToGetMessage;
+        if (from !== undefined) queryParameters['from'] = from;
+        if (to !== undefined) queryParameters['to'] = to;
+        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
+        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
+        if (sortName !== undefined) queryParameters['sortName'] = sortName;
+        if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
