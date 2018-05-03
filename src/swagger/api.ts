@@ -548,18 +548,11 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get List Messages for current user
-     * @param userIdToGetMessage 
      * @param sortName 
      * @param sortType 
      */
-    public getListMessageForCurrentUser (userIdToGetMessage: string, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<Array<MessageDetailView>>> {
-
-        // verify required parameter 'userIdToGetMessage' is not null or undefined
-        if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
-            throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageForCurrentUser.');
-        }
+    public getListMessageForCurrentUser (sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<Array<MessageDetailView>>> {
         let queryParameters: any = {};
-        if (userIdToGetMessage !== undefined) queryParameters['userIdToGetMessage'] = userIdToGetMessage;
         if (sortName !== undefined) queryParameters['sortName'] = sortName;
         if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;

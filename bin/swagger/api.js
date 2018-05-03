@@ -210,18 +210,11 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get List Messages for current user
-     * @param userIdToGetMessage
      * @param sortName
      * @param sortType
      */
-    getListMessageForCurrentUser(userIdToGetMessage, sortName, sortType) {
-        // verify required parameter 'userIdToGetMessage' is not null or undefined
-        if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
-            throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageForCurrentUser.');
-        }
+    getListMessageForCurrentUser(sortName, sortType) {
         let queryParameters = {};
-        if (userIdToGetMessage !== undefined)
-            queryParameters['userIdToGetMessage'] = userIdToGetMessage;
         if (sortName !== undefined)
             queryParameters['sortName'] = sortName;
         if (sortType !== undefined)
