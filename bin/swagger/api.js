@@ -200,27 +200,9 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get List Messages For App
-     * @param from
-     * @param to
-     * @param pageNumber
-     * @param itemCount
-     * @param sortName
-     * @param sortType
      */
-    getListMessageForApp(from, to, pageNumber, itemCount, sortName, sortType) {
+    getListMessageForApp() {
         let queryParameters = {};
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
-        if (sortName !== undefined)
-            queryParameters['sortName'] = sortName;
-        if (sortType !== undefined)
-            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
