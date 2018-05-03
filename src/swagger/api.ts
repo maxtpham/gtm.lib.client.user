@@ -535,9 +535,13 @@ export class MessageApi extends libclient.ApiClient {
 
     /**
      * Get List Messages For App
+     * @param sortName 
+     * @param sortType 
      */
-    public getListMessageForApp () : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
+    public getListMessageForApp (sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
         let queryParameters: any = {};
+        if (sortName !== undefined) queryParameters['sortName'] = sortName;
+        if (sortType !== undefined) queryParameters['sortType'] = sortType;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};

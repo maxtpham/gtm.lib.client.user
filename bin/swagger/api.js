@@ -200,9 +200,15 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get List Messages For App
+     * @param sortName
+     * @param sortType
      */
-    getListMessageForApp() {
+    getListMessageForApp(sortName, sortType) {
         let queryParameters = {};
+        if (sortName !== undefined)
+            queryParameters['sortName'] = sortName;
+        if (sortType !== undefined)
+            queryParameters['sortType'] = sortType;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};

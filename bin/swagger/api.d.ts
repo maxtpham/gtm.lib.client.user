@@ -435,8 +435,10 @@ export declare class MessageApi extends libclient.ApiClient {
     getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
     /**
      * Get List Messages For App
+     * @param sortName
+     * @param sortType
      */
-    getListMessageForApp(): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
+    getListMessageForApp(sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
     /**
      * Get List Messages for current user
      * @param sortName
