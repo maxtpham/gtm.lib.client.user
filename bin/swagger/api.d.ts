@@ -445,15 +445,11 @@ export declare class MessageApi extends libclient.ApiClient {
     getListMessageForCurrentUser(sortName?: string, sortType?: number): Promise<libclient.ApiResponse<Array<MessageDetailView>>>;
     /**
      * Get List Messages with an user for App
-     * @param userIdToGetMessage
-     * @param from
-     * @param to
-     * @param pageNumber
-     * @param itemCount
+     * @param toUserId
      * @param sortName
      * @param sortType
      */
-    getListMessageOfUser(userIdToGetMessage: string, from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
+    getListMessageOfUser(toUserId: string, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
     /**
      * Get Messages to notification
      */

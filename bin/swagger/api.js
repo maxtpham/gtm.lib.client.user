@@ -226,30 +226,18 @@ class MessageApi extends libclient.ApiClient {
     }
     /**
      * Get List Messages with an user for App
-     * @param userIdToGetMessage
-     * @param from
-     * @param to
-     * @param pageNumber
-     * @param itemCount
+     * @param toUserId
      * @param sortName
      * @param sortType
      */
-    getListMessageOfUser(userIdToGetMessage, from, to, pageNumber, itemCount, sortName, sortType) {
-        // verify required parameter 'userIdToGetMessage' is not null or undefined
-        if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
-            throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageOfUser.');
+    getListMessageOfUser(toUserId, sortName, sortType) {
+        // verify required parameter 'toUserId' is not null or undefined
+        if (toUserId === null || toUserId === undefined) {
+            throw new Error('Required parameter toUserId was null or undefined when calling getListMessageOfUser.');
         }
         let queryParameters = {};
-        if (userIdToGetMessage !== undefined)
-            queryParameters['userIdToGetMessage'] = userIdToGetMessage;
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
+        if (toUserId !== undefined)
+            queryParameters['toUserId'] = toUserId;
         if (sortName !== undefined)
             queryParameters['sortName'] = sortName;
         if (sortType !== undefined)
