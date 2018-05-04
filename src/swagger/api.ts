@@ -164,6 +164,15 @@ export class MessageViewWithPaginationApp {
     'messages': Array<MessageDetailViewApp>;
 }
 
+export class ProfileDefault {
+    'bankRate': number;
+    'job': string;
+    'infos': string;
+    'note': string;
+    'identityCard': string;
+    'houseHolder': string;
+}
+
 export class ProfileView {
     /**
     * Google/FB profile id
@@ -214,6 +223,10 @@ export class ProfileView {
     * token FCM 
     */
     'fcmToken': string;
+    /**
+    * profile.default 
+    */
+    'profileDefault': ProfileDefault;
     /**
     * First Login 
     */
@@ -348,6 +361,10 @@ export class UserEntity {
     */
     'fcmToken': string;
     /**
+    * profile.default 
+    */
+    'profileDefault': ProfileDefault;
+    /**
     * First Login 
     */
     'isFirstLogin': boolean;
@@ -432,6 +449,10 @@ export class UserViewDetails {
     * token FCM 
     */
     'fcmToken': string;
+    /**
+    * profile.default 
+    */
+    'profileDefault': ProfileDefault;
     /**
     * First Login 
     */
@@ -1189,7 +1210,7 @@ export class UserApi extends libclient.ApiClient {
      * Update user with profiles 
      * @param profile 
      */
-    public updateUserProfiles (profile: MProfileView) : Promise<libclient.ApiResponse<UserEntity>> {
+    public updateUserProfiles (profile: MProfileView) : Promise<libclient.ApiResponse<ProfileView>> {
 
         // verify required parameter 'profile' is not null or undefined
         if (profile === null || profile === undefined) {
@@ -1199,7 +1220,7 @@ export class UserApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<UserEntity>('POST', '/api/user/v1/user/update-user-profiles',
+        return this.execute<ProfileView>('POST', '/api/user/v1/user/update-user-profiles',
             queryParameters, headerParams, formParams, isFile, false, profile
         );
     }
