@@ -211,6 +211,10 @@ export class ProfileView {
     */
     'timezone': number;
     /**
+    * token FCM 
+    */
+    'fcmToken': string;
+    /**
     * First Login 
     */
     'isFirstLogin': boolean;
@@ -340,6 +344,10 @@ export class UserEntity {
     */
     'timezone': number;
     /**
+    * token FCM 
+    */
+    'fcmToken': string;
+    /**
     * First Login 
     */
     'isFirstLogin': boolean;
@@ -420,6 +428,10 @@ export class UserViewDetails {
     * +/- UTC time 
     */
     'timezone': number;
+    /**
+    * token FCM 
+    */
+    'fcmToken': string;
     /**
     * First Login 
     */
