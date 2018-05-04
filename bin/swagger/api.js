@@ -64,6 +64,9 @@ exports.MessageViewWithPaginationAnUserApp = MessageViewWithPaginationAnUserApp;
 class MessageViewWithPaginationApp {
 }
 exports.MessageViewWithPaginationApp = MessageViewWithPaginationApp;
+class ProfileDefault {
+}
+exports.ProfileDefault = ProfileDefault;
 class ProfileView {
 }
 exports.ProfileView = ProfileView;

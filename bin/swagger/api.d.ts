@@ -144,6 +144,14 @@ export declare class MessageViewWithPaginationAnUserApp {
 export declare class MessageViewWithPaginationApp {
     'messages': Array<MessageDetailViewApp>;
 }
+export declare class ProfileDefault {
+    'bankRate': number;
+    'job': string;
+    'infos': string;
+    'note': string;
+    'identityCard': string;
+    'houseHolder': string;
+}
 export declare class ProfileView {
     /**
     * Google/FB profile id
@@ -194,6 +202,10 @@ export declare class ProfileView {
     * token FCM
     */
     'fcmToken': string;
+    /**
+    * profile.default
+    */
+    'profileDefault': ProfileDefault;
     /**
     * First Login
     */
@@ -317,6 +329,10 @@ export declare class UserEntity {
     */
     'fcmToken': string;
     /**
+    * profile.default
+    */
+    'profileDefault': ProfileDefault;
+    /**
     * First Login
     */
     'isFirstLogin': boolean;
@@ -396,6 +412,10 @@ export declare class UserViewDetails {
     * token FCM
     */
     'fcmToken': string;
+    /**
+    * profile.default
+    */
+    'profileDefault': ProfileDefault;
     /**
     * First Login
     */
@@ -647,6 +667,6 @@ export declare class UserApi extends libclient.ApiClient {
      * Update user with profiles
      * @param profile
      */
-    updateUserProfiles(profile: MProfileView): Promise<libclient.ApiResponse<UserEntity>>;
+    updateUserProfiles(profile: MProfileView): Promise<libclient.ApiResponse<ProfileView>>;
 }
 export declare function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)): void;
