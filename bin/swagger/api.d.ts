@@ -493,6 +493,15 @@ export declare class MessageApi extends libclient.ApiClient {
      */
     getMessageToNotificationUpdate(): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
     /**
+     *
+     * @param title
+     * @param message
+     * @param fcm
+     * @param userId
+     * @param screenID
+     */
+    testNotifiForMessage(title: string, message: string, fcm: string, userId: string, screenID: string): Promise<libclient.ApiResponse<string>>;
+    /**
      * Update Message
      * @param id
      * @param messageView
