@@ -319,7 +319,7 @@ class MessageApi extends libclient.ApiClient {
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/{id}', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('GET', '/api/user/v1/Message/test-notifi-message', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Update Message
