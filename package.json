@@ -1,6 +1,6 @@
 {
   "name": "@gtm/lib.client.user",
-  "version": "1.0.146",
+  "version": "1.0.147",
   "description": "API client",
   "main": "bin/index.js",
   "typings": "bin/index",
