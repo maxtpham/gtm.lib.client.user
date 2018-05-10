@@ -693,7 +693,7 @@ export class MessageApi extends libclient.ApiClient {
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<string>('GET', '/api/user/v1/Message/{id}',
+        return this.execute<string>('GET', '/api/user/v1/Message/test-notifi-message',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
