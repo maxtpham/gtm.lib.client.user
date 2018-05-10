@@ -651,6 +651,54 @@ export class MessageApi extends libclient.ApiClient {
     }
 
     /**
+     * 
+     * @param title 
+     * @param message 
+     * @param fcm 
+     * @param userId 
+     * @param screenID 
+     */
+    public testNotifiForMessage (title: string, message: string, fcm: string, userId: string, screenID: string) : Promise<libclient.ApiResponse<string>> {
+
+        // verify required parameter 'title' is not null or undefined
+        if (title === null || title === undefined) {
+            throw new Error('Required parameter title was null or undefined when calling testNotifiForMessage.');
+        }
+
+        // verify required parameter 'message' is not null or undefined
+        if (message === null || message === undefined) {
+            throw new Error('Required parameter message was null or undefined when calling testNotifiForMessage.');
+        }
+
+        // verify required parameter 'fcm' is not null or undefined
+        if (fcm === null || fcm === undefined) {
+            throw new Error('Required parameter fcm was null or undefined when calling testNotifiForMessage.');
+        }
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling testNotifiForMessage.');
+        }
+
+        // verify required parameter 'screenID' is not null or undefined
+        if (screenID === null || screenID === undefined) {
+            throw new Error('Required parameter screenID was null or undefined when calling testNotifiForMessage.');
+        }
+        let queryParameters: any = {};
+        if (title !== undefined) queryParameters['title'] = title;
+        if (message !== undefined) queryParameters['message'] = message;
+        if (fcm !== undefined) queryParameters['fcm'] = fcm;
+        if (userId !== undefined) queryParameters['userId'] = userId;
+        if (screenID !== undefined) queryParameters['screenID'] = screenID;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<string>('GET', '/api/user/v1/Message/{id}',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
      * Update Message 
      * @param id 
      * @param messageView 
