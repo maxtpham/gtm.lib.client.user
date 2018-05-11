@@ -500,7 +500,17 @@ export declare class MessageApi extends libclient.ApiClient {
      * @param userId
      * @param screenID
      */
-    testNotifiForMessage(title: string, message: string, fcm: string, userId: string, screenID: string): Promise<libclient.ApiResponse<string>>;
+    testNotifiForMessage(title: string, message: string, fcm: string, userId: string, screenID: number): Promise<libclient.ApiResponse<string>>;
+    /**
+     *
+     * @param title
+     * @param message
+     * @param fcm
+     * @param matchId
+     * @param borrowId
+     * @param screenID
+     */
+    testNotifiForOpenScreen(title: string, message: string, fcm: string, matchId: string, borrowId: string, screenID: number): Promise<libclient.ApiResponse<string>>;
     /**
      * Update Message
      * @param id

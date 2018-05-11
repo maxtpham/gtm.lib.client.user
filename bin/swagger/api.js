@@ -322,6 +322,58 @@ class MessageApi extends libclient.ApiClient {
         return this.execute('GET', '/api/user/v1/Message/test-notifi-message', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
+     *
+     * @param title
+     * @param message
+     * @param fcm
+     * @param matchId
+     * @param borrowId
+     * @param screenID
+     */
+    testNotifiForOpenScreen(title, message, fcm, matchId, borrowId, screenID) {
+        // verify required parameter 'title' is not null or undefined
+        if (title === null || title === undefined) {
+            throw new Error('Required parameter title was null or undefined when calling testNotifiForOpenScreen.');
+        }
+        // verify required parameter 'message' is not null or undefined
+        if (message === null || message === undefined) {
+            throw new Error('Required parameter message was null or undefined when calling testNotifiForOpenScreen.');
+        }
+        // verify required parameter 'fcm' is not null or undefined
+        if (fcm === null || fcm === undefined) {
+            throw new Error('Required parameter fcm was null or undefined when calling testNotifiForOpenScreen.');
+        }
+        // verify required parameter 'matchId' is not null or undefined
+        if (matchId === null || matchId === undefined) {
+            throw new Error('Required parameter matchId was null or undefined when calling testNotifiForOpenScreen.');
+        }
+        // verify required parameter 'borrowId' is not null or undefined
+        if (borrowId === null || borrowId === undefined) {
+            throw new Error('Required parameter borrowId was null or undefined when calling testNotifiForOpenScreen.');
+        }
+        // verify required parameter 'screenID' is not null or undefined
+        if (screenID === null || screenID === undefined) {
+            throw new Error('Required parameter screenID was null or undefined when calling testNotifiForOpenScreen.');
+        }
+        let queryParameters = {};
+        if (title !== undefined)
+            queryParameters['title'] = title;
+        if (message !== undefined)
+            queryParameters['message'] = message;
+        if (fcm !== undefined)
+            queryParameters['fcm'] = fcm;
+        if (matchId !== undefined)
+            queryParameters['matchId'] = matchId;
+        if (borrowId !== undefined)
+            queryParameters['borrowId'] = borrowId;
+        if (screenID !== undefined)
+            queryParameters['screenID'] = screenID;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/Message/test-notifi-screen', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
      * Update Message
      * @param id
      * @param messageView
