@@ -658,7 +658,7 @@ export class MessageApi extends libclient.ApiClient {
      * @param userId 
      * @param screenID 
      */
-    public testNotifiForMessage (title: string, message: string, fcm: string, userId: string, screenID: number) : Promise<libclient.ApiResponse<string>> {
+    public testNotifiForMessage (title: string, message: string, fcm: string, userId: string, screenID: string) : Promise<libclient.ApiResponse<string>> {
 
         // verify required parameter 'title' is not null or undefined
         if (title === null || title === undefined) {
@@ -707,7 +707,7 @@ export class MessageApi extends libclient.ApiClient {
      * @param borrowId 
      * @param screenID 
      */
-    public testNotifiForOpenScreen (title: string, message: string, fcm: string, matchId: string, borrowId: string, screenID: number) : Promise<libclient.ApiResponse<string>> {
+    public testNotifiForOpenScreen (title: string, message: string, fcm: string, matchId: string, borrowId: string, screenID: string) : Promise<libclient.ApiResponse<string>> {
 
         // verify required parameter 'title' is not null or undefined
         if (title === null || title === undefined) {
