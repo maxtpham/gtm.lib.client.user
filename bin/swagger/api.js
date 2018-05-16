@@ -34,9 +34,15 @@ exports.MAvatarView = MAvatarView;
 class MFCMView {
 }
 exports.MFCMView = MFCMView;
+class MFindUserByPhone {
+}
+exports.MFindUserByPhone = MFindUserByPhone;
 class MProfileView {
 }
 exports.MProfileView = MProfileView;
+class MUserFindByPhone {
+}
+exports.MUserFindByPhone = MUserFindByPhone;
 class MUserView {
 }
 exports.MUserView = MUserView;
@@ -94,6 +100,9 @@ exports.SessionView = SessionView;
 class SessionViewWithPagination {
 }
 exports.SessionViewWithPagination = SessionViewWithPagination;
+class StatusFindByPhone {
+}
+exports.StatusFindByPhone = StatusFindByPhone;
 class UserAccount {
 }
 exports.UserAccount = UserAccount;
@@ -607,6 +616,23 @@ class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams = {};
         return this.execute('GET', '/api/user/v1/user/find-user', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     *
+     * @param find
+     */
+    findUserByPhone(find) {
+        // verify required parameter 'find' is not null or undefined
+        if (find === null || find === undefined) {
+            throw new Error('Required parameter find was null or undefined when calling findUserByPhone.');
+        }
+        let queryParameters = {};
+        if (find !== undefined)
+            queryParameters['find'] = find;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/user/find-user-by-phone', queryParameters, headerParams, formParams, isFile, false, undefined);
     }
     /**
      * Get user by Id

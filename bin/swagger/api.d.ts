@@ -74,6 +74,10 @@ export declare class MAvatarView {
 export declare class MFCMView {
     'fcmToken': string;
 }
+export declare class MFindUserByPhone {
+    'user': MUserFindByPhone;
+    'status': StatusFindByPhone;
+}
 export declare class MProfileView {
     'name': string;
     'gender': string;
@@ -87,6 +91,15 @@ export declare class MProfileView {
     'note': string;
     'infos': string;
     'houseHolder': string;
+}
+export declare class MUserFindByPhone {
+    'id': string;
+    'name': string;
+    'phone': string;
+    'birthday': number;
+    'email': string;
+    'gender': string;
+    'houseHolder': any;
 }
 export declare class MUserView {
     'id': string;
@@ -263,6 +276,8 @@ export declare class SessionView {
 export declare class SessionViewWithPagination {
     'sessions': Array<SessionView>;
     'totalItems': number;
+}
+export declare class StatusFindByPhone {
 }
 export declare class UserAccount {
     'balance': number;
@@ -602,6 +617,11 @@ export declare class UserApi extends libclient.ApiClient {
      * @param find
      */
     findUser(find: string): Promise<libclient.ApiResponse<Array<MUserView>>>;
+    /**
+     *
+     * @param find
+     */
+    findUserByPhone(find: string): Promise<libclient.ApiResponse<MFindUserByPhone>>;
     /**
      * Get user by Id
      * @param id
