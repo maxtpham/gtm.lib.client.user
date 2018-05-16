@@ -84,6 +84,11 @@ export class MFCMView {
     'fcmToken': string;
 }
 
+export class MFindUserByPhone {
+    'user': MUserFindByPhone;
+    'status': StatusFindByPhone;
+}
+
 export class MProfileView {
     'name': string;
     'gender': string;
@@ -97,6 +102,16 @@ export class MProfileView {
     'note': string;
     'infos': string;
     'houseHolder': string;
+}
+
+export class MUserFindByPhone {
+    'id': string;
+    'name': string;
+    'phone': string;
+    'birthday': number;
+    'email': string;
+    'gender': string;
+    'houseHolder': any;
 }
 
 export class MUserView {
@@ -292,6 +307,9 @@ export class SessionView {
 export class SessionViewWithPagination {
     'sessions': Array<SessionView>;
     'totalItems': number;
+}
+
+export class StatusFindByPhone {
 }
 
 export class UserAccount {
@@ -1015,6 +1033,26 @@ export class UserApi extends libclient.ApiClient {
         let isFile = false;
         let formParams: any = {};
         return this.execute<Array<MUserView>>('GET', '/api/user/v1/user/find-user',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * 
+     * @param find 
+     */
+    public findUserByPhone (find: string) : Promise<libclient.ApiResponse<MFindUserByPhone>> {
+
+        // verify required parameter 'find' is not null or undefined
+        if (find === null || find === undefined) {
+            throw new Error('Required parameter find was null or undefined when calling findUserByPhone.');
+        }
+        let queryParameters: any = {};
+        if (find !== undefined) queryParameters['find'] = find;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<MFindUserByPhone>('GET', '/api/user/v1/user/find-user-by-phone',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
