@@ -14,6 +14,17 @@ import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
 
 /* tslint:disable:no-unused-variable */
+export class AccountEntity {
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+    'userId': string;
+    'balance': number;
+    'balanceGold': number;
+    'bonus': number;
+}
+
 export class AccountView {
     'balance': number;
     'balanceGold': number;
@@ -22,57 +33,72 @@ export class AccountView {
 
 export class AttachmentView {
     /**
-    * HTML Content-Type: image/png, image/jpeg, image/gif,..  This will be return to browser client to correctly load & show the image  
+    * HTML Content-Type: image/png, image/jpeg, image/gif,..  This will be return to browser client to correctly load & show the image
     */
     'media': string;
     /**
-    * Image raw/binary Content-Data will be stramming to browser client 
+    * Image raw/binary Content-Data will be stramming to browser client
     */
     'data': Binary;
 }
 
+/**
+* A class representation of the BSON Binary type.
+*/
 export class Binary {
-    'sUBTYPEDEFAULT': number;
-    'sUBTYPEFUNCTION': number;
-    'sUBTYPEBYTEARRAY': number;
-    'sUBTYPEUUIDOLD': number;
-    'sUBTYPEUUID': number;
+    'SUBTYPE_DEFAULT': number;
+    'SUBTYPE_FUNCTION': number;
+    'SUBTYPE_BYTE_ARRAY': number;
+    'SUBTYPE_UUID_OLD': number;
+    'SUBTYPE_UUID': number;
     'sUBTYPEMD5': number;
-    'sUBTYPEUSERDEFINED': number;
+    'SUBTYPE_USER_DEFINED': number;
+    /**
+    * A buffer object containing the binary data
+    */
     'buffer': string;
+    /**
+    * Binary data subtype
+    */
     'subType': number;
 }
 
 export class JwtToken {
     /**
-    * User's display name 
+    * User's display name
     */
     'name': string;
     'session': string;
     'user': string;
     /**
-    * List of roles for quicky checking 
+    * List of roles for quicky checking
     */
     'roles': MapOfBoolean;
     /**
-    * List of scope or null is all scope (*) 
+    * List of scope or null is all scope (*)
     */
     'scope': MapOfBoolean;
     /**
-    * Valid until 
+    * Valid until
     */
     'expires': number;
 }
 
 export class LocationView {
     /**
-    * longitude 
+    * longitude
     */
     'x': number;
     /**
-    * latitude 
+    * latitude
     */
     'y': number;
+}
+
+export class MAccountView {
+    'userId': string;
+    'balance': number;
+    'balanceGold': number;
 }
 
 export class MAvatarView {
@@ -125,60 +151,6 @@ export class MUserView {
 export class MapOfBoolean extends null<String, boolean> {
 }
 
-export class MessageDetailView {
-    'id': string;
-    'userId': string;
-    'userName': string;
-    'toUserId': string;
-    'toUserName': string;
-    'content': string;
-    'delivered': number;
-    'announced': boolean;
-    'created': number;
-    'updated': number;
-}
-
-export class MessageDetailViewApp {
-    'userId': string;
-    'userName': string;
-    'messageDetailView': Array<MessageDetailView>;
-}
-
-export class MessageEntity {
-    'id': any;
-    'created': number;
-    'updated': number;
-    'deleted': number;
-    'userId': string;
-    'toUserId': string;
-    'content': string;
-    'delivered': number;
-    'announced': boolean;
-}
-
-export class MessageView {
-    'userId': string;
-    'toUserId': string;
-    'content': string;
-    'delivered': number;
-    'announced': boolean;
-}
-
-export class MessageViewWithPagination {
-    'messages': Array<MessageDetailView>;
-    'totalItems': number;
-}
-
-export class MessageViewWithPaginationAnUserApp {
-    'userId': string;
-    'userName': string;
-    'messages': Array<MessageDetailView>;
-}
-
-export class MessageViewWithPaginationApp {
-    'messages': Array<MessageDetailViewApp>;
-}
-
 export class ProfileDefault {
     'bankRate': number;
     'job': string;
@@ -194,28 +166,28 @@ export class ProfileView {
     */
     'code': string;
     /**
-    * Google/FB display name, ex: Thanh Pham 
+    * Google/FB display name, ex: Thanh Pham
     */
     'name': string;
     /**
-    * OAuth2 provider: google/facebook/builtin/.. 
+    * OAuth2 provider: google/facebook/builtin/..
     */
     'provider': string;
     /**
-    * Link to [role] table 
+    * Link to [role] table
     */
     'roles': Array<UserRole>;
     /**
-    * user account 
+    * user account
     */
     'account': UserAccount;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     'status': UserStatus;
     /**
-    * UTC tick only date without time component 
+    * UTC tick only date without time component
     */
     'birthday': number;
     'address': string;
@@ -223,27 +195,27 @@ export class ProfileView {
     'phone': string;
     'email': string;
     /**
-    * en, vn,.. 
+    * en, vn,..
     */
     'language': string;
     /**
-    * male/female 
+    * male/female
     */
     'gender': string;
     /**
-    * +/- UTC time 
+    * +/- UTC time
     */
     'timezone': number;
     /**
-    * token FCM 
+    * token FCM
     */
     'fcmToken': string;
     /**
-    * profile.default 
+    * profile.default
     */
     'profileDefault': ProfileDefault;
     /**
-    * First Login 
+    * First Login
     */
     'isFirstLogin': boolean;
 }
@@ -273,15 +245,15 @@ export class RoleType {
 
 export class RoleView {
     /**
-    * role code 
+    * role code
     */
     'code': string;
     /**
-    * role scope 
+    * role scope
     */
     'scope': string;
     /**
-    * role status 
+    * role status
     */
     'status': RoleStatus;
 }
@@ -334,28 +306,28 @@ export class UserEntity {
     */
     'code': string;
     /**
-    * Google/FB display name, ex: Thanh Pham 
+    * Google/FB display name, ex: Thanh Pham
     */
     'name': string;
     /**
-    * OAuth2 provider: google/facebook/builtin/.. 
+    * OAuth2 provider: google/facebook/builtin/..
     */
     'provider': string;
     /**
-    * Link to [role] table 
+    * Link to [role] table
     */
     'roles': Array<UserRole>;
     /**
-    * user account 
+    * user account
     */
     'account': UserAccount;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     'status': UserStatus;
     /**
-    * UTC tick only date without time component 
+    * UTC tick only date without time component
     */
     'birthday': number;
     'address': string;
@@ -363,35 +335,35 @@ export class UserEntity {
     'phone': string;
     'email': string;
     /**
-    * en, vn,.. 
+    * en, vn,..
     */
     'language': string;
     /**
-    * male/female 
+    * male/female
     */
     'gender': string;
     /**
-    * +/- UTC time 
+    * +/- UTC time
     */
     'timezone': number;
     /**
-    * token FCM 
+    * token FCM
     */
     'fcmToken': string;
     /**
-    * profile.default 
+    * profile.default
     */
     'profileDefault': ProfileDefault;
     /**
-    * First Login 
+    * First Login
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
 }
@@ -426,25 +398,28 @@ export class UserViewDetails {
     */
     'code': string;
     /**
-    * Google/FB display name, ex: Thanh Pham 
+    * Google/FB display name, ex: Thanh Pham
     */
     'name': string;
     /**
-    * OAuth2 provider: google/facebook/builtin/.. 
+    * OAuth2 provider: google/facebook/builtin/..
     */
     'provider': string;
     /**
-    * Link to [role] table 
+    * Link to [role] table
     */
     'roles': Array<UserRole>;
+    /**
+    * user account
+    */
     'account': AccountView;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process 
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     'status': UserStatus;
     /**
-    * UTC tick only date without time component 
+    * UTC tick only date without time component
     */
     'birthday': number;
     'address': string;
@@ -452,35 +427,35 @@ export class UserViewDetails {
     'phone': string;
     'email': string;
     /**
-    * en, vn,.. 
+    * en, vn,..
     */
     'language': string;
     /**
-    * male/female 
+    * male/female
     */
     'gender': string;
     /**
-    * +/- UTC time 
+    * +/- UTC time
     */
     'timezone': number;
     /**
-    * token FCM 
+    * token FCM
     */
     'fcmToken': string;
     /**
-    * profile.default 
+    * profile.default
     */
     'profileDefault': ProfileDefault;
     /**
-    * First Login 
+    * First Login
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login  
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
     'id': string;
@@ -494,305 +469,141 @@ export class UserViewWithPagination {
 }
 
 
-export enum MessageApiApiKeys {
+export enum AccountApiApiKeys {
 }
 
-export class MessageApi extends libclient.ApiClient {
+export class AccountApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string) {
         super(basePath, accessToken);
     }
 
     /**
-     * Create New Message 
-     * @param messageView 
-     */
-    public createEntity (messageView: MessageView) : Promise<libclient.ApiResponse<MessageEntity>> {
-
-        // verify required parameter 'messageView' is not null or undefined
-        if (messageView === null || messageView === undefined) {
-            throw new Error('Required parameter messageView was null or undefined when calling createEntity.');
-        }
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageEntity>('POST', '/api/user/v1/Message',
-            queryParameters, headerParams, formParams, isFile, false, messageView
-        );
-    }
-
-    /**
-     * Delete Message 
-     * @param id 
-     */
-    public deleteEntity (id: string) : Promise<libclient.ApiResponse<any>> {
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling deleteEntity.');
-        }
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<any>('DELETE', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)),
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get Messages 
-     * @param from 
-     * @param to 
-     * @param pageNumber 
-     * @param itemCount 
-     * @param sortName 
-     * @param sortType 
-     */
-    public getEntities (from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
-        let queryParameters: any = {};
-        if (from !== undefined) queryParameters['from'] = from;
-        if (to !== undefined) queryParameters['to'] = to;
-        if (pageNumber !== undefined) queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined) queryParameters['itemCount'] = itemCount;
-        if (sortName !== undefined) queryParameters['sortName'] = sortName;
-        if (sortType !== undefined) queryParameters['sortType'] = sortType;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get Message by Id 
-     * @param id 
-     */
-    public getEntity (id: string) : Promise<libclient.ApiResponse<MessageEntity>> {
-
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getEntity.');
-        }
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageEntity>('GET', '/api/user/v1/Message/getbyid/{id}'.replace('{' + 'id' + '}', String(id)),
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get List Messages For App
-     * @param sortName 
-     * @param sortType 
-     */
-    public getListMessageForApp (sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<MessageViewWithPaginationApp>> {
-        let queryParameters: any = {};
-        if (sortName !== undefined) queryParameters['sortName'] = sortName;
-        if (sortType !== undefined) queryParameters['sortType'] = sortType;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageViewWithPaginationApp>('GET', '/api/user/v1/Message/getforapp',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get List Messages for current user
-     * @param sortName 
-     * @param sortType 
-     */
-    public getListMessageForCurrentUser (sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<Array<MessageDetailView>>> {
-        let queryParameters: any = {};
-        if (sortName !== undefined) queryParameters['sortName'] = sortName;
-        if (sortType !== undefined) queryParameters['sortType'] = sortType;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<Array<MessageDetailView>>('GET', '/api/user/v1/Message/get-messages-for-current-user',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get List Messages with an user for App
-     * @param userIdToGetMessage 
-     * @param sortName 
-     * @param sortType 
-     */
-    public getListMessageOfUser (userIdToGetMessage: string, sortName?: string, sortType?: number) : Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>> {
-
-        // verify required parameter 'userIdToGetMessage' is not null or undefined
-        if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
-            throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageOfUser.');
-        }
-        let queryParameters: any = {};
-        if (userIdToGetMessage !== undefined) queryParameters['userIdToGetMessage'] = userIdToGetMessage;
-        if (sortName !== undefined) queryParameters['sortName'] = sortName;
-        if (sortType !== undefined) queryParameters['sortType'] = sortType;
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageViewWithPaginationAnUserApp>('GET', '/api/user/v1/Message/getforanuserapp',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get Messages to notification
-     */
-    public getMessageToNotification () : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message/get-message-to-notification',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * Get Messages to notification update
-     */
-    public getMessageToNotificationUpdate () : Promise<libclient.ApiResponse<MessageViewWithPagination>> {
-        let queryParameters: any = {};
-        let headerParams: any = this.defaultHeaders;
-        let isFile = false;
-        let formParams: any = {};
-        return this.execute<MessageViewWithPagination>('GET', '/api/user/v1/Message/get-message-to-notification-update',
-            queryParameters, headerParams, formParams, isFile, false, undefined
-        );
-    }
-
-    /**
-     * 
-     * @param title 
-     * @param message 
-     * @param fcm 
+     * add account
      * @param userId 
-     * @param screenID 
+     * @param account 
      */
-    public testNotifiForMessage (title: string, message: string, fcm: string, userId: string, screenID: string) : Promise<libclient.ApiResponse<string>> {
-
-        // verify required parameter 'title' is not null or undefined
-        if (title === null || title === undefined) {
-            throw new Error('Required parameter title was null or undefined when calling testNotifiForMessage.');
-        }
-
-        // verify required parameter 'message' is not null or undefined
-        if (message === null || message === undefined) {
-            throw new Error('Required parameter message was null or undefined when calling testNotifiForMessage.');
-        }
-
-        // verify required parameter 'fcm' is not null or undefined
-        if (fcm === null || fcm === undefined) {
-            throw new Error('Required parameter fcm was null or undefined when calling testNotifiForMessage.');
-        }
+    public addAccount (userId: string, account: AccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
 
         // verify required parameter 'userId' is not null or undefined
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling testNotifiForMessage.');
+            throw new Error('Required parameter userId was null or undefined when calling addAccount.');
         }
 
-        // verify required parameter 'screenID' is not null or undefined
-        if (screenID === null || screenID === undefined) {
-            throw new Error('Required parameter screenID was null or undefined when calling testNotifiForMessage.');
+        // verify required parameter 'account' is not null or undefined
+        if (account === null || account === undefined) {
+            throw new Error('Required parameter account was null or undefined when calling addAccount.');
         }
         let queryParameters: any = {};
-        if (title !== undefined) queryParameters['title'] = title;
-        if (message !== undefined) queryParameters['message'] = message;
-        if (fcm !== undefined) queryParameters['fcm'] = fcm;
         if (userId !== undefined) queryParameters['userId'] = userId;
-        if (screenID !== undefined) queryParameters['screenID'] = screenID;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<string>('GET', '/api/user/v1/Message/test-notifi-message',
-            queryParameters, headerParams, formParams, isFile, false, undefined
+        return this.execute<AccountEntity>('POST', '/api/user/v1/account/create',
+            queryParameters, headerParams, formParams, isFile, false, account
         );
     }
 
     /**
-     * 
-     * @param title 
-     * @param message 
-     * @param fcm 
-     * @param matchId 
-     * @param borrowId 
-     * @param screenID 
+     * add balance of account
+     * @param accountView 
      */
-    public testNotifiForOpenScreen (title: string, message: string, fcm: string, matchId: string, borrowId: string, screenID: string) : Promise<libclient.ApiResponse<string>> {
+    public addBalance (accountView: MAccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
 
-        // verify required parameter 'title' is not null or undefined
-        if (title === null || title === undefined) {
-            throw new Error('Required parameter title was null or undefined when calling testNotifiForOpenScreen.');
-        }
-
-        // verify required parameter 'message' is not null or undefined
-        if (message === null || message === undefined) {
-            throw new Error('Required parameter message was null or undefined when calling testNotifiForOpenScreen.');
-        }
-
-        // verify required parameter 'fcm' is not null or undefined
-        if (fcm === null || fcm === undefined) {
-            throw new Error('Required parameter fcm was null or undefined when calling testNotifiForOpenScreen.');
-        }
-
-        // verify required parameter 'matchId' is not null or undefined
-        if (matchId === null || matchId === undefined) {
-            throw new Error('Required parameter matchId was null or undefined when calling testNotifiForOpenScreen.');
-        }
-
-        // verify required parameter 'borrowId' is not null or undefined
-        if (borrowId === null || borrowId === undefined) {
-            throw new Error('Required parameter borrowId was null or undefined when calling testNotifiForOpenScreen.');
-        }
-
-        // verify required parameter 'screenID' is not null or undefined
-        if (screenID === null || screenID === undefined) {
-            throw new Error('Required parameter screenID was null or undefined when calling testNotifiForOpenScreen.');
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling addBalance.');
         }
         let queryParameters: any = {};
-        if (title !== undefined) queryParameters['title'] = title;
-        if (message !== undefined) queryParameters['message'] = message;
-        if (fcm !== undefined) queryParameters['fcm'] = fcm;
-        if (matchId !== undefined) queryParameters['matchId'] = matchId;
-        if (borrowId !== undefined) queryParameters['borrowId'] = borrowId;
-        if (screenID !== undefined) queryParameters['screenID'] = screenID;
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<string>('GET', '/api/user/v1/Message/test-notifi-screen',
+        return this.execute<AccountEntity>('POST', '/api/user/v1/account/add-balance',
+            queryParameters, headerParams, formParams, isFile, false, accountView
+        );
+    }
+
+    /**
+     * get all account
+     */
+    public getAccounts () : Promise<libclient.ApiResponse<Array<AccountEntity>>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<Array<AccountEntity>>('GET', '/api/user/v1/account/get-all',
             queryParameters, headerParams, formParams, isFile, false, undefined
         );
     }
 
     /**
-     * Update Message 
+     * get account by id
      * @param id 
-     * @param messageView 
      */
-    public updateEntity (id: string, messageView: MessageView) : Promise<libclient.ApiResponse<MessageEntity>> {
+    public getById (id: string) : Promise<libclient.ApiResponse<AccountEntity>> {
 
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getById.');
         }
+        let queryParameters: any = {};
+        if (id !== undefined) queryParameters['id'] = id;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('GET', '/api/user/v1/account/get-by-id',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
 
-        // verify required parameter 'messageView' is not null or undefined
-        if (messageView === null || messageView === undefined) {
-            throw new Error('Required parameter messageView was null or undefined when calling updateEntity.');
+    /**
+     * get account by id
+     * @param userId 
+     */
+    public getByUserId (userId: string) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getByUserId.');
+        }
+        let queryParameters: any = {};
+        if (userId !== undefined) queryParameters['userId'] = userId;
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('GET', '/api/user/v1/account/get-by-user-id',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * get my-account
+     */
+    public getMyAccount () : Promise<libclient.ApiResponse<AccountEntity>> {
+        let queryParameters: any = {};
+        let headerParams: any = this.defaultHeaders;
+        let isFile = false;
+        let formParams: any = {};
+        return this.execute<AccountEntity>('GET', '/api/user/v1/account/my-account',
+            queryParameters, headerParams, formParams, isFile, false, undefined
+        );
+    }
+
+    /**
+     * remove balance of account
+     * @param accountView 
+     */
+    public removeBalance (accountView: MAccountView) : Promise<libclient.ApiResponse<AccountEntity>> {
+
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling removeBalance.');
         }
         let queryParameters: any = {};
         let headerParams: any = this.defaultHeaders;
         let isFile = false;
         let formParams: any = {};
-        return this.execute<MessageEntity>('PUT', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)),
-            queryParameters, headerParams, formParams, isFile, false, messageView
+        return this.execute<AccountEntity>('POST', '/api/user/v1/account/remove-balance',
+            queryParameters, headerParams, formParams, isFile, false, accountView
         );
     }
 }
@@ -805,7 +616,7 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
-     * Create New Role 
+     * Create New Role
      * @param roleView 
      */
     public createEntity (roleView?: RoleView) : Promise<libclient.ApiResponse<RoleDetailView>> {
@@ -819,7 +630,7 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
-     * Delete Role 
+     * Delete Role
      * @param id 
      */
     public deleteEntity (id: string) : Promise<libclient.ApiResponse<string>> {
@@ -838,7 +649,7 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
-     * Get all role entities 
+     * Get all role entities
      */
     public getAllEntities () : Promise<libclient.ApiResponse<Array<RoleDetailView>>> {
         let queryParameters: any = {};
@@ -851,7 +662,7 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
-     * Get Roles 
+     * Get Roles
      * @param query 
      * @param pageNumber 
      * @param itemCount 
@@ -874,7 +685,7 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
-     * Get Role by Id 
+     * Get Role by Id
      * @param id 
      */
     public getEntity (id: string) : Promise<libclient.ApiResponse<RoleDetailView>> {
@@ -893,7 +704,7 @@ export class RoleApi extends libclient.ApiClient {
     }
 
     /**
-     * Update Role 
+     * Update Role
      * @param id 
      * @param roleView 
      */
@@ -921,7 +732,7 @@ export class SessionApi extends libclient.ApiClient {
     }
 
     /**
-     * Check current session info 
+     * Check current session info
      */
     public getCurrent () : Promise<libclient.ApiResponse<JwtToken>> {
         let queryParameters: any = {};
@@ -934,7 +745,7 @@ export class SessionApi extends libclient.ApiClient {
     }
 
     /**
-     * Get sessions with pagination 
+     * Get sessions with pagination
      * @param userId 
      * @param pageNumber 
      * @param itemCount 
@@ -965,7 +776,7 @@ export class SystemApi extends libclient.ApiClient {
     }
 
     /**
-     * Check loggedin status 
+     * Check loggedin status
      */
     public getLoggedin () : Promise<libclient.ApiResponse<boolean>> {
         let queryParameters: any = {};
@@ -978,7 +789,7 @@ export class SystemApi extends libclient.ApiClient {
     }
 
     /**
-     * Get current system version info 
+     * Get current system version info
      */
     public getVersion () : Promise<libclient.ApiResponse<string>> {
         let queryParameters: any = {};
@@ -999,7 +810,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Create or update User Role 
+     * Create or update User Role
      * @param userRoleView 
      */
     public createOrUpdateUserRole (userRoleView: UserRoleView) : Promise<libclient.ApiResponse<ProfileView>> {
@@ -1058,7 +869,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get user by Id 
+     * Get user by Id
      * @param id 
      */
     public getById (id: string) : Promise<libclient.ApiResponse<MUserView>> {
@@ -1077,7 +888,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get user details by Id 
+     * Get user details by Id
      * @param id 
      */
     public getDetailViewById (id: string) : Promise<libclient.ApiResponse<UserViewDetails>> {
@@ -1096,7 +907,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get users with pagination 
+     * Get users with pagination
      * @param status 
      * @param userId 
      * @param pageNumber 
@@ -1121,7 +932,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * getFCMForMobile 
+     * getFCMForMobile
      * @param userId 
      */
     public getFCMForMobile (userId: string) : Promise<libclient.ApiResponse<MFCMView>> {
@@ -1141,7 +952,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get lend user for app 
+     * Get lend user for app
      * @param find 
      */
     public getLenderUserForApp (find: string) : Promise<libclient.ApiResponse<Array<MUserView>>> {
@@ -1187,7 +998,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get user account 
+     * Get user account
      * @param userId 
      */
     public getUserAccount (userId: string) : Promise<libclient.ApiResponse<UserAccount>> {
@@ -1226,7 +1037,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Get all user lite 
+     * Get all user lite
      */
     public getUserLite () : Promise<libclient.ApiResponse<Array<MUserView>>> {
         let queryParameters: any = {};
@@ -1239,7 +1050,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * setFCMForMobile 
+     * setFCMForMobile
      * @param fcms 
      */
     public setFCMForMobile (fcms: MFCMView) : Promise<libclient.ApiResponse<string>> {
@@ -1258,7 +1069,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Update user with profiles 
+     * Update user with profiles
      * @param avatar 
      */
     public updateAvatar (avatar: MAvatarView) : Promise<libclient.ApiResponse<UserEntity>> {
@@ -1296,7 +1107,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Update user account 
+     * Update user account
      * @param userId 
      * @param userAccountView 
      * @param type 
@@ -1323,7 +1134,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Update user details 
+     * Update user details
      * @param userId 
      * @param userDetails 
      */
@@ -1348,7 +1159,7 @@ export class UserApi extends libclient.ApiClient {
     }
 
     /**
-     * Update user with profiles 
+     * Update user with profiles
      * @param profile 
      */
     public updateUserProfiles (profile: MProfileView) : Promise<libclient.ApiResponse<ProfileView>> {
@@ -1368,7 +1179,7 @@ export class UserApi extends libclient.ApiClient {
 }
 
 export function registerIoc(iocContainer: interfaces.Container, basePath: string, token?: string | (() => string)) {
-    libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
+    libclient.registerApiClient(iocContainer, AccountApi, AccountApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);
     libclient.registerApiClient(iocContainer, SystemApi, SystemApi, basePath, token);

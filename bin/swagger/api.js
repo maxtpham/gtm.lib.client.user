@@ -13,12 +13,18 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const libclient = require("@gtm/lib.client");
 /* tslint:disable:no-unused-variable */
+class AccountEntity {
+}
+exports.AccountEntity = AccountEntity;
 class AccountView {
 }
 exports.AccountView = AccountView;
 class AttachmentView {
 }
 exports.AttachmentView = AttachmentView;
+/**
+* A class representation of the BSON Binary type.
+*/
 class Binary {
 }
 exports.Binary = Binary;
@@ -28,6 +34,9 @@ exports.JwtToken = JwtToken;
 class LocationView {
 }
 exports.LocationView = LocationView;
+class MAccountView {
+}
+exports.MAccountView = MAccountView;
 class MAvatarView {
 }
 exports.MAvatarView = MAvatarView;
@@ -49,27 +58,6 @@ exports.MUserView = MUserView;
 class MapOfBoolean extends null {
 }
 exports.MapOfBoolean = MapOfBoolean;
-class MessageDetailView {
-}
-exports.MessageDetailView = MessageDetailView;
-class MessageDetailViewApp {
-}
-exports.MessageDetailViewApp = MessageDetailViewApp;
-class MessageEntity {
-}
-exports.MessageEntity = MessageEntity;
-class MessageView {
-}
-exports.MessageView = MessageView;
-class MessageViewWithPagination {
-}
-exports.MessageViewWithPagination = MessageViewWithPagination;
-class MessageViewWithPaginationAnUserApp {
-}
-exports.MessageViewWithPaginationAnUserApp = MessageViewWithPaginationAnUserApp;
-class MessageViewWithPaginationApp {
-}
-exports.MessageViewWithPaginationApp = MessageViewWithPaginationApp;
 class ProfileDefault {
 }
 exports.ProfileDefault = ProfileDefault;
@@ -130,280 +118,121 @@ exports.UserViewDetails = UserViewDetails;
 class UserViewWithPagination {
 }
 exports.UserViewWithPagination = UserViewWithPagination;
-var MessageApiApiKeys;
-(function (MessageApiApiKeys) {
-})(MessageApiApiKeys = exports.MessageApiApiKeys || (exports.MessageApiApiKeys = {}));
-class MessageApi extends libclient.ApiClient {
+var AccountApiApiKeys;
+(function (AccountApiApiKeys) {
+})(AccountApiApiKeys = exports.AccountApiApiKeys || (exports.AccountApiApiKeys = {}));
+class AccountApi extends libclient.ApiClient {
     constructor(basePath, accessToken) {
         super(basePath, accessToken);
     }
     /**
-     * Create New Message
-     * @param messageView
-     */
-    createEntity(messageView) {
-        // verify required parameter 'messageView' is not null or undefined
-        if (messageView === null || messageView === undefined) {
-            throw new Error('Required parameter messageView was null or undefined when calling createEntity.');
-        }
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('POST', '/api/user/v1/Message', queryParameters, headerParams, formParams, isFile, false, messageView);
-    }
-    /**
-     * Delete Message
-     * @param id
-     */
-    deleteEntity(id) {
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling deleteEntity.');
-        }
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('DELETE', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get Messages
-     * @param from
-     * @param to
-     * @param pageNumber
-     * @param itemCount
-     * @param sortName
-     * @param sortType
-     */
-    getEntities(from, to, pageNumber, itemCount, sortName, sortType) {
-        let queryParameters = {};
-        if (from !== undefined)
-            queryParameters['from'] = from;
-        if (to !== undefined)
-            queryParameters['to'] = to;
-        if (pageNumber !== undefined)
-            queryParameters['pageNumber'] = pageNumber;
-        if (itemCount !== undefined)
-            queryParameters['itemCount'] = itemCount;
-        if (sortName !== undefined)
-            queryParameters['sortName'] = sortName;
-        if (sortType !== undefined)
-            queryParameters['sortType'] = sortType;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get Message by Id
-     * @param id
-     */
-    getEntity(id) {
-        // verify required parameter 'id' is not null or undefined
-        if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling getEntity.');
-        }
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/getbyid/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get List Messages For App
-     * @param sortName
-     * @param sortType
-     */
-    getListMessageForApp(sortName, sortType) {
-        let queryParameters = {};
-        if (sortName !== undefined)
-            queryParameters['sortName'] = sortName;
-        if (sortType !== undefined)
-            queryParameters['sortType'] = sortType;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/getforapp', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get List Messages for current user
-     * @param sortName
-     * @param sortType
-     */
-    getListMessageForCurrentUser(sortName, sortType) {
-        let queryParameters = {};
-        if (sortName !== undefined)
-            queryParameters['sortName'] = sortName;
-        if (sortType !== undefined)
-            queryParameters['sortType'] = sortType;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/get-messages-for-current-user', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get List Messages with an user for App
-     * @param userIdToGetMessage
-     * @param sortName
-     * @param sortType
-     */
-    getListMessageOfUser(userIdToGetMessage, sortName, sortType) {
-        // verify required parameter 'userIdToGetMessage' is not null or undefined
-        if (userIdToGetMessage === null || userIdToGetMessage === undefined) {
-            throw new Error('Required parameter userIdToGetMessage was null or undefined when calling getListMessageOfUser.');
-        }
-        let queryParameters = {};
-        if (userIdToGetMessage !== undefined)
-            queryParameters['userIdToGetMessage'] = userIdToGetMessage;
-        if (sortName !== undefined)
-            queryParameters['sortName'] = sortName;
-        if (sortType !== undefined)
-            queryParameters['sortType'] = sortType;
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/getforanuserapp', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get Messages to notification
-     */
-    getMessageToNotification() {
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/get-message-to-notification', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     * Get Messages to notification update
-     */
-    getMessageToNotificationUpdate() {
-        let queryParameters = {};
-        let headerParams = this.defaultHeaders;
-        let isFile = false;
-        let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/get-message-to-notification-update', queryParameters, headerParams, formParams, isFile, false, undefined);
-    }
-    /**
-     *
-     * @param title
-     * @param message
-     * @param fcm
+     * add account
      * @param userId
-     * @param screenID
+     * @param account
      */
-    testNotifiForMessage(title, message, fcm, userId, screenID) {
-        // verify required parameter 'title' is not null or undefined
-        if (title === null || title === undefined) {
-            throw new Error('Required parameter title was null or undefined when calling testNotifiForMessage.');
-        }
-        // verify required parameter 'message' is not null or undefined
-        if (message === null || message === undefined) {
-            throw new Error('Required parameter message was null or undefined when calling testNotifiForMessage.');
-        }
-        // verify required parameter 'fcm' is not null or undefined
-        if (fcm === null || fcm === undefined) {
-            throw new Error('Required parameter fcm was null or undefined when calling testNotifiForMessage.');
-        }
+    addAccount(userId, account) {
         // verify required parameter 'userId' is not null or undefined
         if (userId === null || userId === undefined) {
-            throw new Error('Required parameter userId was null or undefined when calling testNotifiForMessage.');
+            throw new Error('Required parameter userId was null or undefined when calling addAccount.');
         }
-        // verify required parameter 'screenID' is not null or undefined
-        if (screenID === null || screenID === undefined) {
-            throw new Error('Required parameter screenID was null or undefined when calling testNotifiForMessage.');
+        // verify required parameter 'account' is not null or undefined
+        if (account === null || account === undefined) {
+            throw new Error('Required parameter account was null or undefined when calling addAccount.');
         }
         let queryParameters = {};
-        if (title !== undefined)
-            queryParameters['title'] = title;
-        if (message !== undefined)
-            queryParameters['message'] = message;
-        if (fcm !== undefined)
-            queryParameters['fcm'] = fcm;
         if (userId !== undefined)
             queryParameters['userId'] = userId;
-        if (screenID !== undefined)
-            queryParameters['screenID'] = screenID;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/test-notifi-message', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('POST', '/api/user/v1/account/create', queryParameters, headerParams, formParams, isFile, false, account);
     }
     /**
-     *
-     * @param title
-     * @param message
-     * @param fcm
-     * @param matchId
-     * @param borrowId
-     * @param screenID
+     * add balance of account
+     * @param accountView
      */
-    testNotifiForOpenScreen(title, message, fcm, matchId, borrowId, screenID) {
-        // verify required parameter 'title' is not null or undefined
-        if (title === null || title === undefined) {
-            throw new Error('Required parameter title was null or undefined when calling testNotifiForOpenScreen.');
-        }
-        // verify required parameter 'message' is not null or undefined
-        if (message === null || message === undefined) {
-            throw new Error('Required parameter message was null or undefined when calling testNotifiForOpenScreen.');
-        }
-        // verify required parameter 'fcm' is not null or undefined
-        if (fcm === null || fcm === undefined) {
-            throw new Error('Required parameter fcm was null or undefined when calling testNotifiForOpenScreen.');
-        }
-        // verify required parameter 'matchId' is not null or undefined
-        if (matchId === null || matchId === undefined) {
-            throw new Error('Required parameter matchId was null or undefined when calling testNotifiForOpenScreen.');
-        }
-        // verify required parameter 'borrowId' is not null or undefined
-        if (borrowId === null || borrowId === undefined) {
-            throw new Error('Required parameter borrowId was null or undefined when calling testNotifiForOpenScreen.');
-        }
-        // verify required parameter 'screenID' is not null or undefined
-        if (screenID === null || screenID === undefined) {
-            throw new Error('Required parameter screenID was null or undefined when calling testNotifiForOpenScreen.');
+    addBalance(accountView) {
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling addBalance.');
         }
         let queryParameters = {};
-        if (title !== undefined)
-            queryParameters['title'] = title;
-        if (message !== undefined)
-            queryParameters['message'] = message;
-        if (fcm !== undefined)
-            queryParameters['fcm'] = fcm;
-        if (matchId !== undefined)
-            queryParameters['matchId'] = matchId;
-        if (borrowId !== undefined)
-            queryParameters['borrowId'] = borrowId;
-        if (screenID !== undefined)
-            queryParameters['screenID'] = screenID;
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('GET', '/api/user/v1/Message/test-notifi-screen', queryParameters, headerParams, formParams, isFile, false, undefined);
+        return this.execute('POST', '/api/user/v1/account/add-balance', queryParameters, headerParams, formParams, isFile, false, accountView);
     }
     /**
-     * Update Message
-     * @param id
-     * @param messageView
+     * get all account
      */
-    updateEntity(id, messageView) {
+    getAccounts() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/get-all', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * get account by id
+     * @param id
+     */
+    getById(id) {
         // verify required parameter 'id' is not null or undefined
         if (id === null || id === undefined) {
-            throw new Error('Required parameter id was null or undefined when calling updateEntity.');
+            throw new Error('Required parameter id was null or undefined when calling getById.');
         }
-        // verify required parameter 'messageView' is not null or undefined
-        if (messageView === null || messageView === undefined) {
-            throw new Error('Required parameter messageView was null or undefined when calling updateEntity.');
+        let queryParameters = {};
+        if (id !== undefined)
+            queryParameters['id'] = id;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/get-by-id', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * get account by id
+     * @param userId
+     */
+    getByUserId(userId) {
+        // verify required parameter 'userId' is not null or undefined
+        if (userId === null || userId === undefined) {
+            throw new Error('Required parameter userId was null or undefined when calling getByUserId.');
+        }
+        let queryParameters = {};
+        if (userId !== undefined)
+            queryParameters['userId'] = userId;
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/get-by-user-id', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * get my-account
+     */
+    getMyAccount() {
+        let queryParameters = {};
+        let headerParams = this.defaultHeaders;
+        let isFile = false;
+        let formParams = {};
+        return this.execute('GET', '/api/user/v1/account/my-account', queryParameters, headerParams, formParams, isFile, false, undefined);
+    }
+    /**
+     * remove balance of account
+     * @param accountView
+     */
+    removeBalance(accountView) {
+        // verify required parameter 'accountView' is not null or undefined
+        if (accountView === null || accountView === undefined) {
+            throw new Error('Required parameter accountView was null or undefined when calling removeBalance.');
         }
         let queryParameters = {};
         let headerParams = this.defaultHeaders;
         let isFile = false;
         let formParams = {};
-        return this.execute('PUT', '/api/user/v1/Message/{id}'.replace('{' + 'id' + '}', String(id)), queryParameters, headerParams, formParams, isFile, false, messageView);
+        return this.execute('POST', '/api/user/v1/account/remove-balance', queryParameters, headerParams, formParams, isFile, false, accountView);
     }
 }
-exports.MessageApi = MessageApi;
+exports.AccountApi = AccountApi;
 var RoleApiApiKeys;
 (function (RoleApiApiKeys) {
 })(RoleApiApiKeys = exports.RoleApiApiKeys || (exports.RoleApiApiKeys = {}));
@@ -894,7 +723,7 @@ class UserApi extends libclient.ApiClient {
 }
 exports.UserApi = UserApi;
 function registerIoc(iocContainer, basePath, token) {
-    libclient.registerApiClient(iocContainer, MessageApi, MessageApi, basePath, token);
+    libclient.registerApiClient(iocContainer, AccountApi, AccountApi, basePath, token);
     libclient.registerApiClient(iocContainer, RoleApi, RoleApi, basePath, token);
     libclient.registerApiClient(iocContainer, SessionApi, SessionApi, basePath, token);
     libclient.registerApiClient(iocContainer, SystemApi, SystemApi, basePath, token);

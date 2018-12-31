@@ -11,6 +11,16 @@
  */
 import { interfaces } from 'inversify';
 import * as libclient from '@gtm/lib.client';
+export declare class AccountEntity {
+    'id': any;
+    'created': number;
+    'updated': number;
+    'deleted': number;
+    'userId': string;
+    'balance': number;
+    'balanceGold': number;
+    'bonus': number;
+}
 export declare class AccountView {
     'balance': number;
     'balanceGold': number;
@@ -26,15 +36,24 @@ export declare class AttachmentView {
     */
     'data': Binary;
 }
+/**
+* A class representation of the BSON Binary type.
+*/
 export declare class Binary {
-    'sUBTYPEDEFAULT': number;
-    'sUBTYPEFUNCTION': number;
-    'sUBTYPEBYTEARRAY': number;
-    'sUBTYPEUUIDOLD': number;
-    'sUBTYPEUUID': number;
+    'SUBTYPE_DEFAULT': number;
+    'SUBTYPE_FUNCTION': number;
+    'SUBTYPE_BYTE_ARRAY': number;
+    'SUBTYPE_UUID_OLD': number;
+    'SUBTYPE_UUID': number;
     'sUBTYPEMD5': number;
-    'sUBTYPEUSERDEFINED': number;
+    'SUBTYPE_USER_DEFINED': number;
+    /**
+    * A buffer object containing the binary data
+    */
     'buffer': string;
+    /**
+    * Binary data subtype
+    */
     'subType': number;
 }
 export declare class JwtToken {
@@ -66,6 +85,11 @@ export declare class LocationView {
     * latitude
     */
     'y': number;
+}
+export declare class MAccountView {
+    'userId': string;
+    'balance': number;
+    'balanceGold': number;
 }
 export declare class MAvatarView {
     'media': string;
@@ -110,53 +134,6 @@ export declare class MUserView {
 }
 export declare class MapOfBoolean extends null<String, boolean> {
 }
-export declare class MessageDetailView {
-    'id': string;
-    'userId': string;
-    'userName': string;
-    'toUserId': string;
-    'toUserName': string;
-    'content': string;
-    'delivered': number;
-    'announced': boolean;
-    'created': number;
-    'updated': number;
-}
-export declare class MessageDetailViewApp {
-    'userId': string;
-    'userName': string;
-    'messageDetailView': Array<MessageDetailView>;
-}
-export declare class MessageEntity {
-    'id': any;
-    'created': number;
-    'updated': number;
-    'deleted': number;
-    'userId': string;
-    'toUserId': string;
-    'content': string;
-    'delivered': number;
-    'announced': boolean;
-}
-export declare class MessageView {
-    'userId': string;
-    'toUserId': string;
-    'content': string;
-    'delivered': number;
-    'announced': boolean;
-}
-export declare class MessageViewWithPagination {
-    'messages': Array<MessageDetailView>;
-    'totalItems': number;
-}
-export declare class MessageViewWithPaginationAnUserApp {
-    'userId': string;
-    'userName': string;
-    'messages': Array<MessageDetailView>;
-}
-export declare class MessageViewWithPaginationApp {
-    'messages': Array<MessageDetailViewApp>;
-}
 export declare class ProfileDefault {
     'bankRate': number;
     'job': string;
@@ -187,7 +164,7 @@ export declare class ProfileView {
     */
     'account': UserAccount;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     'status': UserStatus;
@@ -315,7 +292,7 @@ export declare class UserEntity {
     */
     'account': UserAccount;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     'status': UserStatus;
@@ -352,11 +329,11 @@ export declare class UserEntity {
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
 }
@@ -397,9 +374,12 @@ export declare class UserViewDetails {
     * Link to [role] table
     */
     'roles': Array<UserRole>;
+    /**
+    * user account
+    */
     'account': AccountView;
     /**
-    * [true] - active user  [false] - inactive user  [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
+    * [true] - active user [false] - inactive user [<null>] - is un-approved user state with limited access to the system, this state is auto created by OAuth2 process
     */
     'active': boolean;
     'status': UserStatus;
@@ -436,11 +416,11 @@ export declare class UserViewDetails {
     */
     'isFirstLogin': boolean;
     /**
-    * With 3 sub-dcouments:  - user.profiles.google: Google profile (auto created by OAuth2 by Google)  - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google)  - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
+    * With 3 sub-dcouments: - user.profiles.google: Google profile (auto created by OAuth2 by Google) - user.profiles.facebook: FaceBook profile (auto created by OAuth2 by Google) - user.profiles.app: is an application specific profile, need to define a view: ScProfileView { balance: number; bonus: number; LaiXuatMacDinh: number; .. }
     */
     'profiles': any;
     /**
-    * The OAuth2 authentication process should auto  load up the default user avatar at 1st user login
+    * The OAuth2 authentication process should auto load up the default user avatar at 1st user login
     */
     'avatar': AttachmentView;
     'id': string;
@@ -451,87 +431,44 @@ export declare class UserViewWithPagination {
     'users': Array<UserViewDetails>;
     'totalItems': number;
 }
-export declare enum MessageApiApiKeys {
+export declare enum AccountApiApiKeys {
 }
-export declare class MessageApi extends libclient.ApiClient {
+export declare class AccountApi extends libclient.ApiClient {
     constructor(basePath?: string, accessToken?: string);
     /**
-     * Create New Message
-     * @param messageView
-     */
-    createEntity(messageView: MessageView): Promise<libclient.ApiResponse<MessageEntity>>;
-    /**
-     * Delete Message
-     * @param id
-     */
-    deleteEntity(id: string): Promise<libclient.ApiResponse<any>>;
-    /**
-     * Get Messages
-     * @param from
-     * @param to
-     * @param pageNumber
-     * @param itemCount
-     * @param sortName
-     * @param sortType
-     */
-    getEntities(from?: string, to?: string, pageNumber?: number, itemCount?: number, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
-    /**
-     * Get Message by Id
-     * @param id
-     */
-    getEntity(id: string): Promise<libclient.ApiResponse<MessageEntity>>;
-    /**
-     * Get List Messages For App
-     * @param sortName
-     * @param sortType
-     */
-    getListMessageForApp(sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationApp>>;
-    /**
-     * Get List Messages for current user
-     * @param sortName
-     * @param sortType
-     */
-    getListMessageForCurrentUser(sortName?: string, sortType?: number): Promise<libclient.ApiResponse<Array<MessageDetailView>>>;
-    /**
-     * Get List Messages with an user for App
-     * @param userIdToGetMessage
-     * @param sortName
-     * @param sortType
-     */
-    getListMessageOfUser(userIdToGetMessage: string, sortName?: string, sortType?: number): Promise<libclient.ApiResponse<MessageViewWithPaginationAnUserApp>>;
-    /**
-     * Get Messages to notification
-     */
-    getMessageToNotification(): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
-    /**
-     * Get Messages to notification update
-     */
-    getMessageToNotificationUpdate(): Promise<libclient.ApiResponse<MessageViewWithPagination>>;
-    /**
-     *
-     * @param title
-     * @param message
-     * @param fcm
+     * add account
      * @param userId
-     * @param screenID
+     * @param account
      */
-    testNotifiForMessage(title: string, message: string, fcm: string, userId: string, screenID: string): Promise<libclient.ApiResponse<string>>;
+    addAccount(userId: string, account: AccountView): Promise<libclient.ApiResponse<AccountEntity>>;
     /**
-     *
-     * @param title
-     * @param message
-     * @param fcm
-     * @param matchId
-     * @param borrowId
-     * @param screenID
+     * add balance of account
+     * @param accountView
      */
-    testNotifiForOpenScreen(title: string, message: string, fcm: string, matchId: string, borrowId: string, screenID: string): Promise<libclient.ApiResponse<string>>;
+    addBalance(accountView: MAccountView): Promise<libclient.ApiResponse<AccountEntity>>;
     /**
-     * Update Message
+     * get all account
+     */
+    getAccounts(): Promise<libclient.ApiResponse<Array<AccountEntity>>>;
+    /**
+     * get account by id
      * @param id
-     * @param messageView
      */
-    updateEntity(id: string, messageView: MessageView): Promise<libclient.ApiResponse<MessageEntity>>;
+    getById(id: string): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
+     * get account by id
+     * @param userId
+     */
+    getByUserId(userId: string): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
+     * get my-account
+     */
+    getMyAccount(): Promise<libclient.ApiResponse<AccountEntity>>;
+    /**
+     * remove balance of account
+     * @param accountView
+     */
+    removeBalance(accountView: MAccountView): Promise<libclient.ApiResponse<AccountEntity>>;
 }
 export declare enum RoleApiApiKeys {
 }
