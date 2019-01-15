@@ -5,8 +5,7 @@
   "main": "bin/index.js",
   "typings": "bin/index",
   "scripts": {
-    "clean": "rimraf bin/*",
-    "build": "npm run clean && npm install && tsc",
+    "build": "rm -rf bin && npm install && tsc",
     "b": "npm run build",
     "prepublishOnly": "npm version patch && npm run build && git push origin && git push --tags origin",
     "p": "npm publish --access public"
@@ -23,7 +22,6 @@
   },
   "dependencies": {
     "@gtm/lib.client": "^1.0.14",
-    "inversify": "^5.0.1",
-    "rimraf": "^2.6.2"
+    "inversify": "^5.0.1"
   }
 }
